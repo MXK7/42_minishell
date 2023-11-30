@@ -6,49 +6,44 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/11/23 10:24:02 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/01 00:39:21 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
+NAME = minishell
 
 CC = gcc
 RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror
 
-SRCS =	TODO
+CFLAGS = -Wall -Wextra -Werror -g -I ./includes/
+PRFLAGS = -lreadline
 
+SRCS = src/main.c
 OBJS = $(SRCS:.c=.o)
 
-LIBFT_DIR = ./include/libft
-MLX_DIR = ./include/minilibx
-
+LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX = $(MLX_DIR)/libmlx_Linux.a
 
 all: $(NAME)
+	@echo "\033[0;32m$(shell echo $(NAME) | tr '[:lower:]' '[:upper:]') : COMPILED\033[0m"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(OBJS) $(LIBFT) $(MLX) -g3 -lXext -lX11 -lm -fsanitize=address -lz -o $(NAME)
-
-$(LIBFT):
+$(NAME): $(OBJS)
 	make -C $(LIBFT_DIR)
-
-$(MLX):
-	make -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(PRFLAGS) $(LIBFT)
 
 clean:
-	$(RM) $(OBJS)
 	make clean -C $(LIBFT_DIR)
-	make clean -C $(MLX_DIR)
+	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
 	make fclean -C $(LIBFT_DIR)
+	$(RM) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+.SILENT:
