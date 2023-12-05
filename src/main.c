@@ -6,44 +6,39 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/01 00:29:03 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/05 23:27:10 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-jmp_buf	env;
-
-void	sigintHandler(int signum __attribute__((unused)))
+static void	prompt(t_settings *settings, t_global *global, char **envp)
 {
-	printf("\n");
-	rl_on_new_line();
-	rl_redisplay();
+	signal(SIGINT, handler_signal);
+	signal(SIGQUIT, _signal_exit);
+	handler_parse_cmd(settings, global);
+	(void)envp; // TODO: ENVP "env"
+	while (settings->exitRequested)
+	{
+		global->input = readline("Minishell > ");
+		free(global->input);
+	}
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
-	char *pwd;
-	char *rl;
-	int exitRequested;
+	t_global	*global;
+	t_settings	*settings;
 
-	signal(SIGINT, sigintHandler);
-	exitRequested = 0;
-	while (!exitRequested)
+	(void)argv;
+	global = (t_global *)malloc(sizeof(global));
+	settings = (t_settings *)malloc(sizeof(settings));
+	if (argc == 1 || (settings != NULL && global == NULL))
 	{
-		if (setjmp(env) == 0)
-		{
-			rl = readline("Minishell > ");
-
-			if (ft_strcmp(rl, "exit") == 0)
-				exitRequested = 1;
-			else if (ft_strcmp(rl, "pwd") == 0)
-			{
-				pwd = getcwd(NULL, 0);
-				printf("%s\n", pwd);
-			}
-		}
+		settings->exitRequested = true;
+		prompt(settings, global, envp);
+		free(global);
+		free(settings);
 	}
-	free(pwd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/01 00:39:21 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/05 21:30:30 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,20 @@ RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror -g -I ./includes/
 PRFLAGS = -lreadline
 
-SRCS = src/main.c
+SRCS = src/main.c src/signal.c \
+	   src/handler_builtin.c \
+	   src/handler_parsing.c \
+	   src/handler_signal.c
+
+SRCS += src/builtin/env.c
+
 OBJS = $(SRCS:.c=.o)
 
-LIBFT_DIR = ./libft
+LIBFT_DIR = ./includes/src/libft
 LIBFT = $(LIBFT_DIR)/libft.a
+
+GCLIB_DIR = ./includes/src/gc/
+GCLIB = $(GCLIB_DIR)/libgc.a
 
 all: $(NAME)
 	@echo "\033[0;32m$(shell echo $(NAME) | tr '[:lower:]' '[:upper:]') : COMPILED\033[0m"
@@ -32,14 +41,17 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(PRFLAGS) $(LIBFT)
+	make -C $(GCLIB_DIR)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(PRFLAGS) $(LIBFT) $(GCLIB)
 
 clean:
 	make clean -C $(LIBFT_DIR)
+	make clean -C $(GCLIB_DIR)
 	$(RM) $(OBJS)
 
 fclean: clean
 	make fclean -C $(LIBFT_DIR)
+	make fclean -C $(GCLIB_DIR)
 	$(RM) $(NAME)
 
 re: fclean all
