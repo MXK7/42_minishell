@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/05 23:27:10 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:57:04 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static void	prompt(t_settings *settings, t_global *global, char **envp)
 {
 	signal(SIGINT, handler_signal);
-	signal(SIGQUIT, _signal_exit);
+	// signal(SIGQUIT, _signal_exit);
 	handler_parse_cmd(settings, global);
+	// get_env(global, envp);
+	// handler_builtin(settings, global);
 	(void)envp; // TODO: ENVP "env"
 	while (settings->exitRequested)
 	{
