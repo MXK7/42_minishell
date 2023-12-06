@@ -3,59 +3,88 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
+#    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/05 21:30:30 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/06 18:49:14 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME        = minishell
+INCLUDES    = includes/
+SRC_DIR     = src/
+OBJ_DIR     = obj/
 
-CC = gcc
-RM = rm -rf
+LIBFT_DIR   = $(INCLUDES)src/libft/
+LIBFT       = $(LIBFT_DIR)libft.a
 
-CFLAGS = -Wall -Wextra -Werror -g -I ./includes/
-PRFLAGS = -lreadline
+GCLIB_DIR   = $(INCLUDES)src/gc/
+GCLIB       = $(GCLIB_DIR)libgc.a
 
-SRCS = src/main.c src/signal.c \
-	   src/handler_builtin.c \
-	   src/handler_parsing.c \
-	   src/handler_signal.c
+CC          = gcc
+CFLAGS      = -Wall -Wextra -Werror -g -I $(INCLUDES)
+PRFLAGS     = -lreadline
+RM          = rm -rf
 
-SRCS += src/builtin/env.c
+PARSING_DIR = parsing/
+PARSING     = handler_parsing
 
-OBJS = $(SRCS:.c=.o)
+BUILTIN_DIR = builtin/
+BUILTIN     = handler_builtin env
 
-LIBFT_DIR = ./includes/src/libft
-LIBFT = $(LIBFT_DIR)/libft.a
+SIGNAL_DIR = signal/
+SIGNAL     = handler_signal signal
 
-GCLIB_DIR = ./includes/src/gc/
-GCLIB = $(GCLIB_DIR)/libgc.a
+SRC_FILES  += main
+SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
+SRC_FILES  += $(addprefix $(BUILTIN_DIR), $(BUILTIN))
+SRC_FILES  += $(addprefix $(SIGNAL_DIR), $(SIGNAL))
 
-all: $(NAME)
-	@echo "\033[0;32m$(shell echo $(NAME) | tr '[:lower:]' '[:upper:]') : COMPILED\033[0m"
+SRC         = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJ         = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+OBJ_CACHE   = .cache_exists
 
-$(NAME): $(OBJS)
-	make -C $(LIBFT_DIR)
-	make -C $(GCLIB_DIR)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(PRFLAGS) $(LIBFT) $(GCLIB)
+###
+
+all: 			$(LIBFT) $(GCLIB) $(NAME)
+
+$(LIBFT):
+					@make -C $(LIBFT_DIR)
+
+$(GCLIB):
+					@make -C $(GCLIB_DIR)
+
+$(NAME): 		$(OBJ)
+					$(CC) $(CFLAGS) $(OBJ) $(PRFLAGS) $(LIBFT) $(GCLIB) -o $(NAME)
+					@echo "\033[0;32m$(shell echo $(NAME) | tr '[:lower:]' '[:upper:]') : COMPILED\033[0m"
+
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
+					@echo "Compiling $<"
+					@$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+
+$(OBJ_CACHE):
+					@mkdir -p $(OBJ_DIR)
+					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
+					@mkdir -p $(OBJ_DIR)$(BUILTIN_DIR)
+					@mkdir -p $(OBJ_DIR)$(SIGNAL_DIR)
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	make clean -C $(GCLIB_DIR)
-	$(RM) $(OBJS)
+					@make clean -C $(LIBFT_DIR)
+					@make clean -C $(GCLIB_DIR)
+					$(RM) $(OBJ_DIR)
+					$(RM) $(OBJ_CACHE)
+					@echo "minishell and libs object files cleaned!"
 
-fclean: clean
-	make fclean -C $(LIBFT_DIR)
-	make fclean -C $(GCLIB_DIR)
-	$(RM) $(NAME)
+fclean: 		clean
+					@make fclean -C $(LIBFT_DIR)
+					@make fclean -C $(GCLIB_DIR)
+					$(RM) $(NAME)
+					@echo "minishell and libs executable files cleaned!"
 
-re: fclean all
+re: 			fclean all
+					@echo "Cleaned and rebuilt everything for minishell!"
 
-.PHONY: all clean fclean re
+.PHONY:			all clean fclean re
 
 .SILENT:

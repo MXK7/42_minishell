@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_parsing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/05 23:27:21 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:42:23 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	handler_parse_cmd(t_settings *settings, t_global *global)
 {
-	int	i;
-
-	i = 0;
-	while (global->input == '\'')
-	{
-		
-	}
+	(void) settings;
+	printf("input: %s\n", global->input);
 }

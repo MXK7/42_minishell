@@ -1,4 +1,23 @@
-*.exe
-/.vscode
-*.out
+# System files
+.DS_Store
+
+# Object files
 *.o
+
+# Libraries
+*.lib
+*.a
+
+# Executables
+*.out
+*.exe
+minishell
+
+# Temp files
+*.swp
+
+# Debug files
+*.dSYM/
+
+# VS Code files
+.vscode
