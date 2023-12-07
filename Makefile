@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/05 21:30:30 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/07 02:00:45 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,16 @@ RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror -g -I ./includes/
 PRFLAGS = -lreadline
 
-SRCS = src/main.c src/signal.c \
+SRCS = src/main.c \
+	   src/utils.c \
 	   src/handler_builtin.c \
 	   src/handler_parsing.c \
 	   src/handler_signal.c
 
-SRCS += src/builtin/env.c
+SRCS += src/builtin/env.c \
+		src/builtin/others.c \
+		src/builtin/echo.c \
+		src/builtin/pwd.c \
 
 OBJS = $(SRCS:.c=.o)
 

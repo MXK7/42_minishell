@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/06 16:57:04 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/07 02:08:51 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ static void	prompt(t_settings *settings, t_global *global, char **envp)
 {
 	signal(SIGINT, handler_signal);
 	// signal(SIGQUIT, _signal_exit);
-	handler_parse_cmd(settings, global);
-	// get_env(global, envp);
-	// handler_builtin(settings, global);
-	(void)envp; // TODO: ENVP "env"
+	builtin_start(global, envp);
+	printf("COUNT PATH : %d\n", count_path((char *)global->env));
 	while (settings->exitRequested)
 	{
-		global->input = readline("Minishell > ");
-		free(global->input);
+		global->input = readline("\033[1;37m-\033[0m \033[1;31m\033[1;1mAMS\033[0m \033[1;33m\033[1;93m✗\033[0m ");
+		handler_builtin(settings, global);
 	}
 }
 
@@ -39,8 +37,9 @@ int	main(int argc, char **argv, char **envp)
 	{
 		settings->exitRequested = true;
 		prompt(settings, global, envp);
-		free(global);
-		free(settings);
+		free(global->input);
 	}
+	free(global);
+	free(settings);
 	return (0);
 }
