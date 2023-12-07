@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/07 18:35:51 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:50:44 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ typedef struct s_settings
 
 typedef struct s_global
 {
-	char	*input;
 	char	**env;
+	char	*input;
 	char	*pwd;
+	char	*path;
 }			t_global;
 
 /// @param settings

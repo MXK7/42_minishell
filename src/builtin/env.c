@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/07 01:42:34 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:59:09 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ void _env(t_global *global, char **envp)
         j++;
     }
     global->env[j] = NULL;
+    i = 0;
+    while (global->env[i])
+    {
+        if (global->env[i][0] == 'P' && global->env[i][1] == 'A' && global->env[i][2] == 'T' && global->env[i][3] == 'H')
+            global->path = global->env[i];
+        // printf("%s\n", global->path);
+        i++;
+    }
 }
 
 void	_builtin_env(t_global *global)
