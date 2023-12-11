@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/06 18:49:14 by arazzok          ###   ########.fr        #
+#    Updated: 2023/12/11 15:00:24 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,12 @@ PARSING_DIR = parsing/
 PARSING     = handler_parsing
 
 BUILTIN_DIR = builtin/
-BUILTIN     = handler_builtin env
+BUILTIN     = handler_builtin env echo others pwd
 
 SIGNAL_DIR = signal/
 SIGNAL     = handler_signal signal
 
-SRC_FILES  += main
+SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
 SRC_FILES  += $(addprefix $(BUILTIN_DIR), $(BUILTIN))
 SRC_FILES  += $(addprefix $(SIGNAL_DIR), $(SIGNAL))
