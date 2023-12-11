@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/07 18:42:04 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/08 21:34:52 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	handler_builtin(t_settings *settings, t_global *global)
 			_builtin_env(global);
 	}
 	else
-		_builtin_others();
+		_builtin_others(global);
 }
