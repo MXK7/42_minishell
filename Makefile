@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/11 15:00:24 by arazzok          ###   ########.fr        #
+#    Updated: 2023/12/11 16:08:17 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ CFLAGS      = -Wall -Wextra -Werror -g -I $(INCLUDES)
 PRFLAGS     = -lreadline
 RM          = rm -rf
 
+LEXING_DIR  = lexing/
+LEXING      = lexer
+
 PARSING_DIR = parsing/
 PARSING     = handler_parsing
 
@@ -36,6 +39,7 @@ SIGNAL_DIR = signal/
 SIGNAL     = handler_signal signal
 
 SRC_FILES  += main utils
+SRC_FILES  += $(addprefix $(LEXING_DIR), $(LEXING))
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
 SRC_FILES  += $(addprefix $(BUILTIN_DIR), $(BUILTIN))
 SRC_FILES  += $(addprefix $(SIGNAL_DIR), $(SIGNAL))
@@ -65,6 +69,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
 
 $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
+					@mkdir -p $(OBJ_DIR)$(LEXING_DIR)
 					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
 					@mkdir -p $(OBJ_DIR)$(BUILTIN_DIR)
 					@mkdir -p $(OBJ_DIR)$(SIGNAL_DIR)

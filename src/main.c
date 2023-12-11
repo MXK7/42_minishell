@@ -3,26 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/08 21:38:17 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:58:48 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	handle_line(t_global *global)
+{
+	char	*line;
+
+	line = readline("\x1b[31;1m" "AMS " "\x1b[m");
+	if (line)
+	{
+		if (line[0] == '\0')
+		{
+			free(line);
+			return (0);
+		}
+		add_history(line);
+		rl_redisplay();
+		global->input = ft_strdup(line);
+		free(line);
+		return (1);
+	}
+	else
+		exit (1);
+}
+
 static void	prompt(t_settings *settings, t_global *global, char **envp)
 {
-	signal(SIGINT, handler_signal);
-	// signal(SIGQUIT, _signal_exit);
 	builtin_start(global, envp);
-	// printf("COUNT PATH : %d\n", count_path(global->path));
 	
 	while (settings->exitRequested)
 	{
-		global->input = readline("\033[1;37m-\033[0m \033[1;31m\033[1;1mAMS\033[0m \033[1;33m\033[1;93m✗\033[0m ");
-		handler_builtin(settings, global);
+		// signal(SIGINT, handler_signal);
+		// signal(SIGQUIT, _signal_exit);
+		if (!handle_line(global))
+			continue ;
+		lexer(global);
 	}
 }
 
@@ -32,8 +54,8 @@ int	main(int argc, char **argv, char **envp)
 	t_settings	*settings;
 
 	(void)argv;
-	global = (t_global *)malloc(sizeof(global));
-	settings = (t_settings *)malloc(sizeof(settings));
+	global = (t_global *)malloc(sizeof(t_global));
+	settings = (t_settings *)malloc(sizeof(t_settings));
 	if (argc == 1 && (settings != NULL && global != NULL))
 	{
 		settings->exitRequested = true;
