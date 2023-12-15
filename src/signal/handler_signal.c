@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:07:11 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/07 18:42:06 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:32:58 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,3 @@ void	handler_signal(int signal __attribute__((unused)))
 	rl_on_new_line();
 	rl_redisplay();
 }
-
-// void	_signal_exit(int signal __attribute__((unused)))
-// {
-	
-// }

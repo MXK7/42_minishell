@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 05:49:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/04 14:11:55 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/15 09:03:28 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int					ft_strcmp(const char *s1, const char *s2);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_atoi(const char *str);
 
+char				*ft_strcat(char *dest, char *src);
+char				*ft_strncat(char *dest, char *src, unsigned int nb);
+char				*ft_strcpy(char *dest, char *src);
 char				*ft_strchr(const char *str, int c);
 char				*ft_strdup(const char *src);
 char				*ft_strrchr(const char *str, int c);

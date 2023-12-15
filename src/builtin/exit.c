@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 22:04:29 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/15 08:57:56 by mpoussie         ###   ########.fr       */
+/*   Created: 2023/12/13 10:15:48 by mpoussie          #+#    #+#             */
+/*   Updated: 2023/12/15 09:13:12 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strcpy(char *dest, char *src)
+void	_builtin_exit(t_settings *settings)
 {
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	settings->exit_requested = false;
+	exit(1);
 }

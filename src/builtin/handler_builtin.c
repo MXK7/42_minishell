@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/08 21:34:52 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/15 09:12:09 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	builtin_start(t_global *global, char **envp)
 {
 	_env(global, envp);
+	global->nbr_path = count_path(global->path);
+	handler_exe(global);
 }
 
 bool	builtin_exist(t_global *global)
@@ -39,15 +41,19 @@ bool	builtin_exist(t_global *global)
 
 void	handler_builtin(t_settings *settings, t_global *global)
 {
+	global->token = strtok(global->input, " ");
 	if (builtin_exist(global))
 	{
-		if (ft_strcmp(global->input, "exit") == 0)
-			settings->exitRequested = false;
-		else if (ft_strcmp(global->input, "pwd") == 0)
+		if (ft_strcmp(global->token, "exit") == 0)
+			_builtin_exit(settings);
+		else if (ft_strcmp(global->token, "pwd") == 0)
 			_builtin_pwd(global);
-		else if (ft_strcmp(global->input, "env") == 0)
+		else if (ft_strcmp(global->token, "env") == 0)
 			_builtin_env(global);
+		else if (ft_strcmp(global->token, "echo") == 0)
+			_builtin_echo(settings, global);
 	}
 	else
 		_builtin_others(global);
+	global->token = strtok(NULL, " ");
 }

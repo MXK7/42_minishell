@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 16:02:49 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/05 17:19:11 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/15 09:03:39 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,9 @@ SRCS    		=	ft_gnl/get_next_line.c \
 					ft_str/ft_strdup.c \
 					ft_str/ft_strlen.c \
 					ft_str/ft_strrchr.c \
+					ft_str/ft_strcat.c \
+					ft_str/ft_strcpy.c \
+					ft_str/ft_strncat.c \
 					ft_str/ft_strnstr.c \
 					ft_str/ft_substr.c \
 					ft_str/ft_strmapi.c \
