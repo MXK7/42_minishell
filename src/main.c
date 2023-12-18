@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/18 18:06:22 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:19:11 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	init_sh(t_settings *settings, t_global *global, char **envp)
 	while (settings->exit_requested)
 	{
 		global->input = readline("AMS $ ");
-		handler_builtin(settings, global);
 		add_history(global->input);
+		handler_builtin(settings, global);
 	}
 }
 

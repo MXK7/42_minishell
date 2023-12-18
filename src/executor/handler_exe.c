@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/15 09:13:34 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:21:54 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	handler_exe(t_global *global)
 	}
 	i = 0;
 	global->args_path = (char **)malloc(sizeof(char *) * ft_strlen(path_start
-			+ 1));
+				+ 1));
 	token = strtok(path_start + 1, ":");
 	while (token != NULL)
 	{
@@ -46,7 +46,7 @@ bool	exe_commands(t_global *global)
 	while (global->nbr_path > 0)
 	{
 		global->path = ft_strjoin(global->args_path[global->nbr_path - 1],
-			global->argv[0]);
+				global->argv[0]);
 		if (access(global->path, X_OK) == 0)
 			return (true);
 		global->nbr_path--;
