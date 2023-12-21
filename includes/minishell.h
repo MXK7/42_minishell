@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 13:42:02 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/21 18:26:41 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/wait.h>
 # include <time.h>
 # include <unistd.h>
+# include "parsing.h"
 
 # define MAX_TOKENS 100
 # define CTRL_D '\004'
@@ -34,20 +35,28 @@
 
 typedef struct s_settings
 {
-	bool	exit_requested;
-}			t_settings;
+	bool		exit_requested;
+}				t_settings;
 
 typedef struct s_global
 {
-	int		nbr_path;
-	char	**args_path;
-	char	**env;
-	char	*input;
-	char	*pwd;
-	char	*path;
-	char	*token;
-	char	**argv;
-}			t_global;
+	int			nbr_path;
+	char		**args_path;
+	char		**env;
+	char		*input;
+	char		*pwd;
+	char		*path;
+	char		*token;
+	char		**argv;
+	// new struct
+	t_command	*commands;
+	t_lexer		*lexer_list;
+	char		*old_pwd;
+	int			nb_pipes;
+	int			*pid;
+	bool		heredoc;
+	bool		reset;
+}				t_global;
 
 /// @param settings Structure secondaire pour la gestion du projet
 /// @param global Structure principal pour les datas
@@ -55,31 +64,31 @@ typedef struct s_global
 /// @param unused_signal
 
 /* #@ SIGNAL */
-void		handler_signal(int signal __attribute__((unused)));
-void		_signal_exit(int signal __attribute__((unused)));
+void			handler_signal(int signal __attribute__((unused)));
+void			_signal_exit(int signal __attribute__((unused)));
 
 /* #@ EXECUTOR */
-void		handler_exe(t_global *global);
-bool		exe_commands(t_global *global);
+void			handler_exe(t_global *global);
+bool			exe_commands(t_global *global);
 
 /* #@ BUILTIN */
-void		handler_builtin(t_settings *settings, t_global *global);
-void		builtin_start(t_global *global, char **envp);
-bool		builtin_exist(t_global *global);
+void			handler_builtin(t_settings *settings, t_global *global);
+void			builtin_start(t_global *global, char **envp);
+bool			builtin_exist(t_global *global);
 
-void		_env(t_global *global, char **envp);
-void		_others(t_global *global);
+void			_env(t_global *global, char **envp);
+void			_others(t_global *global);
 
-void		_builtin_exit(t_settings *settings, t_global *global);
-void		_builtin_pwd(t_global *global);
-void		_builtin_env(t_global *global);
-void		_builtin_echo(t_global *global);
-void		_builtin_others(t_global *global);
-void		_builtin_cd(t_global *global);
+void			_builtin_exit(t_settings *settings, t_global *global);
+void			_builtin_pwd(t_global *global);
+void			_builtin_env(t_global *global);
+void			_builtin_echo(t_global *global);
+void			_builtin_others(t_global *global);
+void			_builtin_cd(t_global *global);
 
 /* #@ UTILS */
-char		**split_string(const char *str, int *numWords);
-int			count_path(char *path);
-void		free_alloc(t_global *global, t_settings *settings);
+char			**split_string(const char *str, int *numWords);
+int				count_path(char *path);
+void			free_alloc(t_global *global, t_settings *settings);
 
 #endif

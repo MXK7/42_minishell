@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/21 13:29:18 by arazzok          ###   ########.fr        #
+#    Updated: 2023/12/21 18:51:21 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_DIR   = $(INCLUDES)src/libft/
 LIBFT       = $(LIBFT_DIR)libft.a
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror -g -I $(INCLUDES)
+CFLAGS      = -Wall -Wextra -Werror -g
 PRFLAGS     = -lreadline
 RM          = rm -rf
 
@@ -59,7 +59,7 @@ $(NAME): 		$(OBJ)
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
 					@echo "Compiling $<"
-					@$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+					@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
 
 $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
