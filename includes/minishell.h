@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 10:30:07 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/21 13:42:02 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ typedef struct s_global
 /* #@ SIGNAL */
 void		handler_signal(int signal __attribute__((unused)));
 void		_signal_exit(int signal __attribute__((unused)));
-
-/* #@ PARSING */
-void		handler_parse_cmd(t_settings *settings, t_global *global);
 
 /* #@ EXECUTOR */
 void		handler_exe(t_global *global);
