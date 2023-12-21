@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 09:40:10 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/21 09:45:42 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	handler_builtin(t_settings *settings, t_global *global)
 	if (builtin_exist(global))
 	{
 		if (ft_strcmp(global->input, "exit") == 0)
-			_builtin_exit(settings);
+			_builtin_exit(settings, global);
 		else if (ft_strcmp(global->input, "pwd") == 0)
 			_builtin_pwd(global);
 		else if (ft_strcmp(global->input, "env") == 0)

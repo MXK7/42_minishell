@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:58:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/18 20:05:11 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/21 09:45:13 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,9 @@ char	**split_string(const char *str, int *numWords)
 
 // TODO:: Create function for free all allocation in memory.
 // free(path_tokens);
+
+void free_alloc(t_global *global, t_settings *settings)
+{
+	free(global);
+	free(settings);
+}

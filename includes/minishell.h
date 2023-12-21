@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 09:40:32 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:30:07 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ typedef struct s_global
 	char	**argv;
 }			t_global;
 
-/// @param settings
-/// @param global
-/// @param envp
+/// @param settings Structure secondaire pour la gestion du projet
+/// @param global Structure principal pour les datas
+/// @param envp Variable d'environement
 /// @param unused_signal
 
 /* #@ SIGNAL */
@@ -73,14 +73,16 @@ bool		builtin_exist(t_global *global);
 void		_env(t_global *global, char **envp);
 void		_others(t_global *global);
 
-void		_builtin_exit(t_settings *settings);
+void		_builtin_exit(t_settings *settings, t_global *global);
 void		_builtin_pwd(t_global *global);
 void		_builtin_env(t_global *global);
 void		_builtin_echo(t_global *global);
 void		_builtin_others(t_global *global);
+void		_builtin_cd(t_global *global);
 
 /* #@ UTILS */
 char		**split_string(const char *str, int *numWords);
 int			count_path(char *path);
+void		free_alloc(t_global *global, t_settings *settings);
 
 #endif
