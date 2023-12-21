@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/15 09:10:34 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/21 09:40:32 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		_others(t_global *global);
 void		_builtin_exit(t_settings *settings);
 void		_builtin_pwd(t_global *global);
 void		_builtin_env(t_global *global);
-void		_builtin_echo(t_settings *settings, t_global *global);
+void		_builtin_echo(t_global *global);
 void		_builtin_others(t_global *global);
 
 /* #@ UTILS */

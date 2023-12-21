@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 09:30:18 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/21 09:40:10 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	handler_builtin(t_settings *settings, t_global *global)
 		else if (ft_strcmp(global->input, "env") == 0)
 			_builtin_env(global);
 		else if (ft_strcmp(global->input, "echo") == 0)
-			_builtin_echo(settings, global);
+			_builtin_echo(global);
 	}
 	else
 		_builtin_others(global);
