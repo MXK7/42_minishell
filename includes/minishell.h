@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 10:30:07 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/22 18:23:13 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ void		builtin_start(t_global *global, char **envp);
 bool		builtin_exist(t_global *global);
 
 void		_env(t_global *global, char **envp);
+char		*_env_get(char *env_name, t_global *global);
+void		_update_env(t_global *global, char *env_name, char *new_env);
+
 void		_others(t_global *global);
 
 void		_builtin_exit(t_settings *settings, t_global *global);

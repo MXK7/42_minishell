@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/13 13:35:20 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/22 14:33:53 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ EXE_DIR = executor/
 EXE     = handler_exe
 
 BUILTIN_DIR = builtin/
-BUILTIN     = handler_builtin env echo others pwd exit
+BUILTIN     = handler_builtin env echo others pwd exit cd
 
 SIGNAL_DIR = signal/
 SIGNAL     = handler_signal signal
