@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/21 18:51:21 by arazzok          ###   ########.fr        #
+#    Updated: 2023/12/22 11:36:35 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ PRFLAGS     = -lreadline
 RM          = rm -rf
 
 PARSING_DIR = parsing/
-PARSING     = handler_parsing
+PARSING     = parser
 
 EXE_DIR = executor/
 EXE     = handler_exe

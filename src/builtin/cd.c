@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 10:44:12 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/22 11:44:33 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	_builtin_cd(t_global *global)
 {
-    
+    (void)global;
     // chdir
 }

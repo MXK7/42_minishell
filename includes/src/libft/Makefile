@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
+#    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 16:02:49 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/15 09:03:39 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/22 11:45:34 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,3 +90,5 @@ bonus:			$(OBJS) $(BONUS_OBJS)
 re: fclean ${NAME}
 
 .PHONY: all, clean, fclean, re
+
+.SILENT:
