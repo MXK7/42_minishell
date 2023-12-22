@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_parsing.c                                  :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/22 14:22:24 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/22 18:39:15 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handler_parse_cmd(t_settings *settings, t_global *global)
+int is_whitespace(char c)
 {
-	(void) settings;
-	ft_printf("input: %s\n", global->input);
+    return (c == ' ' || (c > 8 && c < 14));
+}
+
+int is_operator(char c)
+{
+    return (c == '|' || c == '<' || c == '>');
+}
+
+void skip_whitespaces(char *input, int *i)
+{
+    while (is_whitespace(input[*i]))
+        (*i)++;
 }

@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/22 14:33:53 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/22 18:39:42 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,21 +19,21 @@ LIBFT_DIR   = $(INCLUDES)src/libft/
 LIBFT       = $(LIBFT_DIR)libft.a
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror -g -I $(INCLUDES)
+CFLAGS      = -Wall -Wextra -Werror -g
 PRFLAGS     = -lreadline
 RM          = rm -rf
 
 PARSING_DIR = parsing/
-PARSING     = handler_parsing
+PARSING     = parser lexer lexer_utils
 
-EXE_DIR = executor/
-EXE     = handler_exe
+EXE_DIR     = executor/
+EXE         = handler_exe
 
 BUILTIN_DIR = builtin/
 BUILTIN     = handler_builtin env echo others pwd exit cd
 
-SIGNAL_DIR = signal/
-SIGNAL     = handler_signal signal
+SIGNAL_DIR  = signal/
+SIGNAL      = handler_signal signal
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
@@ -59,7 +59,7 @@ $(NAME): 		$(OBJ)
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
 					@echo "Compiling $<"
-					@$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+					@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
 
 $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
