@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/22 11:36:35 by arazzok          ###   ########.fr        #
+#    Updated: 2023/12/22 15:29:06 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,16 @@ PRFLAGS     = -lreadline
 RM          = rm -rf
 
 PARSING_DIR = parsing/
-PARSING     = parser
+PARSING     = parser lexer lexer_utils
 
-EXE_DIR = executor/
-EXE     = handler_exe
+EXE_DIR     = executor/
+EXE         = handler_exe
 
 BUILTIN_DIR = builtin/
 BUILTIN     = handler_builtin env echo others pwd exit cd
 
-SIGNAL_DIR = signal/
-SIGNAL     = handler_signal signal
+SIGNAL_DIR  = signal/
+SIGNAL      = handler_signal signal
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))

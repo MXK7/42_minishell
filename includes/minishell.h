@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/22 11:35:59 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/22 16:01:04 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,9 @@ typedef struct s_settings
 	bool				exit_requested;
 }						t_settings;
 
-typedef enum s_token
+typedef struct s_token
 {
-	PIPE = 1,
-	LEFT,
-	DOUBLE_LEFT,
-	RIGHT,
-	DOUBLE_RIGHT
+	WORD = 1, PIPE, LEFT, DOUBLE_LEFT, RIGHT, DOUBLE_RIGHT
 }						t_token;
 
 typedef struct s_lexer
@@ -88,6 +84,13 @@ void					handler_signal(int signal __attribute__((unused)));
 void					_signal_exit(int signal __attribute__((unused)));
 
 /* #@ PARSING */
+// lexer.c
+t_lexer					*init_lexer(char *str, t_token token, int index);
+void					free_lexer(t_lexer *head);
+t_lexer					*tokenize(char *input);
+// lexer_utils.c
+
+// parser.c
 void					parser(t_global *global);
 
 /* #@ EXECUTOR */
