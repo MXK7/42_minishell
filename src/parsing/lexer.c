@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:25:43 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/22 16:09:23 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/24 17:29:16 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,25 @@ t_lexer	*tokenize(char *input)
 	current = NULL;
 	len = ft_strlen(input);
 	i = 0;
-}
-
-// Test functions
-void	printLexer(Lexer *head)
-{
-	while (head)
+	while (i < len)
 	{
-		ft_printf("Token: %s, Type: %d\n", head->str, head->token);
-		head = head->next;
+		skip_whitespaces(input, i);
+		if (is_operator(input[i]))
+			handle_operator(input, &i, &current, input[i]);
+		else if (is_quote(input[i]))
+			handle_quote(input, &i, &current, input[i]);
+		else
+			handle_word(input, &i, &current input[i]);
+		// TODO: à mettre dans une fonction à part
+		if (head == NULL)
+			head = current;
+		else
+		{
+			current->prev = head;
+			head->next = current;
+			head = current;
+		}
+		i++;
 	}
+	return (head);
 }

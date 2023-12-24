@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/22 16:06:57 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/24 16:15:21 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void	init_sh(t_settings *settings, t_global *global, char **envp)
 		global->input = readline("AMS $ ");
 		add_history(global->input);
 		parser(global);
-        
 		handler_builtin(settings, global);
 		// if (!global->input)
 		// {
 		// 	_builtin_exit(settings, global);
 		// }
+	    free(global->input);
 	}
 }
 
@@ -41,7 +41,6 @@ int	main(int argc, char **argv, char **envp)
 	settings->exit_requested = true;
 	if (argc == 1 && (settings != NULL && global != NULL))
 		init_sh(settings, global, envp);
-	free(global->input);
 	free(global);
 	free(settings);
 	return (0);

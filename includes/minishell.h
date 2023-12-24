@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/22 16:01:04 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/24 17:28:15 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,17 @@ t_lexer					*init_lexer(char *str, t_token token, int index);
 void					free_lexer(t_lexer *head);
 t_lexer					*tokenize(char *input);
 // lexer_utils.c
+int						is_whitespace(char c);
+int						is_operator(char c);
+int						is_quote(char c);
+void					skip_whitespaces(char *input, int *i);
+int						get_word_len(char *input, int i);
+// lexer_handler.c
+void					handle_operator(char *input, int *i, t_lexer **current,
+							char operator);
+void					handle_quote(char *input, int *i, t_lexer **current,
+							char quote);
+void					handle_word(char *input, int *i, t_lexer **current);
 
 // parser.c
 void					parser(t_global *global);
