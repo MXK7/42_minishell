@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/24 17:28:15 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/24 17:33:44 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,11 @@ void					handler_builtin(t_settings *settings, t_global *global);
 void					builtin_start(t_global *global, char **envp);
 bool					builtin_exist(t_global *global);
 
-void					_env(t_global *global, char **envp);
-void					_others(t_global *global);
+void		_env(t_global *global, char **envp);
+char		*_env_get(char *env_name, t_global *global);
+void		_update_env(t_global *global, char *env_name, char *new_env);
+
+void		_others(t_global *global);
 
 void					_builtin_exit(t_settings *settings, t_global *global);
 void					_builtin_pwd(t_global *global);

@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/24 16:15:21 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/24 17:34:58 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ static void	init_sh(t_settings *settings, t_global *global, char **envp)
 		add_history(global->input);
 		parser(global);
 		handler_builtin(settings, global);
-		// if (!global->input)
-		// {
-		// 	_builtin_exit(settings, global);
-		// }
 	    free(global->input);
 	}
 }
