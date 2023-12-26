@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 07:43:26 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 07:54:55 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ typedef struct s_settings
 	bool				exit_requested;
 }						t_settings;
 
-// typedef struct s_token
-// {
-// 	WORD = 1, PIPE, LEFT, DOUBLE_LEFT, RIGHT, DOUBLE_RIGHT
-// }						t_token;
+typedef struct s_token
+{
+	WORD = 1, PIPE, LEFT, DOUBLE_LEFT, RIGHT, DOUBLE_RIGHT
+}						t_token;
 
-// typedef struct s_lexer
-// {
-// 	char				*str;
-// 	t_token				token;
-// 	int					index;
-// 	struct s_lexer		*prev;
-// 	struct s_lexer		*next;
-// }						t_lexer;
+typedef struct s_lexer
+{
+	char				*str;
+	t_token				token;
+	int					index;
+	struct s_lexer		*prev;
+	struct s_lexer		*next;
+}						t_lexer;
 
 typedef struct s_global
 {
@@ -84,11 +84,22 @@ void					handler_signal(int signal __attribute__((unused)));
 void					_signal_exit(int signal __attribute__((unused)));
 
 /* #@ PARSING */
-// // lexer.c
-// t_lexer					*init_lexer(char *str, t_token token, int index);
-// void					free_lexer(t_lexer *head);
-// t_lexer					*tokenize(char *input);
-// // lexer_utils.c
+// lexer.c
+t_lexer					*init_lexer(char *str, t_token token, int index);
+void					free_lexer(t_lexer *head);
+t_lexer					*tokenize(char *input);
+// lexer_utils.c
+int						is_whitespace(char c);
+int						is_operator(char c);
+int						is_quote(char c);
+void					skip_whitespaces(char *input, int *i);
+int						get_word_len(char *input, int i);
+// lexer_handler.c
+void					handle_operator(char *input, int *i, t_lexer **current,
+							char operator);
+void					handle_quote(char *input, int *i, t_lexer **current,
+							char quote);
+void					handle_word(char *input, int *i, t_lexer **current);
 
 // // parser.c
 // void					parser(t_global *global);

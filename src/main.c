@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 06:40:19 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 07:52:43 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	init_sh(t_settings *settings, t_global *global, char **envp)
 		// parser(global);
         
 		handler_builtin(settings, global);
+	    free(global->input);
 	}
 }
 
@@ -37,7 +38,6 @@ int	main(int argc, char **argv, char **envp)
 	settings->exit_requested = true;
 	if (argc == 1 && (settings != NULL && global != NULL))
 		init_sh(settings, global, envp);
-	free(global->input);
 	free(global);
 	free(settings);
 	return (0);
