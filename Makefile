@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
+#    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/26 07:56:36 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/26 17:02:56 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,7 @@ PRFLAGS     = -lreadline
 RM          = rm -rf
 
 PARSING_DIR = parsing/
-PARSING     = 
-#PARSING     = parser lexer lexer_utils
+PARSING     = parser lexer lexer_utils lexer_handler
 
 EXE_DIR     = executor/
 EXE         = handler_exe

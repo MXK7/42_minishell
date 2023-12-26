@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/24 16:16:05 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/26 17:30:15 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 // Test functions
 void	print_lexer(t_lexer *head)
 {
-	while (head)
+	t_lexer	*current;
+
+	current = head;
+	while (current)
 	{
-		ft_printf("Token: %s, Type: %d\n", head->str, head->token);
-		head = head->next;
+		ft_printf("Token: %s, Type: %d\n", current->str, current->token);
+		current = current->next;
 	}
 }
 
@@ -29,6 +32,7 @@ void	parser(t_global *global)
 	token_list = malloc(sizeof(t_lexer));
 	token_list = tokenize(global->input);
 	print_lexer(token_list);
+	free_lexer(token_list);
 	// 5. Gérer les pipes
 	// 6. Gérer les redirections
 	// 7. Gérer $? (code de sortie du dernier programme exécuté)

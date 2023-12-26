@@ -6,15 +6,26 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/24 17:31:22 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/26 16:51:30 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO: Coder un helper strndup
 static char	*ft_strndup(const char *src, size_t size)
 {
+	size_t	len;
+	char	*copy;
+
+	len = 0;
+	while (src[len] && len < size)
+		len++;
+	copy = malloc(sizeof(char) * (len + 1));
+	if (!copy)
+		return (NULL);
+	ft_memcpy(copy, src, size);
+	copy[len] = '\0';
+	return (copy);
 }
 
 void	handle_operator(char *input, int *i, t_lexer **current, char operator)
@@ -40,7 +51,7 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 		j++;
 	if (input[j] == quote)
 	{
-		// ! word = ft_strndup(&input[*i + 1], j - *i - 1);
+		word = ft_strndup(&input[*i + 1], j - *i - 1);
 		*current = init_lexer(word, WORD, *i);
 		*i = j;
 	}
@@ -57,7 +68,7 @@ void	handle_word(char *input, int *i, t_lexer **current)
 	char	*word;
 
 	len = get_word_len(input, *i);
-	// ! word = ft_strndup(&input[*i], len);
+	word = ft_strndup(&input[*i], len);
 	*current = init_lexer(word, WORD, *i);
 	*i += len - 1;
 }

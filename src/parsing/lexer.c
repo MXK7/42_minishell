@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:25:43 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/26 07:55:49 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:07:38 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ t_lexer	*tokenize(char *input)
 	i = 0;
 	while (i < len)
 	{
-		skip_whitespaces(input, i);
+		skip_whitespaces(input, &i);
 		if (is_operator(input[i]))
 			handle_operator(input, &i, &current, input[i]);
 		else if (is_quote(input[i]))
 			handle_quote(input, &i, &current, input[i]);
 		else
-			handle_word(input, &i, &current input[i]);
+			handle_word(input, &i, &current);
 		// TODO: à mettre dans une fonction à part
 		if (head == NULL)
 			head = current;
