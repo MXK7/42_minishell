@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2023/12/26 07:41:29 by mpoussie         ###   ########.fr        #
+#    Updated: 2023/12/26 07:56:36 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ RM          = rm -rf
 
 PARSING_DIR = parsing/
 PARSING     = 
-# PARSING     = parser lexer lexer_utils
+#PARSING     = parser lexer lexer_utils
 
 EXE_DIR     = executor/
 EXE         = handler_exe

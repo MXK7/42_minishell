@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:39:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 09:39:58 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:40:18 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	_builtin_echo(t_global *global)
 {
-	int i;
-	bool param;
+	int		i;
+	bool	param;
 
 	i = 3;
 	param = false;

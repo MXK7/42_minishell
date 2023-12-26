@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:58:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/21 09:45:13 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:40:02 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,7 @@ int	count_path(char *path)
 	return (count);
 }
 
-char	**split_string(const char *str, int *numWords)
-{
-	char	**words;
-	char	*token;
-	char	*str_copy;
-
-	words = (char **)malloc(strlen(str) * sizeof(char *));
-	if (words == NULL)
-		exit(EXIT_FAILURE);
-	str_copy = strdup(str);
-	if (str_copy == NULL)
-		exit(EXIT_FAILURE);
-	token = strtok(str_copy, " ");
-	*numWords = 0;
-	while (token != NULL)
-	{
-		words[*numWords] = strdup(token);
-		if (words[*numWords] == NULL)
-			exit(EXIT_FAILURE);
-		(*numWords)++;
-		token = strtok(NULL, " ");
-	}
-	free(str_copy);
-	return (words);
-}
-
-// TODO:: Create function for free all allocation in memory.
-// free(path_tokens);
-
-void free_alloc(t_global *global, t_settings *settings)
+void	free_alloc(t_global *global, t_settings *settings)
 {
 	free(global);
 	free(settings);

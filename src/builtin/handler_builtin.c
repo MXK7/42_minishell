@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 07:47:50 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:40:54 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ bool	builtin_exist(t_global *global)
 
 void	handler_builtin(t_settings *settings, t_global *global)
 {
-	int	nbr_str;
-
-	global->argv = split_string(global->input, &nbr_str);
+	global->argv = ft_split(global->input, ' ');
 	if (exe_commands(global) || builtin_exist(global))
 	{
-		printf("%s\n", global->argv[0]);
+		// ? TODO DELETED: printf("%s\n", global->argv[0]);
 		if (builtin_exist(global))
 		{
 			if (ft_strcmp(global->argv[0], "exit") == 0)
@@ -68,6 +66,6 @@ void	handler_builtin(t_settings *settings, t_global *global)
 	else
 	{
 		global->argv = NULL;
-		printf("ERROR\n");
+		printf("ams: command not found: %s\n", global->input);
 	}
 }

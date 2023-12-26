@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 07:00:25 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:38:29 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	_env(t_global *global, char **envp)
 			global->path = global->env[i];
 		i++;
 	}
+	global->pwd = getcwd(NULL, 0);
 }
+
 char	*_env_get(char *env_name, t_global *global)
 {
 	size_t	en_len;

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 07:04:05 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:39:46 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,20 @@
 int	_builtin_cd(t_global *global)
 {
 	char	*new_pwd;
+	int		fd;
 
-	// int		fd;
-	// printf("%s\n%s\n", global->argv[0], global->argv[1]);
-	// opendir: verifie si le chemin d'acces existe
-	// if (opendir(global->argv[1]) != NULL)
-	// {
-	// 	printf("%s\n", global->argv[1]);
-	// 	fd = open(global->argv[1], O_RDONLY);
-	// 	if (fd == -1)
-	// 	{
-	// 		printf("ERROR CD OPEN\n");
-	// 		close(fd);
-	// 		return (1);
-	// 	}
-	// 	close(fd);
-	// }
+	if (opendir(global->argv[1]) != NULL)
+	{
+		printf("%s\n", global->argv[1]);
+		fd = open(global->argv[1], O_RDONLY);
+		if (fd == -1)
+		{
+			printf("ERROR CD OPEN\n");
+			close(fd);
+			return (1);
+		}
+		close(fd);
+	}
 	if (chdir(global->argv[1]) == 0)
 	{
 		new_pwd = ft_strjoin(_env_get("PWD=", global), ft_strjoin("/",
