@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/22 17:04:04 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 07:47:50 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	handler_builtin(t_settings *settings, t_global *global)
 	global->argv = split_string(global->input, &nbr_str);
 	if (exe_commands(global) || builtin_exist(global))
 	{
-		printf("TEST\n");
 		printf("%s\n", global->argv[0]);
 		if (builtin_exist(global))
 		{
@@ -59,10 +58,9 @@ void	handler_builtin(t_settings *settings, t_global *global)
 			else if (ft_strcmp(global->argv[0], "echo") == 0)
 				_builtin_echo(global);
 			else if (ft_strcmp(global->argv[0], "cd") == 0)
-			{
-				printf("%s\n", global->argv[0]);
-				_builtin_cd(global);
-			}
+				_builtin_cd(global); // ! ERROR AFTER USE "LS"
+			else if (ft_strcmp(global->argv[0], "export") == 0)
+				_builtin_export(global);
 		}
 		else
 			_builtin_others(global);

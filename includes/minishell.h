@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/22 18:39:59 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 07:43:26 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ typedef struct s_settings
 	bool				exit_requested;
 }						t_settings;
 
-typedef struct s_token
-{
-	WORD = 1, PIPE, LEFT, DOUBLE_LEFT, RIGHT, DOUBLE_RIGHT
-}						t_token;
+// typedef struct s_token
+// {
+// 	WORD = 1, PIPE, LEFT, DOUBLE_LEFT, RIGHT, DOUBLE_RIGHT
+// }						t_token;
 
-typedef struct s_lexer
-{
-	char				*str;
-	t_token				token;
-	int					index;
-	struct s_lexer		*prev;
-	struct s_lexer		*next;
-}						t_lexer;
+// typedef struct s_lexer
+// {
+// 	char				*str;
+// 	t_token				token;
+// 	int					index;
+// 	struct s_lexer		*prev;
+// 	struct s_lexer		*next;
+// }						t_lexer;
 
 typedef struct s_global
 {
@@ -69,7 +69,7 @@ typedef struct s_command
 	void				(*builtin)(t_global *global);
 	int					nb_redirections;
 	char				*heredoc_file_name;
-	t_lexer				*redirections;
+	// t_lexer				*redirections;
 	struct s_command	*prev;
 	struct s_command	*next;
 }						t_command;
@@ -84,14 +84,14 @@ void					handler_signal(int signal __attribute__((unused)));
 void					_signal_exit(int signal __attribute__((unused)));
 
 /* #@ PARSING */
-// lexer.c
-t_lexer					*init_lexer(char *str, t_token token, int index);
-void					free_lexer(t_lexer *head);
-t_lexer					*tokenize(char *input);
-// lexer_utils.c
+// // lexer.c
+// t_lexer					*init_lexer(char *str, t_token token, int index);
+// void					free_lexer(t_lexer *head);
+// t_lexer					*tokenize(char *input);
+// // lexer_utils.c
 
-// parser.c
-void					parser(t_global *global);
+// // parser.c
+// void					parser(t_global *global);
 
 /* #@ EXECUTOR */
 void					handler_exe(t_global *global);
@@ -102,18 +102,20 @@ void					handler_builtin(t_settings *settings, t_global *global);
 void					builtin_start(t_global *global, char **envp);
 bool					builtin_exist(t_global *global);
 
-void		_env(t_global *global, char **envp);
-char		*_env_get(char *env_name, t_global *global);
-void		_update_env(t_global *global, char *env_name, char *new_env);
+void					_env(t_global *global, char **envp);
+char					*_env_get(char *env_name, t_global *global);
+void					_env_update(t_global *global, const char *env_name,
+							const char *new_env);
 
-void		_others(t_global *global);
+void					_others(t_global *global);
 
 void					_builtin_exit(t_settings *settings, t_global *global);
 void					_builtin_pwd(t_global *global);
 void					_builtin_env(t_global *global);
 void					_builtin_echo(t_global *global);
 void					_builtin_others(t_global *global);
-void					_builtin_cd(t_global *global);
+int						_builtin_cd(t_global *global);
+void					_builtin_export(t_global *global);
 
 /* #@ UTILS */
 char					**split_string(const char *str, int *numWords);

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/22 17:00:38 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 07:01:15 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	handler_exe(t_global *global)
 	}
 	i = 0;
 	global->args_path = (char **)malloc(sizeof(char *) * ft_strlen(path_start
-			+ 1));
+				+ 1));
 	token = strtok(path_start + 1, ":");
 	while (token != NULL)
 	{

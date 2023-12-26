@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/22 18:34:56 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/26 07:00:25 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,21 @@ char	*_env_get(char *env_name, t_global *global)
 	return (NULL);
 }
 
-void	_update_env(t_global *global, char *env_name, char *new_env)
+void	_env_update(t_global *global, const char *env_name, const char *new_env)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	while (global->env[i])
 	{
-		if (ft_strcmp(global->env[i], env_name) == 0)
+		if (ft_strncmp(global->env[i], env_name, ft_strlen(env_name)) == 0)
 		{
 			free(global->env[i]);
-			new_env = ft_strjoin("PWD=", new_env);
-			global->env[i] = ft_strdup(new_env);
+			temp = ft_strjoin(env_name, new_env);
+			global->env[i] = ft_strdup(temp);
+			free(temp);
+			printf("%s\n", global->env[i]);
 		}
 		i++;
 	}
