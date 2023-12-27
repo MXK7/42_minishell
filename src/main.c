@@ -6,25 +6,13 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 08:12:37 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 08:39:58 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_sh(t_settings *settings, t_global *global, char **envp)
-{
-	signal(SIGINT, handler_signal);
-	builtin_start(global, envp);
-	while (settings->exit_requested)
-	{
-		global->input = readline("AMS $ ");
-		add_history(global->input);
-		// parser(global);
-		handler_builtin(settings, global);
-		free(global->input);
-	}
-}
+static void	init_sh(t_settings *settings, t_global *global, char **envp);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -40,4 +28,18 @@ int	main(int argc, char **argv, char **envp)
 	free(global);
 	free(settings);
 	return (0);
+}
+
+static void	init_sh(t_settings *settings, t_global *global, char **envp)
+{
+	signal(SIGINT, handler_signal);
+	builtin_start(global, envp);
+	while (settings->exit_requested)
+	{
+		global->input = readline("AMS $ ");
+		add_history(global->input);
+		// parser(global);
+		handler_builtin(settings, global);
+		free(global->input);
+	}
 }

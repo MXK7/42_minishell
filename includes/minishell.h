@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 17:00:17 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/27 08:42:13 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ typedef struct s_settings
 typedef enum s_token
 {
 	WORD = 1,
-    PIPE,
-    LEFT,
-    DOUBLE_LEFT,
-    RIGHT,
-    DOUBLE_RIGHT
+	PIPE,
+	LEFT,
+	DOUBLE_LEFT,
+	RIGHT,
+	DOUBLE_RIGHT
 }						t_token;
 
 typedef struct s_lexer
@@ -115,7 +115,6 @@ bool					exe_commands(t_global *global);
 /* #@ BUILTIN */
 void					handler_builtin(t_settings *settings, t_global *global);
 void					builtin_start(t_global *global, char **envp);
-bool					builtin_exist(t_global *global);
 
 void					_env(t_global *global, char **envp);
 char					*_env_get(char *env_name, t_global *global);
@@ -131,6 +130,7 @@ void					_builtin_echo(t_global *global);
 void					_builtin_others(t_global *global);
 int						_builtin_cd(t_global *global);
 void					_builtin_export(t_global *global);
+void					_builtin_unset(t_global *global);
 
 /* #@ UTILS */
 char					**split_string(const char *str, int *numWords);

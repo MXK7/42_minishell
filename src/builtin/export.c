@@ -6,11 +6,27 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 07:38:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 08:14:41 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 08:40:44 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	tri_export_var(t_global *global);
+
+void	_builtin_export(t_global *global)
+{
+	int	i;
+
+	i = 0;
+	tri_export_var(global);
+	while (global->env[i])
+	{
+		if (global->env[i][0] != '\0')
+			printf("declare -x %s\n", global->env[i]);
+		i++;
+	}
+}
 
 static void	tri_export_var(t_global *global)
 {
@@ -35,18 +51,4 @@ static void	tri_export_var(t_global *global)
 	}
 	temp = NULL;
 	free(temp);
-}
-
-void	_builtin_export(t_global *global)
-{
-	int	i;
-
-	i = 0;
-	tri_export_var(global);
-	while (global->env[i])
-	{
-		if (global->env[i][0] != '\0')
-			printf("declare -x %s\n", global->env[i]);
-		i++;
-	}
 }

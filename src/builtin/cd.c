@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 08:14:36 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 08:34:19 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	_builtin_cd(t_global *global)
 	if (chdir(global->argv[1]) == 0)
 	{
 		new_pwd = ft_strjoin(_env_get("PWD=", global), ft_strjoin("/",
-				global->argv[1]));
+					global->argv[1]));
 		_env_update(global, "PWD=", new_pwd);
 	}
 	else

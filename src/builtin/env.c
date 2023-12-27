@@ -6,11 +6,14 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 08:31:00 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 08:40:26 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	update_var(t_global *global, const char *env_name,
+				const char *new_env);
 
 void	_env(t_global *global, char **envp)
 {
@@ -58,7 +61,17 @@ char	*_env_get(char *env_name, t_global *global)
 	}
 	return (NULL);
 }
-void	update_var(t_global *global, const char *env_name, const char *new_env)
+void	_env_update(t_global *global, const char *env_name, const char *new_env)
+{
+	if (env_name[0] == 'P' && env_name[1] == 'W' && env_name[2] == 'D'
+		&& env_name[3] == '=')
+		update_var(global, "PWD=", getcwd(NULL, 0));
+	else
+		update_var(global, env_name, new_env);
+}
+
+static void	update_var(t_global *global, const char *env_name,
+		const char *new_env)
 {
 	int		i;
 	char	*temp;
@@ -75,15 +88,6 @@ void	update_var(t_global *global, const char *env_name, const char *new_env)
 		}
 		i++;
 	}
-}
-
-void	_env_update(t_global *global, const char *env_name, const char *new_env)
-{
-	if (env_name[0] == 'P' && env_name[1] == 'W' && env_name[2] == 'D'
-		&& env_name[3] == '=')
-		update_var(global, "PWD=", getcwd(NULL, 0));
-	else
-		update_var(global, env_name, new_env);
 }
 
 void	_builtin_env(t_global *global)

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 14:38:57 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 08:41:24 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,3 @@ static char	*make_absolute_path(const char *path, const char *exec_name)
 	absolute_path[exec_name_length + 1 + path_length] = '\0';
 	return (absolute_path);
 }
-
-// * [x] Chemin absolu (ex: /usr/bin/echo)
-// * [x] Checmin relatif (ex: build/mon_executable)
-// * [x] Cas special du checmin relatif (ex: ./mon_executable)
-// * [x] chemin depuis le PATH (ex: ls)
