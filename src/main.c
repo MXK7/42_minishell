@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 16:56:29 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/27 08:12:37 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	init_sh(t_settings *settings, t_global *global, char **envp)
 	{
 		global->input = readline("AMS $ ");
 		add_history(global->input);
-		parser(global);
-		// handler_builtin(settings, global);
+		// parser(global);
+		handler_builtin(settings, global);
 		free(global->input);
 	}
 }

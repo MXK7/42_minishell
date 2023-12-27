@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 14:40:54 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 08:12:16 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	handler_builtin(t_settings *settings, t_global *global)
 			else if (ft_strcmp(global->argv[0], "echo") == 0)
 				_builtin_echo(global);
 			else if (ft_strcmp(global->argv[0], "cd") == 0)
-				_builtin_cd(global); // ! ERROR AFTER USE "LS"
+				_builtin_cd(global);
 			else if (ft_strcmp(global->argv[0], "export") == 0)
 				_builtin_export(global);
 		}

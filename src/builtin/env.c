@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 14:38:29 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 08:28:54 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ char	*_env_get(char *env_name, t_global *global)
 	}
 	return (NULL);
 }
-
-void	_env_update(t_global *global, const char *env_name, const char *new_env)
+void	update_var(t_global *global, const char *env_name, const char *new_env)
 {
 	int		i;
 	char	*temp;
@@ -77,6 +76,32 @@ void	_env_update(t_global *global, const char *env_name, const char *new_env)
 		}
 		i++;
 	}
+}
+
+void	_env_update(t_global *global, const char *env_name, const char *new_env)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	if (env_name[0] == 'P' && env_name[1] == 'W' && env_name[2] == 'D'
+		&& env_name[3] == '=')
+	{
+		while (global->env[i])
+		{
+			if (ft_strncmp(global->env[i], "PWD=", ft_strlen(env_name)) == 0)
+			{
+				free(global->env[i]);
+				temp = ft_strjoin("PWD=", getcwd(NULL, 0));
+				global->env[i] = ft_strdup(temp);
+				free(temp);
+				printf("%s\n%s\n", global->env[i], temp);
+			}
+			i++;
+		}
+	}
+	else
+		update_var(global, env_name, new_env);
 }
 
 void	_builtin_env(t_global *global)
