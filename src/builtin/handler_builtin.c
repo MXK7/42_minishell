@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 08:41:58 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:01:19 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,6 @@ static void	_builtin_exe(t_settings *settings, t_global *global)
 		_builtin_cd(global);
 	else if (ft_strcmp(global->argv[0], "export") == 0)
 		_builtin_export(global);
+	else if (ft_strcmp(global->argv[0], "unset") == 0)
+		_builtin_unset(global);
 }

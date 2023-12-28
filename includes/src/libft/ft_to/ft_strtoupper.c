@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 22:36:50 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 12:49:57 by mpoussie         ###   ########.fr       */
+/*   Created: 2023/12/27 12:52:15 by mpoussie          #+#    #+#             */
+/*   Updated: 2023/12/27 14:00:10 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+char	*ft_strtoupper(char *str)
 {
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	return (c);
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+        if (str[i] >= 'a' && str[i] <= 'z')
+            str[i] = str[i] - 32;
+		i++;
+	}
+	return (str);
 }

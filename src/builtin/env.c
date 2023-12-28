@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 08:40:26 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/28 08:34:31 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,16 @@ static void	update_var(t_global *global, const char *env_name,
 		}
 		i++;
 	}
+}
+
+int	_env_len(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	return (i);
 }
 
 void	_builtin_env(t_global *global)

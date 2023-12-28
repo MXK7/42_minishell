@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 05:49:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/15 09:03:28 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:32:57 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 # define CHAR_BIT 8
 # define SCHAR_MIN -128
@@ -75,6 +76,8 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *str, char c);
 char				*ft_itoa(int n);
+char				*ft_strtoupper(char *str);
+char				*ft_strtolower(char *str);
 
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 void				ft_putchar_fd(char c, int fd);
