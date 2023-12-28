@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 14:01:19 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:41:49 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ void	builtin_start(t_global *global, char **envp)
 
 void	handler_builtin(t_settings *settings, t_global *global)
 {
-	global->argv = ft_split(global->input, ' ');
+	printf("%s\n", global->input);
+	if (global->input)
+		global->argv = ft_split(global->input, ' ');
+	else
+		return ;
 	if (exe_commands(global) || builtin_exist(global))
 	{
 		if (builtin_exist(global))
