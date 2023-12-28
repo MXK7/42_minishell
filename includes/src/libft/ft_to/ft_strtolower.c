@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:50:21 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 14:00:32 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/28 08:49:21 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*ft_strtolower(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-        if (str[i] >= 'A' && str[i] <= 'Z')
-            str[i] = str[i] + 32;
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] = str[i] + 32;
 		i++;
 	}
 	return (str);

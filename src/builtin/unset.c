@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 08:36:51 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/28 08:46:45 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/28 08:52:29 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static char	**_delete_var(char **env, char *env_name)
 	x = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], ft_strtoupper(env_name), ft_strlen(env_name)) != 0)
+		if (ft_strncmp(env[i], ft_strtoupper(env_name),
+				ft_strlen(env_name)) != 0)
 		{
 			new_env[x] = env[i];
 			x++;
 		}
 		i++;
-		// free(temp);
 	}
 	new_env[x] = 0;
 	return (new_env);
