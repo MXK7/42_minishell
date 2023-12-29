@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:25:43 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/28 17:40:31 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:27:37 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,7 @@ t_lexer	*tokenize(char *input)
 			handle_quote(input, &i, &current, input[i]);
 		else
 			handle_word(input, &i, &current);
-		// TODO: à mettre dans une fonction à part
-		if (head == NULL)
-			head = current;
-		else
-		{
-			current->prev = head;
-			head->next = current;
-			head = current;
-		}
+		handle_head(&head, current);
 		i++;
 	}
 	return (head);

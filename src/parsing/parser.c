@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/28 17:40:18 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:37:13 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	parser(t_global *global)
 {
 	t_lexer	*token_list;
 
-	token_list = malloc(sizeof(t_lexer));
+	token_list = NULL;
 	token_list = tokenize(global->input);
 	print_lexer(token_list);
 	free_lexer(token_list);

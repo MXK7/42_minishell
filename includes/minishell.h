@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/28 08:41:16 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:24:49 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void					handle_operator(char *input, int *i, t_lexer **current,
 void					handle_quote(char *input, int *i, t_lexer **current,
 							char quote);
 void					handle_word(char *input, int *i, t_lexer **current);
+void					handle_head(t_lexer **head, t_lexer *current);
 // parser.c
 void					parser(t_global *global);
 

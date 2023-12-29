@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/27 08:41:12 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:34:50 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,7 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 		*current = init_lexer(word, WORD, *i);
 		*i = j;
 	}
-	else
-	{
-		// * Quote non-fermée
-		// ? Ignorer ou gérer l'erreur ?
-	}
+	free(word);
 }
 
 void	handle_word(char *input, int *i, t_lexer **current)
@@ -71,4 +67,22 @@ void	handle_word(char *input, int *i, t_lexer **current)
 	word = ft_strndup(&input[*i], len);
 	*current = init_lexer(word, WORD, *i);
 	*i += len - 1;
+	free(word);
+}
+
+void	handle_head(t_lexer **head, t_lexer *current)
+{
+	t_lexer *temp;
+
+	if (*head == NULL)
+		*head = current;
+	else
+	{
+		temp = *head;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = current;
+		current->prev = temp;
+		current->next = NULL;
+	}
 }
