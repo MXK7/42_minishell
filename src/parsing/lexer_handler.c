@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/29 14:34:50 by arazzok          ###   ########.fr       */
+/*   Updated: 2023/12/29 16:06:02 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,28 @@ static char	*ft_strndup(const char *src, size_t size)
 void	handle_operator(char *input, int *i, t_lexer **current, char operator)
 {
 	t_token	token;
+	char	*temp;
+	int		len;
 
+	len = 1;
 	if (operator == '|')
 		token = PIPE;
+	else if ((operator == '<' || operator == '>') && operator == input[*i + 1])
+	{
+		len = 2;
+		if (operator == '<')
+			token = DOUBLE_LEFT;
+		else if (operator == '>')
+			token = DOUBLE_RIGHT;
+	}
 	else if (operator == '<')
 		token = LEFT;
 	else if (operator == '>')
 		token = RIGHT;
-	*current = init_lexer(&input[*i], token, *i);
+	temp = ft_strndup(&input[*i], len);
+	*current = init_lexer(temp, token, *i);
+	*i += len - 1;
+	free(temp);
 }
 
 void	handle_quote(char *input, int *i, t_lexer **current, char quote)
@@ -72,7 +86,7 @@ void	handle_word(char *input, int *i, t_lexer **current)
 
 void	handle_head(t_lexer **head, t_lexer *current)
 {
-	t_lexer *temp;
+	t_lexer	*temp;
 
 	if (*head == NULL)
 		*head = current;
