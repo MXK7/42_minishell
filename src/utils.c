@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:58:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/26 14:40:02 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:12:27 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,4 @@ int	count_path(char *path)
 	}
 	count++;
 	return (count);
-}
-
-void	free_alloc(t_global *global, t_settings *settings)
-{
-	free(global);
-	free(settings);
 }
