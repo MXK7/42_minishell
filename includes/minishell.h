@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/29 19:52:42 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/02 16:41:34 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,11 @@ void					handle_head(t_lexer **head, t_lexer *current);
 t_command				*init_command(void);
 t_command				*tokens_to_commands(t_lexer *lexer);
 void					parser(t_global *global);
-// parser_utils.c
+// parser_handler.c
 void					handle_token(t_lexer *lexer, t_command *command);
+// parser_utils.c
+int						is_redirection(t_token token);
+int						get_str_size(char **str);
 
 /* #@ EXECUTOR */
 void					handler_exe(t_global *global);
