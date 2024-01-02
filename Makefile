@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/02 14:52:21 by mpoussie         ###   ########.fr        #
+#    Updated: 2024/01/02 15:55:53 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_DIR   = $(INCLUDES)src/libft/
 LIBFT       = $(LIBFT_DIR)libft.a
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS      = -Wall -Wextra -Werror -g3
 PRFLAGS     = -lreadline
 RM          = rm -rf
 

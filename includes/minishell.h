@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 14:52:43 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:56:43 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void					_signal_newline(int signal __attribute__((unused)));
 void					_signal_exit(int signal __attribute__((unused)));
 
 /* ###@ UTILS */
-char					**split_string(const char *str, int *numWords);
 int						count_path(char *path);
+void					free_minishell(t_global *global);
 
 #endif

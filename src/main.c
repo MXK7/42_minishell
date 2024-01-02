@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 14:52:37 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:57:43 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	main(int argc, char **argv, char **envp)
 	global = malloc(sizeof(t_global));
 	if (argc == 1 && global != NULL)
 		init_sh(global, envp);
-	free(global);
+	// free(global);
+	free_minishell(global);
 	return (0);
 }
 

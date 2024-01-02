@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:58:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/29 18:12:27 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:04:55 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,25 @@ int	count_path(char *path)
 	}
 	count++;
 	return (count);
+}
+
+void free_minishell(t_global *global)
+{
+	int i;
+
+	i = 0;
+	while (global->env[i])
+	{
+		free(global->env[i]);
+		i++;
+	}
+	i = 0;
+	while (global->args_path[i])
+	{
+		free(global->args_path[i]);
+		i++;
+	}
+	free(global->path);
+	free(global->token);
+	free(global);
 }
