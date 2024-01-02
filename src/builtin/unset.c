@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 08:36:51 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/28 08:52:29 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:00:22 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ static char	**_delete_var(char **env, char *env_name)
 		i++;
 	}
 	new_env[x] = 0;
+	free(new_env);
 	return (new_env);
 }

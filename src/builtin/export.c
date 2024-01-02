@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 07:38:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 08:40:44 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:00:08 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ static void	tri_export_var(t_global *global)
 		}
 		i++;
 	}
-	temp = NULL;
 	free(temp);
+	temp = NULL;
 }

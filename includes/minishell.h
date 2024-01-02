@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 16:41:34 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/02 19:39:06 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <setjmp.h>
 # include <signal.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -32,10 +33,12 @@
 # define CTRL_D '\004'
 # define ERROR_PATH_EGAL "Error: '=' not found in path\n string"
 
-typedef struct s_settings
-{
-	bool				exit_requested;
-}						t_settings;
+extern bool				exit_requested;
+
+// typedef struct s_settings
+// {
+// 	bool				exit_requested;
+// }						t_settings;
 
 typedef enum s_token
 {
@@ -84,11 +87,7 @@ typedef struct s_command
 /// @param envp Variables d'environement
 /// @param unused_signal
 
-/* #@ SIGNAL */
-void					handler_signal(int signal __attribute__((unused)));
-void					_signal_exit(int signal __attribute__((unused)));
-
-/* #@ PARSING */
+/* ###@ PARSING */
 // lexer.c
 t_lexer					*init_lexer(char *str, t_token token, int index);
 void					free_lexer(t_lexer *head);
@@ -116,12 +115,12 @@ void					handle_token(t_lexer *lexer, t_command *command);
 int						is_redirection(t_token token);
 int						get_str_size(char **str);
 
-/* #@ EXECUTOR */
+/* ###@ EXECUTOR */
 void					handler_exe(t_global *global);
 bool					exe_commands(t_global *global);
 
-/* #@ BUILTIN */
-void					handler_builtin(t_settings *settings, t_global *global);
+/* ###@ BUILTIN */
+void					handler_builtin(t_global *global);
 void					builtin_start(t_global *global, char **envp);
 
 void					_env(t_global *global, char **envp);
@@ -132,7 +131,7 @@ int						_env_len(char **env);
 
 void					_others(t_global *global);
 
-void					_builtin_exit(t_settings *settings, t_global *global);
+void					_builtin_exit(t_global *global);
 void					_builtin_pwd(t_global *global);
 void					_builtin_env(t_global *global);
 void					_builtin_echo(t_global *global);
@@ -141,9 +140,12 @@ int						_builtin_cd(t_global *global);
 void					_builtin_export(t_global *global);
 void					_builtin_unset(t_global *global);
 
-/* #@ UTILS */
-char					**split_string(const char *str, int *numWords);
+/* ###@ SIGNAL */
+void					_signal_newline(int signal __attribute__((unused)));
+void					_signal_exit(int signal __attribute__((unused)));
+
+/* ###@ UTILS */
 int						count_path(char *path);
-void					free_alloc(t_global *global, t_settings *settings);
+void					free_minishell(t_global *global);
 
 #endif

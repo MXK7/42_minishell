@@ -6,13 +6,13 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/28 17:41:49 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:26:42 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	_builtin_exe(t_settings *settings, t_global *global);
+static void	_builtin_exe(t_global *global);
 static bool	builtin_exist(t_global *global);
 
 void	builtin_start(t_global *global, char **envp)
@@ -22,9 +22,8 @@ void	builtin_start(t_global *global, char **envp)
 	handler_exe(global);
 }
 
-void	handler_builtin(t_settings *settings, t_global *global)
+void	handler_builtin(t_global *global)
 {
-	printf("%s\n", global->input);
 	if (global->input)
 		global->argv = ft_split(global->input, ' ');
 	else
@@ -32,7 +31,7 @@ void	handler_builtin(t_settings *settings, t_global *global)
 	if (exe_commands(global) || builtin_exist(global))
 	{
 		if (builtin_exist(global))
-			_builtin_exe(settings, global);
+			_builtin_exe(global);
 		else
 			_builtin_others(global);
 	}
@@ -63,10 +62,10 @@ bool	builtin_exist(t_global *global)
 		return (false);
 }
 
-static void	_builtin_exe(t_settings *settings, t_global *global)
+static void	_builtin_exe(t_global *global)
 {
 	if (ft_strcmp(global->argv[0], "exit") == 0)
-		_builtin_exit(settings, global);
+		_builtin_exit(global);
 	else if (ft_strcmp(global->argv[0], "pwd") == 0)
 		_builtin_pwd(global);
 	else if (ft_strcmp(global->argv[0], "env") == 0)

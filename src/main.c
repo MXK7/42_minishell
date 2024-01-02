@@ -3,43 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/29 12:59:34 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/02 15:57:43 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_sh(t_settings *settings, t_global *global, char **envp);
+static void	init_sh(t_global *global, char **envp);
+
+bool		exit_requested = true;
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_global	*global;
-	t_settings	*settings;
 
 	(void)argv;
 	global = malloc(sizeof(t_global));
-	settings = malloc(sizeof(t_settings));
-	settings->exit_requested = true;
-	if (argc == 1 && (settings != NULL && global != NULL))
-		init_sh(settings, global, envp);
-	free(global);
-	free(settings);
+	if (argc == 1 && global != NULL)
+		init_sh(global, envp);
+	// free(global);
+	free_minishell(global);
 	return (0);
 }
 
-static void	init_sh(t_settings *settings, t_global *global, char **envp)
+static void	init_sh(t_global *global, char **envp)
 {
-	signal(SIGINT, handler_signal);
+	signal(SIGINT, _signal_newline);
+	signal(SIGQUIT, SIG_IGN);
 	builtin_start(global, envp);
-	while (settings->exit_requested)
+	while (exit_requested)
 	{
 		global->input = readline("AMS $ ");
-		parser(global);
-		// handler_builtin(settings, global);
+		// parser(global);
+		handler_builtin(global);
 		add_history(global->input);
 		free(global->input);
+		_signal_exit(0);
 	}
 }

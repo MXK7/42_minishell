@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/02 11:38:05 by arazzok          ###   ########.fr        #
+#    Updated: 2024/01/02 19:39:21 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_DIR   = $(INCLUDES)src/libft/
 LIBFT       = $(LIBFT_DIR)libft.a
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS      = -Wall -Wextra -Werror -g3
 PRFLAGS     = -lreadline
 RM          = rm -rf
 
@@ -33,7 +33,7 @@ BUILTIN_DIR = builtin/
 BUILTIN     = handler_builtin utils_builtin env echo others pwd exit cd export unset
 
 SIGNAL_DIR  = signal/
-SIGNAL      = handler_signal signal
+SIGNAL      = signal
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
