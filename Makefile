@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/02 14:26:21 by mpoussie         ###   ########.fr        #
+#    Updated: 2024/01/02 14:52:21 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ PRFLAGS     = -lreadline
 RM          = rm -rf
 
 PARSING_DIR = parsing/
-PARSING     = parser lexer lexer_utils lexer_handler
+PARSING     = parser parser_handler lexer lexer_utils lexer_handler
 
 EXE_DIR     = executor/
 EXE         = handler_exe

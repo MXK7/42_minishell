@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 14:23:59 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:52:43 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_command
 	void				(*builtin)(t_global *global);
 	int					nb_redirections;
 	char				*heredoc_file_name;
-	// t_lexer			*redirections;
+	t_lexer				*redirections;
 	struct s_command	*prev;
 	struct s_command	*next;
 }						t_command;
@@ -104,8 +104,13 @@ void					handle_operator(char *input, int *i, t_lexer **current,
 void					handle_quote(char *input, int *i, t_lexer **current,
 							char quote);
 void					handle_word(char *input, int *i, t_lexer **current);
+void					handle_head(t_lexer **head, t_lexer *current);
 // parser.c
+t_command				*init_command(void);
+t_command				*tokens_to_commands(t_lexer *lexer);
 void					parser(t_global *global);
+// parser_utils.c
+void					handle_token(t_lexer *lexer, t_command *command);
 
 /* ###@ EXECUTOR */
 void					handler_exe(t_global *global);

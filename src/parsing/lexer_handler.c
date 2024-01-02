@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/27 08:41:12 by mpoussie         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:25:56 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,28 @@ static char	*ft_strndup(const char *src, size_t size)
 void	handle_operator(char *input, int *i, t_lexer **current, char operator)
 {
 	t_token	token;
+	char	*temp;
+	int		len;
 
+	len = 1;
 	if (operator == '|')
 		token = PIPE;
+	else if ((operator == '<' || operator == '>') && operator == input[*i + 1])
+	{
+		len = 2;
+		if (operator == '<')
+			token = DOUBLE_LEFT;
+		else if (operator == '>')
+			token = DOUBLE_RIGHT;
+	}
 	else if (operator == '<')
 		token = LEFT;
 	else if (operator == '>')
 		token = RIGHT;
-	*current = init_lexer(&input[*i], token, *i);
+	temp = ft_strndup(&input[*i], len);
+	*current = init_lexer(temp, token, *i);
+	*i += len - 1;
+	free(temp);
 }
 
 void	handle_quote(char *input, int *i, t_lexer **current, char quote)
@@ -54,12 +68,10 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 		word = ft_strndup(&input[*i + 1], j - *i - 1);
 		*current = init_lexer(word, WORD, *i);
 		*i = j;
+		free(word);
 	}
 	else
-	{
-		// * Quote non-fermée
-		// ? Ignorer ou gérer l'erreur ?
-	}
+		ft_printf("Error.\n");
 }
 
 void	handle_word(char *input, int *i, t_lexer **current)
@@ -71,4 +83,22 @@ void	handle_word(char *input, int *i, t_lexer **current)
 	word = ft_strndup(&input[*i], len);
 	*current = init_lexer(word, WORD, *i);
 	*i += len - 1;
+	free(word);
+}
+
+void	handle_head(t_lexer **head, t_lexer *current)
+{
+	t_lexer	*temp;
+
+	if (*head == NULL)
+		*head = current;
+	else
+	{
+		temp = *head;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = current;
+		current->prev = temp;
+		current->next = NULL;
+	}
 }
