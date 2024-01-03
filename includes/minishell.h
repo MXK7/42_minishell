@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 16:42:03 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:47:37 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ void					_builtin_unset(t_global *global);
 
 /* ###@ SIGNAL */
 void					_signal_newline(int signal __attribute__((unused)));
-void					_signal_exit(int signal __attribute__((unused)));
+void					_signal_exit(int signal __attribute__((unused)),
+							t_global *global);
 
 /* ###@ UTILS */
 int						count_path(char *path);
