@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 11:44:09 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 12:53:30 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 1 && global != NULL)
 		init_sh(global, envp);
 	// free(global);
+	// ! Dernier element de global->env ne vaut pas NULL donc seg fault 
 	free_minishell(global);
 	return (0);
 }
