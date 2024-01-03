@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/29 19:25:56 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 11:49:20 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 		free(word);
 	}
 	else
+	{
+		free(input);
+		free_lexer(*current);
 		ft_printf("Error.\n");
+	}
 }
 
 void	handle_word(char *input, int *i, t_lexer **current)
