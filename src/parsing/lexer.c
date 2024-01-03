@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:25:43 by arazzok           #+#    #+#             */
-/*   Updated: 2023/12/29 19:32:32 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:33:35 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ void	free_lexer(t_lexer *head)
 		free(temp->str);
 		free(temp);
 	}
+}
+
+void	del_one(t_lexer **target)
+{
+	t_lexer	*tmp;
+
+	if (*target == NULL)
+		return ;
+	tmp = *target;
+	*target = tmp->next;
+	tmp = NULL;
 }
 
 t_lexer	*tokenize(char *input)

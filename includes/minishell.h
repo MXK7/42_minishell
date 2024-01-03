@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 19:39:06 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:42:03 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_command
 // lexer.c
 t_lexer					*init_lexer(char *str, t_token token, int index);
 void					free_lexer(t_lexer *head);
+void					del_one(t_lexer **target);
 t_lexer					*tokenize(char *input);
 // lexer_utils.c
 int						is_whitespace(char c);

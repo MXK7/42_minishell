@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:45:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/03 12:54:47 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:31:04 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,31 @@ void    handle_words(char *word, t_command *command)
 
 void    handle_redirection(t_lexer *lexer, t_command *command)
 {
-    (void)lexer;
-    (void)command;
+    if (lexer->token == LEFT || lexer->token == DOUBLE_LEFT)
+    {
+        command->redirections = malloc(sizeof(t_lexer));
+        ft_memcpy(command->redirections, lexer->prev, sizeof(t_lexer));
+        command->redirections->next = malloc(sizeof(t_lexer));
+        ft_memcpy(command->redirections->next, lexer, sizeof(t_lexer));
+        command->redirections->next->next = NULL;
+        command->redirections->next->prev = command->redirections;
+    }
+    else if (lexer->token == RIGHT || lexer->token == DOUBLE_RIGHT)
+    {
+        command->redirections = malloc(sizeof(t_lexer));
+        ft_memcpy(command->redirections, lexer, sizeof(t_lexer));
+        command->redirections->next = malloc(sizeof(t_lexer));
+        ft_memcpy(command->redirections->next, lexer->next, sizeof(t_lexer));
+        command->redirections->next->next = NULL;
+        command->redirections->next->prev = command->redirections;
+    }
+    del_one(&lexer);
 }
 
 void	handle_token(t_lexer *lexer, t_command *command)
 {
-	if (lexer->token == WORD)
-		handle_words(lexer->str, command);
-	else if (is_redirection(lexer->token))
+	if (is_redirection(lexer->token))
         handle_redirection(lexer, command);
+	else if (lexer->token == WORD)
+		handle_words(lexer->str, command);
 }

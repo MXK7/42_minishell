@@ -6,14 +6,14 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 12:47:45 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:29:20 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/// Test func
-void	print_command(t_command *command)
+/// *** TEST FUNCTIONS START *** ///
+static void	print_command(t_command *command)
 {
 	int i;
 	t_lexer	*redirection;
@@ -47,7 +47,19 @@ void	print_command(t_command *command)
 		printf("    %s\n", command->str[i]);
 	printf("End of Command\n");
 }
-///
+
+static void	print_command_list(t_command *head)
+{
+	t_command	*current;
+
+	current = head;
+	while (current)
+	{
+		print_command(current);
+		current = current->next;
+	}
+}
+/// *** TEST FUNCTIONS END *** ///
 
 t_command	*init_command(void)
 {
@@ -57,11 +69,28 @@ t_command	*init_command(void)
 	if (!node)
 		return (NULL);
 	ft_bzero(node, sizeof(t_command));
-	node->str = (char **) malloc(1 * sizeof(char *));
+	node->str = (char **) malloc(sizeof(char *));
 	if (!node->str)
 		return (free(node), NULL);
 	node->str[0] = NULL;
 	return (node);
+}
+
+static void	handle_cmd_head(t_command **head, t_command *current)
+{
+	t_command	*temp;
+
+	if (*head == NULL)
+		*head = current;
+	else
+	{
+		temp = *head;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = current;
+		current->prev = temp;
+		current->next = NULL;
+	}
 }
 
 t_command	*tokens_to_commands(t_lexer *lexer)
@@ -73,23 +102,15 @@ t_command	*tokens_to_commands(t_lexer *lexer)
 	current = NULL;
 	while (lexer)
 	{
-		printf("TOKEN STR: %s\n", lexer->str);
 		current = init_command();
 		while (lexer && lexer->token != PIPE)
 		{
 			handle_token(lexer, current);
 			lexer = lexer->next;
 		}
-		if (!head)
-			head = current;
-		else if (current)
-		{
-			current->prev = head;
-			head->next = current;
-			head = current;
-		}
 		if (lexer && lexer->token == PIPE)
 			lexer = lexer->next;
+		handle_cmd_head(&head, current);
 	}
 	return (head);
 }
@@ -102,7 +123,7 @@ void	parser(t_global *global)
 	token_list = NULL;
 	token_list = tokenize(global->input);
 	command_list = tokens_to_commands(token_list);
-	print_command(command_list);
+	print_command_list(command_list);
 	free_lexer(token_list);
 	free(command_list);
 }
