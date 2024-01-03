@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:45:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/02 19:37:01 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 11:42:54 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void    handle_words(char *word, t_command *command)
     if (command->str)
         free(command->str);
     command->str = new_str;
+}
+
+void    handle_redirection(t_lexer *lexer, t_command *command)
+{
+    (void)lexer;
+    (void)command;
 }
 
 void	handle_token(t_lexer *lexer, t_command *command)
