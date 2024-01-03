@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/03 11:49:20 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/03 11:59:45 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 	{
 		free(input);
 		free_lexer(*current);
+		exit_requested = false;
 		ft_printf("Error.\n");
 	}
 }

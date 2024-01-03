@@ -6,13 +6,13 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:39:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 15:56:57 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:13:27 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_signal_exit(int signal __attribute__((unused)))
+void	_signal_exit(int signal __attribute__((unused)), t_global *global)
 {
 	char	buffer[1024];
 	ssize_t	bytesRead;
@@ -22,6 +22,7 @@ void	_signal_exit(int signal __attribute__((unused)))
 		exit_requested = false;
 	else if (bytesRead < 0)
 		exit_requested = false;
+	(void)global;
 	exit(-1);
 }
 

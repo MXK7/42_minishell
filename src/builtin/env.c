@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/28 08:51:36 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:59:15 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	_env(t_global *global, char **envp)
 		global->env[j] = ft_strdup(envp[j]);
 		j++;
 	}
-	global->env[j] = NULL;
+	global->env[j + 1] = NULL;
 	i = 0;
 	while (global->env[i])
 	{

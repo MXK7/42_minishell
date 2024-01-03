@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 19:39:06 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 12:11:56 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ void					_builtin_unset(t_global *global);
 
 /* ###@ SIGNAL */
 void					_signal_newline(int signal __attribute__((unused)));
-void					_signal_exit(int signal __attribute__((unused)));
+void					_signal_exit(int signal __attribute__((unused)),
+							t_global *global);
 
 /* ###@ UTILS */
 int						count_path(char *path);
