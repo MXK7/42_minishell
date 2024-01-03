@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 15:59:55 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/03 12:47:45 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /// Test func
 void	print_command(t_command *command)
 {
+	int i;
 	t_lexer	*redirection;
 
 	if (!command)
@@ -23,6 +24,12 @@ void	print_command(t_command *command)
 		return ;
 	}
 	printf("Command:\n");
+	printf("  Words:\n");
+	i = 0;
+	while (command->str[i]) {
+		printf("    %s\n", command->str[i]);
+		i++;
+	}
 	printf("  Builtin: %p\n", (void *)command->builtin);
 	printf("  Num Redirections: %d\n", command->nb_redirections);
 	printf("  Heredoc File Name: %s\n",
@@ -49,13 +56,11 @@ t_command	*init_command(void)
 	node = malloc(sizeof(t_command));
 	if (!node)
 		return (NULL);
-	node->str = NULL;
-	node->builtin = NULL;
-	node->nb_redirections = 0;
-	node->heredoc_file_name = NULL;
-	node->redirections = NULL;
-	node->prev = NULL;
-	node->next = NULL;
+	ft_bzero(node, sizeof(t_command));
+	node->str = (char **) malloc(1 * sizeof(char *));
+	if (!node->str)
+		return (free(node), NULL);
+	node->str[0] = NULL;
 	return (node);
 }
 
@@ -68,6 +73,7 @@ t_command	*tokens_to_commands(t_lexer *lexer)
 	current = NULL;
 	while (lexer)
 	{
+		printf("TOKEN STR: %s\n", lexer->str);
 		current = init_command();
 		while (lexer && lexer->token != PIPE)
 		{
@@ -96,6 +102,7 @@ void	parser(t_global *global)
 	token_list = NULL;
 	token_list = tokenize(global->input);
 	command_list = tokens_to_commands(token_list);
+	print_command(command_list);
 	free_lexer(token_list);
 	free(command_list);
 }

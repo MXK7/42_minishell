@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:45:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/03 11:50:10 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:54:47 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,14 @@ void    handle_words(char *word, t_command *command)
 {
     int current_size;
     int new_size;
-    char **new_str;
     
     current_size = get_str_size(command->str);
     new_size = current_size + 2;
-    new_str = realloc(command->str, sizeof(char *) * new_size);
-    if (!new_str)
+    command->str = realloc(command->str, sizeof(char *) * new_size);
+    if (!command->str)
         return ;
-    new_str[current_size] = ft_strdup(word);
-    new_str[new_size - 1] = NULL;
-    if (command->str)
-        free(command->str);
-    command->str = new_str;
+    command->str[current_size] = ft_strdup(word);
+    command->str[new_size - 1] = NULL;
 }
 
 void    handle_redirection(t_lexer *lexer, t_command *command)
