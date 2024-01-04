@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 13:01:02 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:39:09 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char **argv, char **envp)
 	global = malloc(sizeof(t_global));
 	if (argc == 1 && global != NULL)
 		init_sh(global, envp);
-	// free(global);
 	// ! Dernier element de global->env ne vaut pas NULL donc seg fault 
 	free_minishell(global);
 	return (0);
@@ -38,8 +37,8 @@ static void	init_sh(t_global *global, char **envp)
 	while (exit_requested)
 	{
 		global->input = readline("AMS $ ");
-		// parser(global);
-		handler_builtin(global);
+		parser(global);
+		// handler_builtin(global);
 		add_history(global->input);
 		free(global->input);
 		_signal_exit(0, global);
