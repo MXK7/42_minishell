@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/04 13:35:48 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:37:34 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,5 @@ static void	_builtin_exe(t_global *global)
 	else if (ft_strcmp(global->argv[0], "unset") == 0)
 		_builtin_unset(global);
 }
+
+
