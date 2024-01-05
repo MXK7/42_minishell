@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 17:29:20 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/04 18:45:51 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ static void	print_command(t_command *command)
 			redirection->str);
 		redirection = redirection->next;
 	}
-	printf("  Arguments:\n");
-	for (int i = 0; i < command->nb_redirections; ++i)
-		printf("    %s\n", command->str[i]);
 	printf("End of Command\n");
 }
 
@@ -125,5 +122,5 @@ void	parser(t_global *global)
 	command_list = tokens_to_commands(token_list);
 	print_command_list(command_list);
 	free_lexer(token_list);
-	free(command_list);
+    // TODO: free command list 
 }

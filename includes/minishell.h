@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 17:47:37 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/04 16:03:51 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,31 +88,30 @@ typedef struct s_command
 /// @param unused_signal
 
 /* ###@ PARSING */
-// lexer.c
 t_lexer					*init_lexer(char *str, t_token token, int index);
 void					free_lexer(t_lexer *head);
 void					del_one(t_lexer **target);
 t_lexer					*tokenize(char *input);
-// lexer_utils.c
+
 int						is_whitespace(char c);
 int						is_operator(char c);
 int						is_quote(char c);
 void					skip_whitespaces(char *input, int *i);
 int						get_word_len(char *input, int i);
-// lexer_handler.c
+
 void					handle_operator(char *input, int *i, t_lexer **current,
 							char operator);
 void					handle_quote(char *input, int *i, t_lexer **current,
 							char quote);
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
-// parser.c
+
 t_command				*init_command(void);
 t_command				*tokens_to_commands(t_lexer *lexer);
 void					parser(t_global *global);
-// parser_handler.c
+
 void					handle_token(t_lexer *lexer, t_command *command);
-// parser_utils.c
+
 int						is_redirection(t_token token);
 int						get_str_size(char **str);
 
