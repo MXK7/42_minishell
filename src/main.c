@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/05 18:26:40 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/05 19:03:51 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ int	main(int argc, char **argv, char **envp)
 	t_global	*global;
 
 	(void)argv;
+	if (argc != 1)
+		return (ft_printf("Error.\nNo argument accepted.\n"), 1);
 	global = malloc(sizeof(t_global));
-	if (argc == 1 && global != NULL)
-		init_sh(global, envp);
-	// ! Dernier element de global->env ne vaut pas NULL donc seg fault 
-	// ! free_minishell(global);
+	if (!global)
+		return (ft_printf("Error.\nMalloc error.\n"), 1);
+	init_sh(global, envp);
 	return (0);
 }
 

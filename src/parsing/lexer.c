@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:25:43 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/05 18:28:27 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/05 19:28:02 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ void	free_lexer(t_lexer *head)
 
 void	del_one(t_lexer **target)
 {
-	t_lexer	*tmp;
+	t_lexer *tmp;
 
-	if (*target == NULL)
-		return ;
-	tmp = *target;
-	*target = tmp->next;
-	tmp = NULL;
+    tmp = *target;
+    if (tmp->prev)
+        tmp->prev->next = tmp->next;
+    if (tmp->next)
+        tmp->next->prev = tmp->prev;
+    free(tmp->str);
+    free(tmp);
+    *target = NULL;
 }
 
 t_lexer	*tokenize(char *input)

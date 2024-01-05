@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:45:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/05 18:31:07 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/05 19:45:45 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,30 @@ void	handle_words(char *word, t_command *command)
 	command->str[new_size - 1] = NULL;
 }
 
-void	handle_redirection(t_lexer *lexer, t_command *command)
+void	handle_redirection(t_lexer **lexer, t_command *command)
 {
 	t_lexer	*sign;
 	t_lexer	*file_name;
 
-	if (lexer->token == DOUBLE_LEFT || lexer->token == LEFT
-		|| lexer->token == RIGHT || lexer->token == DOUBLE_RIGHT)
-	{
-		sign = init_lexer(lexer->str, lexer->token, lexer->index);
-		file_name = init_lexer(lexer->next->str, lexer->next->token,
-				lexer->next->index);
-		sign->next = file_name;
-		file_name->prev = sign;
-		command->redirections = sign;
-	    command->nb_redirections++;
-	    del_one(&lexer);
-	}
+    sign = *lexer;
+    file_name = (*lexer)->next;
+    if (file_name)
+    {
+        command->redirections = sign;
+        command->nb_redirections++;
+        if (sign->prev)
+            sign->prev->next = file_name->next;
+        if (file_name->next)
+            file_name->next->prev = sign->prev;
+        *lexer = file_name->next;
+    }
+    // del_one(&lexer);
 }
 
 void	handle_token(t_lexer *lexer, t_command *command)
 {
 	if (is_redirection(lexer->token))
-		handle_redirection(lexer, command);
+		handle_redirection(&lexer, command);
 	else if (lexer->token == WORD)
 		handle_words(lexer->str, command);
 }
