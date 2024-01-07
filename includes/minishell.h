@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/05 19:23:07 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/07 23:41:43 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,11 @@ typedef struct s_command
 /// @param unused_signal
 
 /* ###@ PARSING */
-t_lexer					*init_lexer(char *str, t_token token, int index);
-void					free_lexer(t_lexer *head);
-void					del_one(t_lexer **target);
-t_lexer					*tokenize(char *input);
+t_lexer					*init_lexer(char *str, t_token token);
+void					clear_one(t_lexer **list);
+void					del_first(t_lexer **list);
+void					del_one(t_lexer **list, int index);
+void					free_lexer(t_lexer **list);
 
 int						is_whitespace(char c);
 int						is_operator(char c);
@@ -106,14 +107,18 @@ void					handle_quote(char *input, int *i, t_lexer **current,
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
 
-t_command				*init_command(void);
-t_command				*tokens_to_commands(t_lexer *lexer);
-void					parser(t_global *global);
-
 void					handle_token(t_lexer *lexer, t_command *command);
+void					handle_cmd_head(t_command **head, t_command *current);
 
 int						is_redirection(t_token token);
 int						get_str_size(char **str);
+
+
+
+t_command				*init_command(void);
+t_lexer					*tokenize(char *input);
+t_command				*tokens_to_commands(t_lexer *lexer);
+void					parser(t_global *global);
 
 /* ###@ EXECUTOR */
 void					handler_exe(t_global *global);

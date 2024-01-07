@@ -6,13 +6,13 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/04 18:45:51 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/07 23:49:48 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/// *** TEST FUNCTIONS START *** ///
+/// ***** TEST FUNCTIONS START ***** ///
 static void	print_command(t_command *command)
 {
 	int i;
@@ -56,38 +56,32 @@ static void	print_command_list(t_command *head)
 		current = current->next;
 	}
 }
-/// *** TEST FUNCTIONS END *** ///
+/// ***** TEST FUNCTIONS END ***** ///
 
-t_command	*init_command(void)
+t_lexer	*tokenize(char *input)
 {
-	t_command	*node;
+	t_lexer	*head;
+	t_lexer	*current;
+	int		len;
+	int		i;
 
-	node = malloc(sizeof(t_command));
-	if (!node)
-		return (NULL);
-	ft_bzero(node, sizeof(t_command));
-	node->str = (char **) malloc(sizeof(char *));
-	if (!node->str)
-		return (free(node), NULL);
-	node->str[0] = NULL;
-	return (node);
-}
-
-static void	handle_cmd_head(t_command **head, t_command *current)
-{
-	t_command	*temp;
-
-	if (*head == NULL)
-		*head = current;
-	else
+	head = NULL;
+	current = NULL;
+	len = ft_strlen(input);
+	i = 0;
+	while (i < len)
 	{
-		temp = *head;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = current;
-		current->prev = temp;
-		current->next = NULL;
+		skip_whitespaces(input, &i);
+		if (is_operator(input[i]))
+			handle_operator(input, &i, &current, input[i]);
+		else if (is_quote(input[i]))
+			handle_quote(input, &i, &current, input[i]);
+		else
+			handle_word(input, &i, &current);
+		handle_head(&head, current);
+		i++;
 	}
+	return (head);
 }
 
 t_command	*tokens_to_commands(t_lexer *lexer)
@@ -119,8 +113,9 @@ void	parser(t_global *global)
 
 	token_list = NULL;
 	token_list = tokenize(global->input);
+    command_list = NULL;
 	command_list = tokens_to_commands(token_list);
 	print_command_list(command_list);
-	free_lexer(token_list);
-    // TODO: free command list 
+	free_lexer(&token_list);
+    // TODO: free command list
 }

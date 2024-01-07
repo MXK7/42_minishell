@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   t_command_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 11:31:55 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/07 23:36:50 by arazzok          ###   ########.fr       */
+/*   Created: 2024/01/07 23:42:16 by arazzok           #+#    #+#             */
+/*   Updated: 2024/01/07 23:43:41 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_redirection(t_token token)
+t_command	*init_command(void)
 {
-	return (token == LEFT || token == DOUBLE_LEFT || token == RIGHT
-		|| token == DOUBLE_RIGHT);
-}
+	t_command	*node;
 
-int	get_str_size(char **str)
-{
-	int	size;
-
-	if (!str)
-		return (0);
-	size = 0;
-	while (str[size])
-		size++;
-	return (size);
+	node = malloc(sizeof(t_command));
+	if (!node)
+		return (NULL);
+	node->str = (char **) malloc(sizeof(char *));
+	if (!node->str)
+		return (free(node), NULL);
+	node->str[0] = NULL;
+    node->builtin = NULL;
+    node->heredoc_file_name = NULL;
+    node->nb_redirections = 0;
+    node->redirections = NULL;
+    node->next = NULL;
+    node->prev = NULL;
+	return (node);
 }

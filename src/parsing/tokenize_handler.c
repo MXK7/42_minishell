@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_handler.c                                    :+:      :+:    :+:   */
+/*   tokenize_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/05 19:08:23 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/07 23:47:33 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	handle_operator(char *input, int *i, t_lexer **current, char operator)
 	else if (operator == '>')
 		token = RIGHT;
 	temp = ft_strndup(&input[*i], len);
-	*current = init_lexer(temp, token, *i);
+	*current = init_lexer(temp, token);
 	*i += len - 1;
 	free(temp);
 }
@@ -66,7 +66,7 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 	if (input[j] == quote)
 	{
 		word = ft_strndup(&input[*i + 1], j - *i - 1);
-		*current = init_lexer(word, WORD, *i);
+		*current = init_lexer(word, WORD);
 		*i = j;
 		free(word);
 	}
@@ -84,7 +84,7 @@ void	handle_word(char *input, int *i, t_lexer **current)
 
 	len = get_word_len(input, *i);
 	word = ft_strndup(&input[*i], len);
-	*current = init_lexer(word, WORD, *i);
+	*current = init_lexer(word, WORD);
 	*i += len - 1;
 	free(word);
 }
