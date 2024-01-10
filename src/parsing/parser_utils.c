@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:31:55 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/07 23:36:50 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/10 23:17:23 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,17 @@ int	get_str_size(char **str)
 	while (str[size])
 		size++;
 	return (size);
+}
+
+void	count_pipes(t_global *global)
+{
+	t_lexer	*temp;
+
+	temp = global->lexer_list;
+	while (temp)
+	{
+		if (temp->token == PIPE)
+			global->nb_pipes++;
+		temp = temp->next;
+	}
 }

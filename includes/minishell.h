@@ -6,10 +6,9 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/10 19:23:25 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/11 00:01:56 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -38,12 +37,12 @@ extern bool				exit_requested;
 
 typedef enum s_token
 {
-	WORD = 1,
+    WORD = 1,
 	PIPE,
-	LEFT,
-	DOUBLE_LEFT,
 	RIGHT,
-	DOUBLE_RIGHT
+	DOUBLE_RIGHT,
+	LEFT,
+	DOUBLE_LEFT
 }						t_token;
 
 typedef struct s_lexer
@@ -67,6 +66,7 @@ typedef struct s_global
 	char				*token;
 	t_lexer				*lexer_list;
 	struct s_command	*command_list;
+	int					nb_pipes;
 }						t_global;
 
 typedef struct s_command
@@ -110,11 +110,11 @@ void					handle_cmd_head(t_command **head, t_command *current);
 
 int						is_redirection(t_token token);
 int						get_str_size(char **str);
+void					count_pipes(t_global *global);
 
 t_command				*init_command(void);
 t_lexer					*tokenize(char *input);
-t_command				*tokens_to_commands(t_lexer *lexer);
-void					parser(t_global *global);
+int						parser(t_global *global);
 
 /* ###@ EXECUTOR */
 void					handler_exe(t_global *global);
@@ -141,6 +141,14 @@ int						_builtin_cd(t_global *global);
 void					_builtin_export(t_global *global);
 void					_builtin_unset(t_global *global);
 
-int			count_path(char *path);
+/* ###@ UTILS */
+int						count_path(char *path);
+int						are_quotes_closed(char *line);
+
+void					init_global(t_global *global);
+void					free_global(t_global *global);
+
+/* ###@ ERROR */
+int						handle_error(int err_code, t_global *global);
 
 #endif

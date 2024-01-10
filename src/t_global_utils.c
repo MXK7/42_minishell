@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/10 15:40:31 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/10 23:03:13 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	init_global(t_global *global)
 	global->token = NULL;
 	global->lexer_list = NULL;
 	global->command_list = NULL;
+    global->nb_pipes = 0;
 }
 
 // TODO: Refaire la fonction pour qu'elle free correctement toute la struct global
-// ? Renommer free_global ?
-void	free_minishell(t_global *global)
+void	free_global(t_global *global)
 {
 	int	i;
 

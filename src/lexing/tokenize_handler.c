@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/07 23:47:33 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/10 22:08:06 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,6 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 		*current = init_lexer(word, WORD);
 		*i = j;
 		free(word);
-	}
-	else
-	{
-        // TODO: Tout free et exit
-		ft_printf("Error.\n");
 	}
 }
 

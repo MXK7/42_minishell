@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/10 19:24:09 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/10 23:45:47 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ static int	init_sh(t_global *global)
 		add_history(global->input);
 		if (!are_quotes_closed(global->input))
 			return (handle_error(1, global));
+		global->lexer_list = tokenize(global->input);
 		parser(global);
 		// Execute
 	}
-    return (1);
+	return (1);
 }

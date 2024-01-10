@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/07 23:49:48 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/11 00:10:14 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,38 +84,23 @@ t_lexer	*tokenize(char *input)
 	return (head);
 }
 
-t_command	*tokens_to_commands(t_lexer *lexer)
+int	parser(t_global *global)
 {
-	t_command	*head;
-	t_command	*current;
+	t_command *node;
+    t_lexer     *temp;
 
-	head = NULL;
-	current = NULL;
-	while (lexer)
-	{
-		current = init_command();
-		while (lexer && lexer->token != PIPE)
-		{
-			handle_token(lexer, current);
-			lexer = lexer->next;
-		}
-		if (lexer && lexer->token == PIPE)
-			lexer = lexer->next;
-		handle_cmd_head(&head, current);
-	}
-	return (head);
-}
-
-void	parser(t_global *global)
-{
-	t_lexer		*token_list;
-	t_command	*command_list;
-
-	token_list = NULL;
-	token_list = tokenize(global->input);
-    command_list = NULL;
-	command_list = tokens_to_commands(token_list);
-	print_command_list(command_list);
-	free_lexer(&token_list);
-    // TODO: free command list
+    (void)node;
+    count_pipes(global);
+    ft_printf("nb pipes: %d\n", global->nb_pipes);
+    if (global->lexer_list->token == PIPE)
+    {
+        ft_putendl_fd("Error.\nParse error: double token.", STDERR_FILENO);
+        return (1);
+    }
+    while (global->lexer_list)
+    {
+        
+    }
+    print_command_list(global->command_list);
+    return (0);
 }
