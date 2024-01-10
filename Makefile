@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/10 18:53:25 by arazzok          ###   ########.fr        #
+#    Updated: 2024/01/10 19:24:51 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
 
 $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
+					@mkdir -p $(OBJ_DIR)$(LEXING_DIR)
 					@mkdir -p $(OBJ_DIR)$(LEXING_DIR)
 					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
 					@mkdir -p $(OBJ_DIR)$(BUILTIN_DIR)

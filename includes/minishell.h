@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/10 18:54:45 by arazzok          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/10 19:23:25 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -140,19 +141,6 @@ int						_builtin_cd(t_global *global);
 void					_builtin_export(t_global *global);
 void					_builtin_unset(t_global *global);
 
-/* ###@ SIGNAL */
-void					_signal_newline(int signal __attribute__((unused)));
-void					_signal_exit(int signal __attribute__((unused)),
-							t_global *global);
-
-/* ###@ UTILS */
-int						count_path(char *path);
-int						are_quotes_closed(char *line);
-
-void					init_global(t_global *global);
-void					free_minishell(t_global *global);
-
-/* ###@ UTILS */
-int						handle_error(int err_code, t_global *global);
+int			count_path(char *path);
 
 #endif
