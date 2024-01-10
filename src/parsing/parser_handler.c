@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:45:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/07 23:39:13 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/10 15:12:07 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ static void	handle_redirection(t_lexer **lexer, t_command *command)
 		if (file_name->next)
 			file_name->next->prev = sign->prev;
 		*lexer = file_name->next;
-	}
-	// del_one(&lexer);
+        // del_one(&sign, sign->index);
+        // del_one(&file_name, file_name->index);
+    }
 }
 
 void	handle_token(t_lexer *lexer, t_command *command)
