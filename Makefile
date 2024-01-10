@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/07 23:45:08 by arazzok          ###   ########.fr        #
+#    Updated: 2024/01/10 18:53:25 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,11 @@ CFLAGS      = -Wall -Wextra -Werror -g3
 PRFLAGS     = -lreadline
 RM          = rm -rf
 
+LEXING_DIR  = lexing/
+LEXING      = tokenize_handler tokenize_utils t_lexer_utils
+
 PARSING_DIR = parsing/
-PARSING     = tokenize_handler tokenize_utils t_lexer_utils parser parser_handler parser_utils t_command_utils
+PARSING     = parser parser_handler parser_utils t_command_utils
 
 EXE_DIR     = executor/
 EXE         = handler_exe
@@ -35,7 +38,8 @@ BUILTIN     = handler_builtin utils_builtin env echo others pwd exit cd export u
 SIGNAL_DIR  = signal/
 SIGNAL      = signal
 
-SRC_FILES  += main utils
+SRC_FILES  += main utils t_global_utils error
+SRC_FILES  += $(addprefix $(LEXING_DIR), $(LEXING))
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
 SRC_FILES  += $(addprefix $(BUILTIN_DIR), $(BUILTIN))
 SRC_FILES  += $(addprefix $(SIGNAL_DIR), $(SIGNAL))
@@ -63,6 +67,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
 
 $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
+					@mkdir -p $(OBJ_DIR)$(LEXING_DIR)
 					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
 					@mkdir -p $(OBJ_DIR)$(BUILTIN_DIR)
 					@mkdir -p $(OBJ_DIR)$(SIGNAL_DIR)

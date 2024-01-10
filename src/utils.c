@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:58:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 12:08:43 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:12:37 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,37 @@ int	count_path(char *path)
 	return (count);
 }
 
-void free_minishell(t_global *global)
+static int	find_matching_quote(char *line, int i, int *nb_quote, char quote)
 {
-	int i;
+	int	j;
 
+	j = i + 1;
+	*nb_quote += 1;
+	while (line[j] && line[j] != quote)
+		j++;
+	if (line[j] == quote)
+		*nb_quote += 1;
+	return (j - i);
+}
+
+int	are_quotes_closed(char *line)
+{
+	int	s_quote;
+	int	d_quote;
+	int	i;
+
+	s_quote = 0;
+	d_quote = 0;
 	i = 0;
-	while (global->env[i])
+	while (line[i])
 	{
-		free(global->env[i]);
-		i++;
+		if (line[i] == '\'')
+			i += find_matching_quote(line, i, &s_quote, '\'');
+		if (line[i] == '"')
+			i += find_matching_quote(line, i, &d_quote, '"');
+        i++;
 	}
-	i = 0;
-	while (global->args_path[i])
-	{
-		free(global->args_path[i]);
-		i++;
-	}
-	free(global->path);
-	free(global->token);
-	free(global);
+	if ((s_quote > 0 && s_quote % 2 != 0) || (d_quote > 0 && d_quote % 2 != 0))
+		return (0);
+	return (1);
 }

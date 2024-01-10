@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/07 23:41:43 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/10 18:54:45 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@
 
 extern bool				exit_requested;
 
-// typedef struct s_settings
-// {
-// 	bool				exit_requested;
-// }						t_settings;
-
 typedef enum s_token
 {
 	WORD = 1,
@@ -61,14 +56,16 @@ typedef struct s_lexer
 
 typedef struct s_global
 {
-	int					nbr_path;
+	char				**argv;
 	char				**args_path;
 	char				**env;
+	int					nbr_path;
 	char				*input;
 	char				*pwd;
 	char				*path;
 	char				*token;
-	char				**argv;
+	t_lexer				*lexer_list;
+	struct s_command	*command_list;
 }						t_global;
 
 typedef struct s_command
@@ -113,8 +110,6 @@ void					handle_cmd_head(t_command **head, t_command *current);
 int						is_redirection(t_token token);
 int						get_str_size(char **str);
 
-
-
 t_command				*init_command(void);
 t_lexer					*tokenize(char *input);
 t_command				*tokens_to_commands(t_lexer *lexer);
@@ -152,6 +147,12 @@ void					_signal_exit(int signal __attribute__((unused)),
 
 /* ###@ UTILS */
 int						count_path(char *path);
+int						are_quotes_closed(char *line);
+
+void					init_global(t_global *global);
 void					free_minishell(t_global *global);
+
+/* ###@ UTILS */
+int						handle_error(int err_code, t_global *global);
 
 #endif
