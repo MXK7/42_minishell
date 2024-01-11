@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/10 19:24:51 by arazzok          ###   ########.fr        #
+#    Updated: 2024/01/11 18:43:10 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LEXING_DIR  = lexing/
 LEXING      = tokenize_handler tokenize_utils t_lexer_utils
 
 PARSING_DIR = parsing/
-PARSING     = parser parser_handler parser_utils t_command_utils
+PARSING     = parser parser_utils redirection_handler t_command_utils
 
 EXE_DIR     = executor/
 EXE         = handler_exe

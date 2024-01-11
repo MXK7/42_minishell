@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/11 00:01:56 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/11 18:41:35 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ extern bool				exit_requested;
 
 typedef enum s_token
 {
-    WORD = 1,
+	WORD = 1,
 	PIPE,
 	RIGHT,
 	DOUBLE_RIGHT,
@@ -53,6 +53,14 @@ typedef struct s_lexer
 	struct s_lexer		*prev;
 	struct s_lexer		*next;
 }						t_lexer;
+
+typedef struct s_parser
+{
+	t_lexer				*lexer_list;
+	t_lexer				*redirections;
+	int					nb_redirections;
+	struct s_global		*global;
+}						t_parser;
 
 typedef struct s_global
 {
@@ -85,7 +93,7 @@ typedef struct s_command
 /// @param envp Variables d'environement
 /// @param unused_signal
 
-/* ###@ PARSING */
+/* ###@ LEXING */
 t_lexer					*init_lexer(char *str, t_token token);
 void					clear_one(t_lexer **list);
 void					del_first(t_lexer **list);
@@ -105,15 +113,19 @@ void					handle_quote(char *input, int *i, t_lexer **current,
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
 
-void					handle_token(t_lexer *lexer, t_command *command);
-void					handle_cmd_head(t_command **head, t_command *current);
-
-int						is_redirection(t_token token);
-int						get_str_size(char **str);
+/* ###@ PARSING */
+t_parser				init_parser(t_global *global);
 void					count_pipes(t_global *global);
+int						count_args(t_lexer *lexer_list);
 
-t_command				*init_command(void);
+t_command				*init_command(char **str, int nb_redirections,
+							t_lexer *redirections);
+void					push_command(t_command **list, t_command *new);
+
+void					del_redirections(t_parser *parser);
+
 t_lexer					*tokenize(char *input);
+t_command				*pre_init_command(t_parser *parser);
 int						parser(t_global *global);
 
 /* ###@ EXECUTOR */
