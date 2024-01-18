@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/11 18:41:35 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/18 18:19:34 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_command				*init_command(char **str, int nb_redirections,
 							t_lexer *redirections);
 void					push_command(t_command **list, t_command *new);
 
+int						add_redirection(t_lexer *temp, t_parser *parser);
 void					del_redirections(t_parser *parser);
 
 t_lexer					*tokenize(char *input);
@@ -161,6 +162,10 @@ void					init_global(t_global *global);
 void					free_global(t_global *global);
 
 /* ###@ ERROR */
+void					parser_error(int err_code, t_global *global,
+							t_lexer *lexer_list);
+int						double_token_error(t_global *global,
+							t_lexer *lexer_list, t_token token);
 int						handle_error(int err_code, t_global *global);
 
 #endif
