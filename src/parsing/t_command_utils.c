@@ -6,13 +6,14 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:42:16 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/11 18:13:51 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:33:49 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command	*init_command(char **str, int nb_redirections, t_lexer *redirections)
+t_command	*init_command(char **str, int nb_redirections,
+		t_lexer *redirections)
 {
 	t_command	*node;
 
@@ -43,4 +44,26 @@ void	push_command(t_command **list, t_command *new)
 		temp = temp->next;
 	temp->next = new;
 	new->prev = temp;
+}
+
+void	free_command(t_command **list)
+{
+	t_command	*temp;
+	t_lexer		*redirections_temp;
+
+	if (*list == NULL)
+		return ;
+	while (*list)
+	{
+		temp = (*list)->next;
+		redirections_temp = (*list)->redirections;
+		free_lexer(&redirections_temp);
+		if ((*list)->str)
+			free_array((*list)->str);
+		if ((*list)->heredoc_file_name)
+			free((*list)->heredoc_file_name);
+		free(*list);
+		*list = temp;
+	}
+	*list = NULL;
 }

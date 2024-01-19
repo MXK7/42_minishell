@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/18 18:19:34 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:35:47 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_global
 	t_lexer				*lexer_list;
 	struct s_command	*command_list;
 	int					nb_pipes;
+	int					*pid;
 }						t_global;
 
 typedef struct s_command
@@ -121,6 +122,7 @@ int						count_args(t_lexer *lexer_list);
 t_command				*init_command(char **str, int nb_redirections,
 							t_lexer *redirections);
 void					push_command(t_command **list, t_command *new);
+void					free_command(t_command **list);
 
 int						add_redirection(t_lexer *temp, t_parser *parser);
 void					del_redirections(t_parser *parser);
@@ -132,6 +134,8 @@ int						parser(t_global *global);
 /* ###@ EXECUTOR */
 void					handler_exe(t_global *global);
 bool					exe_commands(t_global *global);
+
+int						execute(t_global *global);
 
 /* ###@ BUILTIN */
 void					handler_builtin(t_global *global);
@@ -157,8 +161,10 @@ void					_builtin_unset(t_global *global);
 /* ###@ UTILS */
 int						count_path(char *path);
 int						are_quotes_closed(char *line);
+void					free_array(char **array);
 
 void					init_global(t_global *global);
+void					reset_global(t_global *global);
 void					free_global(t_global *global);
 
 /* ###@ ERROR */

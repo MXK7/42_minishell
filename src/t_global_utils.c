@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/10 23:03:13 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:39:19 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ void	init_global(t_global *global)
 	global->lexer_list = NULL;
 	global->command_list = NULL;
     global->nb_pipes = 0;
+}
+
+void     reset_global(t_global *global)
+{
+    free_command(&global->command_list);
+    // free(global->args);
+    if (global->pid)
+        free(global->pid);
+    // free_array(global->path);
+    init_global(global);
+    // global->reset = true;
 }
 
 // TODO: Refaire la fonction pour qu'elle free correctement toute la struct global

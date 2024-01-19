@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:58:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/10 19:12:37 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:33:42 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,24 @@ int	are_quotes_closed(char *line)
 			i += find_matching_quote(line, i, &s_quote, '\'');
 		if (line[i] == '"')
 			i += find_matching_quote(line, i, &d_quote, '"');
-        i++;
+		i++;
 	}
 	if ((s_quote > 0 && s_quote % 2 != 0) || (d_quote > 0 && d_quote % 2 != 0))
 		return (0);
 	return (1);
+}
+
+void	free_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }

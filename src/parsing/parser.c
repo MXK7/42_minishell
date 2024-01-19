@@ -6,58 +6,11 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/18 18:35:24 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:34:05 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/// ***** TEST FUNCTIONS START ***** ///
-static void	print_command(t_command *command)
-{
-	int		i;
-	t_lexer	*redirection;
-
-	if (!command)
-	{
-		printf("Command is NULL\n");
-		return ;
-	}
-	printf("Command:\n");
-	printf("  Words:\n");
-	i = 0;
-	while (command->str[i])
-	{
-		printf("    %s\n", command->str[i]);
-		i++;
-	}
-	printf("  Builtin: %p\n", (void *)command->builtin);
-	printf("  Num Redirections: %d\n", command->nb_redirections);
-	printf("  Heredoc File Name: %s\n",
-		command->heredoc_file_name ? command->heredoc_file_name : "(null)");
-	printf("  Redirections:\n");
-	redirection = command->redirections;
-	while (redirection)
-	{
-		printf("    Token: %d, Value: %s\n", redirection->token,
-			redirection->str);
-		redirection = redirection->next;
-	}
-	printf("End of Command\n");
-}
-
-static void	print_command_list(t_command *head)
-{
-	t_command	*current;
-
-	current = head;
-	while (current)
-	{
-		print_command(current);
-		current = current->next;
-	}
-}
-/// ***** TEST FUNCTIONS END ***** ///
 
 t_lexer	*tokenize(char *input)
 {
@@ -138,6 +91,5 @@ int	parser(t_global *global)
 			push_command(&global->command_list, command_list);
 		global->lexer_list = parser.lexer_list;
 	}
-	print_command_list(global->command_list);
 	return (0);
 }

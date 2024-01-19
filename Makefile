@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/11 18:43:10 by arazzok          ###   ########.fr        #
+#    Updated: 2024/01/19 15:01:48 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ LEXING      = tokenize_handler tokenize_utils t_lexer_utils
 PARSING_DIR = parsing/
 PARSING     = parser parser_utils redirection_handler t_command_utils
 
-EXE_DIR     = executor/
-EXE         = handler_exe
+EXE_DIR     = executing/
+EXE         = handler_exe execute
 
 BUILTIN_DIR = builtin/
 BUILTIN     = handler_builtin utils_builtin env echo others pwd exit cd export unset
@@ -67,7 +67,6 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
 
 $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
-					@mkdir -p $(OBJ_DIR)$(LEXING_DIR)
 					@mkdir -p $(OBJ_DIR)$(LEXING_DIR)
 					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
 					@mkdir -p $(OBJ_DIR)$(BUILTIN_DIR)
