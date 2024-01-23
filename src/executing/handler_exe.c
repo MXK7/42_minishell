@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 16:04:31 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:58:11 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	handler_exe(t_global *global)
 	}
 	i = 0;
 	global->args_path = (char **)malloc(sizeof(char *) * ft_strlen(path_start
-				+ 1));
+			+ 1));
 	token = strtok(path_start + 1, ":");
 	while (token != NULL)
 	{
@@ -47,18 +47,18 @@ bool	exe_commands(t_global *global)
 {
 	int	tmp;
 
-	global->path = ft_strdup(global->argv[0]);
+	global->path = ft_strdup(global->command_list->str[0]);
 	if (access(global->path, X_OK) == 0)
 		return (true);
 	free(global->path);
-	global->path = make_absolute_path(global->pwd, global->argv[0]);
+	global->path = make_absolute_path(global->pwd, global->command_list->str[0]);
 	if (access(global->path, X_OK) == 0)
 		return (true);
 	free(global->path);
 	tmp = global->nbr_path;
 	while (tmp > 0)
 	{
-		global->path = ft_strjoin(global->args_path[tmp - 1], global->argv[0]);
+		global->path = ft_strjoin(global->args_path[tmp - 1], global->command_list->str[0]);
 		if (access(global->path, X_OK) == 0)
 			return (true);
 		free(global->path);

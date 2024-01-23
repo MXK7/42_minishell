@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 14:08:12 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/23 18:02:44 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	main(int argc, char **argv, char **envp)
 	t_global	*global;
 
 	(void)argv;
-	(void)envp;
+	// (void)envp;
 	if (argc != 1)
 		return (ft_printf("Error.\nNo argument accepted.\n"), 1);
 	global = malloc(sizeof(t_global));
 	if (!global)
 		return (ft_printf("Error.\nGlobal malloc error.\n"), 1);
 	init_global(global);
-	// builtin_start(global, envp);
+	builtin_start(global, envp);
 	init_sh(global);
 	return (0);
 }
@@ -65,7 +65,7 @@ static int	init_sh(t_global *global)
 static int pre_execute(t_global *global)
 {
     if (global->nb_pipes == 0)
-        single_command(global);
+		handler_builtin(global);
     else
     {
         global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
