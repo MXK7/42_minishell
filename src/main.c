@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 14:02:07 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/23 14:08:12 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,13 @@ static int	init_sh(t_global *global)
 static int pre_execute(t_global *global)
 {
     if (global->nb_pipes == 0)
-    {
-        // single_command(global);
-    }
+        single_command(global);
     else
     {
         global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
         if (!global->pid)
 			return (handle_error(1, global));
-        // execute(global);
+        execute(global);
     }
     return (0);
 }

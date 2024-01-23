@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/19 15:01:48 by arazzok          ###   ########.fr        #
+#    Updated: 2024/01/23 14:09:16 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ PARSING_DIR = parsing/
 PARSING     = parser parser_utils redirection_handler t_command_utils
 
 EXE_DIR     = executing/
-EXE         = handler_exe execute
+EXE         = handler_exe execute command_handler
 
 BUILTIN_DIR = builtin/
 BUILTIN     = handler_builtin utils_builtin env echo others pwd exit cd export unset

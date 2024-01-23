@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/23 13:49:49 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/23 14:13:33 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ bool					exe_commands(t_global *global);
 
 int						execute(t_global *global);
 
+void					single_command(t_global *global);
+
 /* ###@ BUILTIN */
 void					handler_builtin(t_global *global);
 void					builtin_start(t_global *global, char **envp);
@@ -149,7 +151,7 @@ int						_env_len(char **env);
 
 void					_others(t_global *global);
 
-int						(*get_builtin(char *str))(t_global *global);
+int (*get_builtin(char *str))(t_global *global);
 
 int						_builtin_exit(t_global *global);
 int						_builtin_pwd(t_global *global);
