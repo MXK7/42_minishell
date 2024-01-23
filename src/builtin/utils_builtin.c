@@ -6,14 +6,14 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 08:50:55 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 12:17:22 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:06:37 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	update_var(t_global *global, const char *env_name,
-				const char *new_env);
+	const char *new_env);
 
 char	*_env_get(char *env_name, t_global *global)
 {
