@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/28 17:28:52 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:45:54 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	_builtin_cd(t_global *global)
 	char	*new_pwd;
 	int		fd;
 
-	if (opendir(global->argv[1]) != NULL)
+	if (opendir(global->command_list->str[1]) != NULL)
 	{
-		printf("%s\n", global->argv[1]);
-		fd = open(global->argv[1], O_RDONLY);
+		printf("%s\n", global->command_list->str[1]);
+		fd = open(global->command_list->str[1], O_RDONLY);
 		if (fd == -1)
 		{
 			printf("ERROR CD OPEN\n");
@@ -29,10 +29,10 @@ int	_builtin_cd(t_global *global)
 		}
 		close(fd);
 	}
-	if (chdir(global->argv[1]) == 0)
+	if (chdir(global->command_list->str[1]) == 0)
 	{
 		new_pwd = ft_strjoin(_env_get("PWD=", global), ft_strjoin("/",
-					global->argv[1]));
+					global->command_list->str[1]));
 		_env_update(global, "PWD=", new_pwd);
 	}
 	else
