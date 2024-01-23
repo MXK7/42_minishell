@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:42:16 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/19 15:33:49 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/23 13:36:37 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_command	*init_command(char **str, int nb_redirections,
 	if (!node)
 		return (NULL);
 	node->str = str;
-	// node->builtin = builtin_arr(str[0]);
+	node->builtin = get_builtin(str[0]);
 	node->heredoc_file_name = NULL;
 	node->nb_redirections = nb_redirections;
 	node->redirections = redirections;

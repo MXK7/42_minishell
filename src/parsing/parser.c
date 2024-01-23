@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/19 15:34:05 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/23 12:05:15 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,7 @@ int	parser(t_global *global)
 
 	count_pipes(global);
 	if (global->lexer_list->token == PIPE)
-	{
-		// return (double_token_error(global, global->lexer_list, parser.lexer_list->token));
-	}
+		return (double_token_error(global, global->lexer_list, parser.lexer_list->token));
 	while (global->lexer_list)
 	{
 		if (global->lexer_list && global->lexer_list->token == PIPE)
@@ -82,9 +80,7 @@ int	parser(t_global *global)
 		parser = init_parser(global);
 		command_list = pre_init_command(&parser);
 		if (!command_list)
-		{
-			// parser_error(0, global, parser.lexer_list);
-		}
+			parser_error(0, global, parser.lexer_list);
 		if (!global->command_list)
 			global->command_list = command_list;
 		else

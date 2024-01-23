@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:39:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/29 17:58:13 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:21:03 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_builtin_echo(t_global *global)
+int	_builtin_echo(t_global *global)
 {
 	int		i;
 	bool	param;
@@ -29,5 +29,5 @@ void	_builtin_echo(t_global *global)
 	}
 	if (!param)
 		ft_printf("\n");
-	return ;
+	return (0);
 }

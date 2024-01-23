@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:40:46 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/27 08:14:45 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:30:50 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_builtin_pwd(t_global *global)
+int	_builtin_pwd(t_global *global)
 {
 	global->pwd = getcwd(NULL, 0);
 	ft_printf("%s\n", global->pwd);
+	return (0);
 }

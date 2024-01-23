@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/19 15:35:47 by arazzok          ###   ########.fr       */
+/*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
+/*   Updated: 2024/01/23 13:49:49 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_global
 typedef struct s_command
 {
 	char				**str;
-	void				(*builtin)(t_global *global);
+	int					(*builtin)(t_global *global);
 	int					nb_redirections;
 	char				*heredoc_file_name;
 	t_lexer				*redirections;
@@ -149,14 +149,16 @@ int						_env_len(char **env);
 
 void					_others(t_global *global);
 
-void					_builtin_exit(t_global *global);
-void					_builtin_pwd(t_global *global);
-void					_builtin_env(t_global *global);
-void					_builtin_echo(t_global *global);
+int						(*get_builtin(char *str))(t_global *global);
+
+int						_builtin_exit(t_global *global);
+int						_builtin_pwd(t_global *global);
+int						_builtin_env(t_global *global);
+int						_builtin_echo(t_global *global);
 void					_builtin_others(t_global *global);
 int						_builtin_cd(t_global *global);
-void					_builtin_export(t_global *global);
-void					_builtin_unset(t_global *global);
+int						_builtin_export(t_global *global);
+int						_builtin_unset(t_global *global);
 
 /* ###@ UTILS */
 int						count_path(char *path);

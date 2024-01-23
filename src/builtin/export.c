@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 07:38:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 16:00:08 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:28:43 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	tri_export_var(t_global *global);
 
-void	_builtin_export(t_global *global)
+int	_builtin_export(t_global *global)
 {
 	int	i;
 
@@ -26,6 +26,7 @@ void	_builtin_export(t_global *global)
 			printf("declare -x %s\n", global->env[i]);
 		i++;
 	}
+	return (0);
 }
 
 static void	tri_export_var(t_global *global)

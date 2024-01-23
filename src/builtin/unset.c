@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 08:36:51 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/02 16:00:22 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:31:55 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static char	**_delete_var(char **env, char *env_name);
 
-void	_builtin_unset(t_global *global)
+int	_builtin_unset(t_global *global)
 {
 	int	i;
 
 	if (global->argv[1] == NULL)
 	{
 		ft_printf("unset: not enough arguments\n");
-		return ;
+		return (1);
 	}
 	i = 0;
 	while (global->env[i])
@@ -29,6 +29,7 @@ void	_builtin_unset(t_global *global)
 		global->env = _delete_var(global->env, global->argv[1]);
 		i++;
 	}
+	return (0);
 }
 
 static char	**_delete_var(char **env, char *env_name)

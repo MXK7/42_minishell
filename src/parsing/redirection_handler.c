@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:31:43 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/18 18:35:07 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/23 12:48:07 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	add_redirection(t_lexer *temp, t_parser *parser)
 
 	node = init_lexer(temp->next->str, temp->token);
 	if (!node)
-	{
-		// parser_error(2, parser->global, parser->lexer_list);
-	}
+		parser_error(2, parser->global, parser->lexer_list);
 	push_lexer(&parser->redirections, node);
 	first_index = temp->index;
 	second_index = temp->next->index;
@@ -58,13 +56,10 @@ void	del_redirections(t_parser *parser)
 	if (!temp || temp->token == PIPE)
 		return ;
 	if (!temp->next)
-	{
-		// parser_error(0, parser->global, parser->lexer_list);
-	}
-	if (temp->next->token)
-	{
-		// double_token_error(parser->global, parser->lexer_list, temp->next->token);
-	}
+		parser_error(0, parser->global, parser->lexer_list);
+	if (temp->next->token && temp->next->token != WORD)
+		double_token_error(parser->global, parser->lexer_list,
+			temp->next->token);
 	if (temp->token >= RIGHT && temp->token <= DOUBLE_LEFT)
 		add_redirection(temp, parser);
 	del_redirections(parser);

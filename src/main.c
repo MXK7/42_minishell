@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/19 16:05:34 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/23 14:02:07 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,7 @@ static int pre_execute(t_global *global)
     {
         global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
         if (!global->pid)
-        {
-            // return handle_error
-        }
+			return (handle_error(1, global));
         // execute(global);
     }
     return (0);

@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:23:53 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/19 14:59:19 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/23 12:41:27 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parser_error(int err_code, t_global *global, t_lexer *lexer_list)
 
 int	double_token_error(t_global *global, t_lexer *lexer_list, t_token token)
 {
-    (void)global;
+	(void)lexer_list;
 	ft_putstr_fd("Error.\nParse error near ", STDERR_FILENO);
 	if (token == RIGHT)
 		ft_putstr_fd("'>'\n", STDERR_FILENO);
@@ -35,13 +35,12 @@ int	double_token_error(t_global *global, t_lexer *lexer_list, t_token token)
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
 	free_lexer(&lexer_list);
-	// reset_global(global);
+	reset_global(global);
 	return (1);
 }
 
 int	handle_error(int err_code, t_global *global)
 {
-	(void)global;
 	ft_putstr_fd("Error.\n", STDERR_FILENO);
 	if (err_code == 0)
 		ft_putendl_fd("Syntax error near unexpected token 'newline'.",
@@ -62,6 +61,6 @@ int	handle_error(int err_code, t_global *global)
 		ft_putendl_fd("Infile: No such file or directory.", STDERR_FILENO);
     else if (err_code == 8)
 		ft_putendl_fd("Path does not exist.", STDERR_FILENO);
-	// reset_global(global);
+	reset_global(global);
 	return (1);
 }
