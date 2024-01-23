@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/03 12:59:15 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:24:31 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	_env(t_global *global, char **envp)
 	global->pwd = getcwd(NULL, 0);
 }
 
-void	_builtin_env(t_global *global)
+int	_builtin_env(t_global *global)
 {
 	int	i;
 
@@ -52,4 +52,5 @@ void	_builtin_env(t_global *global)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
 	}
+	return (0);
 }

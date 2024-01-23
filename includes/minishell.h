@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 14:17:15 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/07 23:41:43 by arazzok          ###   ########.fr       */
+/*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
+/*   Updated: 2024/01/23 16:10:43 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,14 @@
 
 extern bool				exit_requested;
 
-// typedef struct s_settings
-// {
-// 	bool				exit_requested;
-// }						t_settings;
-
 typedef enum s_token
 {
 	WORD = 1,
 	PIPE,
-	LEFT,
-	DOUBLE_LEFT,
 	RIGHT,
-	DOUBLE_RIGHT
+	DOUBLE_RIGHT,
+	LEFT,
+	DOUBLE_LEFT
 }						t_token;
 
 typedef struct s_lexer
@@ -59,22 +54,34 @@ typedef struct s_lexer
 	struct s_lexer		*next;
 }						t_lexer;
 
+typedef struct s_parser
+{
+	t_lexer				*lexer_list;
+	t_lexer				*redirections;
+	int					nb_redirections;
+	struct s_global		*global;
+}						t_parser;
+
 typedef struct s_global
 {
-	int					nbr_path;
+	char				**argv;
 	char				**args_path;
 	char				**env;
+	int					nbr_path;
 	char				*input;
 	char				*pwd;
 	char				*path;
 	char				*token;
-	char				**argv;
+	t_lexer				*lexer_list;
+	struct s_command	*command_list;
+	int					nb_pipes;
+	int					*pid;
 }						t_global;
 
 typedef struct s_command
 {
 	char				**str;
-	void				(*builtin)(t_global *global);
+	int					(*builtin)(t_global *global);
 	int					nb_redirections;
 	char				*heredoc_file_name;
 	t_lexer				*redirections;
@@ -87,7 +94,7 @@ typedef struct s_command
 /// @param envp Variables d'environement
 /// @param unused_signal
 
-/* ###@ PARSING */
+/* ###@ LEXING */
 t_lexer					*init_lexer(char *str, t_token token);
 void					clear_one(t_lexer **list);
 void					del_first(t_lexer **list);
@@ -107,22 +114,28 @@ void					handle_quote(char *input, int *i, t_lexer **current,
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
 
-void					handle_token(t_lexer *lexer, t_command *command);
-void					handle_cmd_head(t_command **head, t_command *current);
+/* ###@ PARSING */
+t_parser				init_parser(t_global *global);
+void					count_pipes(t_global *global);
+int						count_args(t_lexer *lexer_list);
 
-int						is_redirection(t_token token);
-int						get_str_size(char **str);
+t_command				*init_command(char **str, int nb_redirections,
+							t_lexer *redirections);
+void					push_command(t_command **list, t_command *new);
+void					free_command(t_command **list);
 
+int						add_redirection(t_lexer *temp, t_parser *parser);
+void					del_redirections(t_parser *parser);
 
-
-t_command				*init_command(void);
 t_lexer					*tokenize(char *input);
-t_command				*tokens_to_commands(t_lexer *lexer);
-void					parser(t_global *global);
+t_command				*pre_init_command(t_parser *parser);
+int						parser(t_global *global);
 
 /* ###@ EXECUTOR */
 void					handler_exe(t_global *global);
 bool					exe_commands(t_global *global);
+
+int						execute(t_global *global);
 
 /* ###@ BUILTIN */
 void					handler_builtin(t_global *global);
@@ -136,22 +149,31 @@ int						_env_len(char **env);
 
 void					_others(t_global *global);
 
-void					_builtin_exit(t_global *global);
-void					_builtin_pwd(t_global *global);
-void					_builtin_env(t_global *global);
-void					_builtin_echo(t_global *global);
+int						(*get_builtin(char *str))(t_global *global);
+
+int						_builtin_exit(t_global *global);
+int						_builtin_pwd(t_global *global);
+int						_builtin_env(t_global *global);
+int						_builtin_echo(t_global *global);
 void					_builtin_others(t_global *global);
 int						_builtin_cd(t_global *global);
-void					_builtin_export(t_global *global);
-void					_builtin_unset(t_global *global);
-
-/* ###@ SIGNAL */
-void					_signal_newline(int signal __attribute__((unused)));
-void					_signal_exit(int signal __attribute__((unused)),
-							t_global *global);
+int						_builtin_export(t_global *global);
+int						_builtin_unset(t_global *global);
 
 /* ###@ UTILS */
 int						count_path(char *path);
-void					free_minishell(t_global *global);
+int						are_quotes_closed(char *line);
+void					free_array(char **array);
+
+void					init_global(t_global *global);
+void					reset_global(t_global *global);
+void					free_global(t_global *global);
+
+/* ###@ ERROR */
+void					parser_error(int err_code, t_global *global,
+							t_lexer *lexer_list);
+int						double_token_error(t_global *global,
+							t_lexer *lexer_list, t_token token);
+int						handle_error(int err_code, t_global *global);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 08:50:55 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 16:06:37 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:02:23 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,24 @@ int	_env_len(char **env)
 	while (env[i])
 		i++;
 	return (i);
+}
+
+int (*get_builtin(char *str))(t_global *global)
+{
+	static void *builtins[7][2] = {{"cd", _builtin_cd}, {"echo", _builtin_echo},
+		{"env", _builtin_env}, {"exit", _builtin_exit}, {"export",
+		_builtin_export}, {"pwd", _builtin_pwd}, {"unset", _builtin_unset}};
+	int i;
+
+	i = 0;
+	while (i < 7)
+	{
+		if (str)
+		{
+			if (!ft_strncmp(builtins[i][0], str, ft_strlen(builtins[i][0])))
+				return builtins[i][1];
+		}
+		i++;
+	}
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:23:21 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/29 17:58:33 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:54:29 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	_builtin_others(t_global *global)
 		pid = fork();
 		if (pid == 0)
 		{
-			execve(global->path, global->argv, global->env);
+			execve(global->path, global->command_list->str, global->env);
 			exit(-1);
 		}
 		waitpid(pid, &status, 0);

@@ -6,26 +6,49 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:31:55 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/07 23:36:50 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/11 18:24:39 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_redirection(t_token token)
+t_parser	init_parser(t_global *global)
 {
-	return (token == LEFT || token == DOUBLE_LEFT || token == RIGHT
-		|| token == DOUBLE_RIGHT);
+	t_parser	node;
+
+	node.lexer_list = global->lexer_list;
+	node.redirections = NULL;
+	node.nb_redirections = 0;
+	node.global = global;
+	return (node);
 }
 
-int	get_str_size(char **str)
+void	count_pipes(t_global *global)
 {
-	int	size;
+	t_lexer	*temp;
 
-	if (!str)
-		return (0);
-	size = 0;
-	while (str[size])
-		size++;
-	return (size);
+	temp = global->lexer_list;
+	while (temp)
+	{
+		if (temp->token == PIPE)
+			global->nb_pipes++;
+		temp = temp->next;
+	}
+}
+
+int	count_args(t_lexer *lexer_list)
+{
+	int		nb_args;
+	t_lexer	*temp;
+
+	;
+	nb_args = 0;
+	temp = lexer_list;
+	while (temp && temp->token != PIPE)
+	{
+		if (temp->index >= 0)
+			nb_args++;
+		temp = temp->next;
+	}
+	return (nb_args);
 }
