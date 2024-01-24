@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 16:58:11 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 02:51:43 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,17 @@
 
 static char	*make_absolute_path(const char *path, const char *exec_name);
 
-void	handler_exe(t_global *global)
+void	get_path_exe(t_global *global)
 {
 	int		i;
 	char	*token;
-	char	*path_start;
-	size_t	token_len;
 
-	path_start = ft_strchr(global->path, '=');
-	if (path_start == NULL)
-	{
-		ft_printf(ERROR_PATH_EGAL);
-		return ;
-	}
 	i = 0;
-	global->args_path = (char **)malloc(sizeof(char *) * ft_strlen(path_start
-			+ 1));
-	token = strtok(path_start + 1, ":");
+	global->args_path = (char **)malloc(sizeof(char **) * ft_strlen(global->path + 1));
+	token = strtok(global->path + 1, ":");
 	while (token != NULL)
 	{
-		token_len = ft_strlen(token);
-		global->args_path[i] = (char *)malloc(token_len + 2);
+		global->args_path[i] = (char *)malloc(ft_strlen(token) + 2);
 		ft_strcpy(global->args_path[i], token);
 		ft_strcat(global->args_path[i], "/");
 		token = strtok(NULL, ":");
@@ -51,14 +41,16 @@ bool	exe_commands(t_global *global)
 	if (access(global->path, X_OK) == 0)
 		return (true);
 	free(global->path);
-	global->path = make_absolute_path(global->pwd, global->command_list->str[0]);
+	global->path = make_absolute_path(global->pwd,
+		global->command_list->str[0]);
 	if (access(global->path, X_OK) == 0)
 		return (true);
 	free(global->path);
 	tmp = global->nbr_path;
 	while (tmp > 0)
 	{
-		global->path = ft_strjoin(global->args_path[tmp - 1], global->command_list->str[0]);
+		global->path = ft_strjoin(global->args_path[tmp - 1],
+			global->command_list->str[0]);
 		if (access(global->path, X_OK) == 0)
 			return (true);
 		free(global->path);
@@ -73,6 +65,11 @@ static char	*make_absolute_path(const char *path, const char *exec_name)
 	size_t	path_length;
 	size_t	exec_name_length;
 
+	if (!path || !exec_name)
+	{
+		exit(-1);
+		return (NULL);
+	}
 	path_length = ft_strlen(path);
 	exec_name_length = ft_strlen(exec_name);
 	absolute_path = (char *)malloc(path_length + 1 + exec_name_length + 1);

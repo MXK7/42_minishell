@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 13:24:31 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/24 02:19:34 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_env(t_global *global, char **envp)
+void init_env(t_global *global, char **envp)
 {
 	int	i;
 	int	j;
@@ -29,16 +29,7 @@ void	_env(t_global *global, char **envp)
 		global->env[j] = ft_strdup(envp[j]);
 		j++;
 	}
-	global->env[j + 1] = NULL;
-	i = 0;
-	while (global->env[i])
-	{
-		if (global->env[i][0] == 'P' && global->env[i][1] == 'A'
-			&& global->env[i][2] == 'T' && global->env[i][3] == 'H')
-			global->path = global->env[i];
-		i++;
-	}
-	global->pwd = getcwd(NULL, 0);
+	global->env[j] = NULL;
 }
 
 int	_builtin_env(t_global *global)

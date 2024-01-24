@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 16:45:54 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 03:02:06 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	_builtin_cd(t_global *global)
 
 	if (opendir(global->command_list->str[1]) != NULL)
 	{
-		printf("%s\n", global->command_list->str[1]);
 		fd = open(global->command_list->str[1], O_RDONLY);
 		if (fd == -1)
 		{
@@ -31,8 +30,7 @@ int	_builtin_cd(t_global *global)
 	}
 	if (chdir(global->command_list->str[1]) == 0)
 	{
-		new_pwd = ft_strjoin(_env_get("PWD=", global), ft_strjoin("/",
-					global->command_list->str[1]));
+		new_pwd = ft_strjoin(get_env("PWD=", global), ft_strjoin("/", global->command_list->str[1]));
 		_env_update(global, "PWD=", new_pwd);
 	}
 	else

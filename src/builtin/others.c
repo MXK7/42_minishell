@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:23:21 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 16:54:29 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 02:23:41 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,6 @@ void	_builtin_others(t_global *global)
 		if (status != 0)
 			ft_printf("STATUS : %d\n", status / 256);
 	}
+	else
+		ft_printf("ams: command not found: %s\n", global->input);
 }

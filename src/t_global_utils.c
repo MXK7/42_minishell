@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_global_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/23 13:36:10 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/24 01:44:57 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	init_global(t_global *global)
 {
-	global->nbr_path = 0;
+	// global->nbr_path = 0;
 	global->input = NULL;
-	global->pwd = NULL;
-	global->path = NULL;
+	// global->pwd = NULL;
+	// global->path = NULL;
 	global->token = NULL;
 	global->lexer_list = NULL;
 	global->command_list = NULL;

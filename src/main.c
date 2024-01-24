@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 16:48:15 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 01:50:20 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!global)
 		return (ft_printf("Error.\nGlobal malloc error.\n"), 1);
 	init_global(global);
-	builtin_start(global, envp);
+	init_execute(global, envp);
 	init_sh(global);
 	return (0);
 }
@@ -65,7 +65,7 @@ static int	init_sh(t_global *global)
 static int pre_execute(t_global *global)
 {
     if (global->nb_pipes == 0)
-		handler_builtin(global);
+		single_command(global);
     else
     {
         global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);

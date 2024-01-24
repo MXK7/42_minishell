@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 08:50:55 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 17:02:23 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 02:39:14 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	update_var(t_global *global, const char *env_name,
 	const char *new_env);
 
-char	*_env_get(char *env_name, t_global *global)
+char	*get_env(char *env_name, t_global *global)
 {
 	size_t	en_len;
 	size_t	i;

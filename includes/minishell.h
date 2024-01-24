@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/23 16:10:43 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 02:27:10 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define MAX_TOKENS 100
 # define CTRL_D '\004'
-# define ERROR_PATH_EGAL "Error: '=' not found in path\n string"
+# define ERROR_PATH_EGAL "Error: '=' not found in path string\n"
 
 extern bool				exit_requested;
 
@@ -132,24 +132,24 @@ t_command				*pre_init_command(t_parser *parser);
 int						parser(t_global *global);
 
 /* ###@ EXECUTOR */
-void					handler_exe(t_global *global);
+void					get_path_exe(t_global *global);
 bool					exe_commands(t_global *global);
 
+void					init_execute(t_global *global, char **envp);
 int						execute(t_global *global);
 
 /* ###@ BUILTIN */
-void					handler_builtin(t_global *global);
-void					builtin_start(t_global *global, char **envp);
-
-void					_env(t_global *global, char **envp);
-char					*_env_get(char *env_name, t_global *global);
+char					*get_path(t_global *global);
+void					single_command(t_global *global);
+void					init_env(t_global *global, char **envp);
+char					*get_env(char *env_name, t_global *global);
 void					_env_update(t_global *global, const char *env_name,
 							const char *new_env);
 int						_env_len(char **env);
 
 void					_others(t_global *global);
 
-int						(*get_builtin(char *str))(t_global *global);
+int (*get_builtin(char *str))(t_global *global);
 
 int						_builtin_exit(t_global *global);
 int						_builtin_pwd(t_global *global);

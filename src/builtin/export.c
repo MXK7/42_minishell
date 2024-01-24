@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 07:38:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/23 13:28:43 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/24 01:15:47 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	_builtin_export(t_global *global)
 	while (global->env[i])
 	{
 		if (global->env[i][0] != '\0')
-			printf("declare -x %s\n", global->env[i]);
+			ft_printf("declare -x %s\n", global->env[i]);
 		i++;
 	}
 	return (0);
