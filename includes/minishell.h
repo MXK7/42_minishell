@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/24 03:07:43 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:57:16 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int						_builtin_unset(t_global *global);
 int						count_path(char *path);
 int						are_quotes_closed(char *line);
 void					free_array(char **array);
+void					free_global(t_global *global);
 
 void					init_global(t_global *global);
 void					reset_global(t_global *global);

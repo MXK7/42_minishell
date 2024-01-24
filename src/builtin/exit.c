@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:15:48 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 03:04:17 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:53:31 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // TODO: tu vas me refaire ca au propre fdp
 int	_builtin_exit(t_global *global)
 {
-	(void)global;
+	free_global(global);
 	exit_requested = false;
 	exit(-1);
 }

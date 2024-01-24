@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:58:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 01:45:52 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:39:55 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,17 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
+}
+
+void free_global(t_global *global)
+{
+	free_array(global->argv);
+	free_array(global->args_path);
+	free_array(global->env);
+	free(global->pwd);
+	free(global->token);
+	free_lexer(&global->lexer_list);
+	free_command(&global->command_list);
+	free(global->pid);
+	free(global);
 }

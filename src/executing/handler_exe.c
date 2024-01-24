@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 03:08:27 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:29:29 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ bool	exe_commands(t_global *global)
 	if (access(global->path, X_OK) == 0)
 		return (true);
 	free(global->path);
+	global->path = NULL;
 	tmp = global->nbr_path;
 	while (tmp > 0)
 	{
@@ -54,6 +55,7 @@ bool	exe_commands(t_global *global)
 		if (access(global->path, X_OK) == 0)
 			return (true);
 		free(global->path);
+		global->path = NULL;
 		tmp--;
 	}
 	return (false);

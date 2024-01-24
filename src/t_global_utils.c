@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/24 01:44:57 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:57:50 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,4 @@ void     reset_global(t_global *global)
     if (global->pid)
         free(global->pid);
     init_global(global);
-}
-
-// TODO: Refaire la fonction pour qu'elle free correctement toute la struct global
-void	free_global(t_global *global)
-{
-	int	i;
-
-	i = 0;
-	while (global->env[i])
-	{
-		free(global->env[i]);
-		i++;
-	}
-	i = 0;
-	while (global->args_path[i])
-	{
-		free(global->args_path[i]);
-		i++;
-	}
-	free(global->path);
-	free(global->token);
-	free(global);
 }

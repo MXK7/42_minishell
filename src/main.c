@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 03:09:38 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:40:51 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	if (argc != 1)
 		return (ft_printf("Error.\nNo argument accepted.\n"), 1);
-	global = malloc(sizeof(t_global));
+	global = calloc(1, sizeof(t_global));
 	if (!global)
 		return (ft_printf("Error.\nGlobal malloc error.\n"), 1);
 	init_global(global);
 	init_execute(global, envp);
 	init_sh(global);
+	free_global(global);
 	return (0);
 }
 
@@ -37,6 +38,7 @@ static int	init_sh(t_global *global)
 {
 	char	*temp;
 
+	temp = NULL;
 	while (exit_requested)
 	{
 		global->input = readline("AMS $ ");
@@ -45,15 +47,20 @@ static int	init_sh(t_global *global)
 		global->input = temp;
 		if (!global->input)
 		{
-			ft_putendl_fd("exit", STDOUT_FILENO);
-			exit(0);
+			ft_putendl_fd("\n", STDOUT_FILENO);
+			free(global->input);
+			return (0);
 		}
 		if (global->input[0] == '\0')
+		{
+			free(global->input);
 			continue ;
+		}
 		add_history(global->input);
 		if (!are_quotes_closed(global->input))
-			return (handle_error(2, global));
+			return (free(global->input), handle_error(2, global));
 		global->lexer_list = tokenize(global->input);
+		free(global->input);
 		parser(global);
         pre_execute(global);
         reset_global(global);
@@ -67,10 +74,11 @@ static int pre_execute(t_global *global)
 		single_command(global);
     else
     {
-        global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
-        if (!global->pid)
-			return (handle_error(1, global));
-        execute(global);
+		// TODO :
+        // global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
+        // if (!global->pid)
+		// 	return (handle_error(1, global));
+        // execute(global);
     }
     return (0);
 }
