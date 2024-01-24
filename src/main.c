@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 03:04:12 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/24 03:09:38 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv, char **envp)
 	t_global	*global;
 
 	(void)argv;
-	// (void)envp;
 	if (argc != 1)
 		return (ft_printf("Error.\nNo argument accepted.\n"), 1);
 	global = malloc(sizeof(t_global));
