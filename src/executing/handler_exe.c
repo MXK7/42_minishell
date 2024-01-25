@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 20:29:29 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:12:37 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	get_path_exe(t_global *global)
 	char	*token;
 
 	i = 0;
-	global->args_path = (char **)malloc(sizeof(char **) * ft_strlen(global->path + 1));
+	global->args_path = (char **)malloc(sizeof(char **) * ft_strlen(global->path
+			+ 1));
 	token = strtok(global->path + 1, ":");
 	while (token != NULL)
 	{

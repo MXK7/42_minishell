@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:39:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/25 00:05:30 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:12:17 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@
 
 int	_builtin_echo(t_global *global)
 {
-	int		i;
-	bool	param;
+	int i = 1;
+	bool new_line = false;
 
-	i = 1;
-	param = false;
-	while (global->command_list->str[i] != NULL && !ft_strcmp(global->command_list->str[i], "-n"))
+	while (global->command_list->str[i] != NULL
+		&& global->command_list->str[i][0] == '-'
+		&& ft_strchr(global->command_list->str[i], 'n'))
 	{
-		param = true;
+		new_line = true;
 		i++;
 	}
-	while (i >= 1)
+	while (global->command_list->str[i] != NULL)
 	{
 		ft_putstr_fd(global->command_list->str[i], STDOUT_FILENO);
-		if (0 < (i - 1))
+		if (global->command_list->str[i + 1] != NULL)
 			ft_putstr_fd(" ", STDOUT_FILENO);
-		i--;
+		i++;
 	}
-	if (param)
+	if (!new_line)
 		ft_printf("\n");
 	return (0);
 }
