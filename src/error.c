@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:23:53 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/24 18:50:51 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:29:00 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ void	parser_error(int err_code, t_global *global, t_lexer *lexer_list)
 int	double_token_error(t_global *global, t_lexer *lexer_list, t_token token)
 {
 	(void)lexer_list;
-	ft_putstr_fd("Error.\nParse error near ", STDERR_FILENO);
+	ft_putstr_fd("ams: parse error near ", STDERR_FILENO);
 	if (token == RIGHT)
-		ft_putstr_fd("'>'\n", STDERR_FILENO);
+		ft_putendl_fd("'>'", STDERR_FILENO);
 	else if (token == DOUBLE_RIGHT)
-		ft_putstr_fd("'>>'\n", STDERR_FILENO);
+		ft_putendl_fd("'>>'", STDERR_FILENO);
 	else if (token == LEFT)
-		ft_putstr_fd("'<'\n", STDERR_FILENO);
+		ft_putendl_fd("'<'", STDERR_FILENO);
 	else if (token == DOUBLE_LEFT)
-		ft_putstr_fd("'<<'\n", STDERR_FILENO);
+		ft_putendl_fd("'<<'", STDERR_FILENO);
 	else if (token == PIPE)
-		ft_putstr_fd("'|'\n", STDERR_FILENO);
+		ft_putendl_fd("'|'", STDERR_FILENO);
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
 	free_lexer(&lexer_list);
@@ -41,26 +41,26 @@ int	double_token_error(t_global *global, t_lexer *lexer_list, t_token token)
 
 int	handle_error(int err_code, t_global *global)
 {
-	ft_putstr_fd("Error.\n", STDERR_FILENO);
+	ft_putstr_fd("ams: ", STDERR_FILENO);
 	if (err_code == 0)
-		ft_putendl_fd("Syntax error near unexpected token 'newline'.",
+		ft_putendl_fd("syntax error near unexpected token 'newline'",
 			STDERR_FILENO);
 	else if (err_code == 1)
-		ft_putendl_fd("Memory allocation error.", STDERR_FILENO);
+		ft_putendl_fd("memory allocation error", STDERR_FILENO);
 	else if (err_code == 2)
-		ft_putendl_fd("Quotes are note closed.", STDERR_FILENO);
+		ft_putendl_fd("quotes are note closed", STDERR_FILENO);
     else if (err_code == 3)
-		ft_putendl_fd("Parser error.", STDERR_FILENO);
+		ft_putendl_fd("parser error", STDERR_FILENO);
     else if (err_code == 4)
-		ft_putendl_fd("Failed to create pipe.", STDERR_FILENO);
+		ft_putendl_fd("failed to create pipe", STDERR_FILENO);
     else if (err_code == 5)
-		ft_putendl_fd("Failed to fork.", STDERR_FILENO);
+		ft_putendl_fd("failed to fork", STDERR_FILENO);
     else if (err_code == 6)
-		ft_putendl_fd("Outfile error.", STDERR_FILENO);
+		ft_putendl_fd("outfile error", STDERR_FILENO);
     else if (err_code == 7)
-		ft_putendl_fd("Infile: No such file or directory.", STDERR_FILENO);
+		ft_putendl_fd("infile: no such file or directory", STDERR_FILENO);
     else if (err_code == 8)
-		ft_putendl_fd("Path does not exist.", STDERR_FILENO);
+		ft_putendl_fd("path does not exist", STDERR_FILENO);
 	reset_global(global);
 	return (1);
 }
