@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   others.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:23:21 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 02:23:41 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:14:58 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	_builtin_others(t_global *global)
 			ft_printf("STATUS : %d\n", status / 256);
 	}
 	else
-		ft_printf("ams: command not found: %s\n", global->input);
+		ft_printf("ams: command not found: %s\n", global->command_list->str[0]);
 }
