@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/25 17:13:19 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:17:57 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	handle_operator(char *input, int *i, t_lexer **current, char operator)
 	free(temp);
 }
 
-void	handle_quote(char *input, int *i, t_lexer **current, char quote)
+void	handle_quote(char *input, int *i, t_lexer **current, char quote, t_global *global)
 {
 	char	*word;
 	int		j;
@@ -72,8 +72,8 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 	}
 	else
 	{
-        // TODO: Tout free et exit
 		ft_printf("Error.\n");
+		free_global(global);
 	}
 }
 

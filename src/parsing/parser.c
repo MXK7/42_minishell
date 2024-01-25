@@ -6,13 +6,13 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 19:18:42 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:18:58 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer	*tokenize(char *input)
+t_lexer	*tokenize(char *input, t_global *global)
 {
 	t_lexer	*head;
 	t_lexer	*current;
@@ -29,7 +29,7 @@ t_lexer	*tokenize(char *input)
 		if (is_operator(input[i]))
 			handle_operator(input, &i, &current, input[i]);
 		else if (is_quote(input[i]))
-			handle_quote(input, &i, &current, input[i]);
+			handle_quote(input, &i, &current, input[i], global);
 		else
 			handle_word(input, &i, &current);
 		handle_head(&head, current);

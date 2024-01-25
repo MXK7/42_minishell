@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/24 18:57:16 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:10:53 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ int						get_word_len(char *input, int i);
 void					handle_operator(char *input, int *i, t_lexer **current,
 							char operator);
 void					handle_quote(char *input, int *i, t_lexer **current,
-							char quote);
+							char quote, t_global *global);
+
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
 
@@ -127,7 +128,7 @@ void					free_command(t_command **list);
 int						add_redirection(t_lexer *temp, t_parser *parser);
 void					del_redirections(t_parser *parser);
 
-t_lexer					*tokenize(char *input);
+t_lexer					*tokenize(char *input, t_global *global);
 t_command				*pre_init_command(t_parser *parser);
 int						parser(t_global *global);
 
@@ -161,6 +162,10 @@ void					_builtin_others(t_global *global);
 int						_builtin_cd(t_global *global);
 int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
+
+/* ###@ SIGNAL */
+void	_signal_newline(int signal __attribute__((unused)));
+void	_signal_exit(int signal __attribute__((unused)), t_global *global);
 
 /* ###@ UTILS */
 int						count_path(char *path);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/25 14:19:46 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/25 19:17:03 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	init_sh(t_global *global)
 
 	while (exit_requested)
 	{
+		signal(SIGINT, _signal_newline);
+		signal(SIGQUIT, SIG_IGN);
 		global->input = readline("AMS $ ");
 		temp = ft_strtrim(global->input, " ");
 		free(global->input);
@@ -54,7 +56,7 @@ static int	init_sh(t_global *global)
 		add_history(global->input);
 		if (!are_quotes_closed(global->input))
 			return (handle_error(2, global));
-		global->lexer_list = tokenize(global->input);
+		global->lexer_list = tokenize(global->input, global);
 		free(global->input);
 		parser(global);
         pre_execute(global);
