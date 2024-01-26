@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
+#    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/25 19:10:58 by mpoussie         ###   ########.fr        #
+#    Updated: 2024/01/26 12:51:55 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,9 @@ LEXING      = tokenize_handler tokenize_utils t_lexer_utils
 PARSING_DIR = parsing/
 PARSING     = parser parser_utils redirection_handler t_command_utils
 
+EXPDING_DIR = expanding/
+EXPDING     = expander
+
 EXE_DIR     = executing/
 EXE         = handler_exe execute
 
@@ -41,6 +44,7 @@ SIGNAL      = signal
 SRC_FILES  += main utils t_global_utils error
 SRC_FILES  += $(addprefix $(LEXING_DIR), $(LEXING))
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
+SRC_FILES  += $(addprefix $(EXPDING_DIR), $(EXPDING))
 SRC_FILES  += $(addprefix $(BUILTIN_DIR), $(BUILTIN))
 SRC_FILES  += $(addprefix $(SIGNAL_DIR), $(SIGNAL))
 SRC_FILES  += $(addprefix $(EXE_DIR), $(EXE))
@@ -69,6 +73,7 @@ $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
 					@mkdir -p $(OBJ_DIR)$(LEXING_DIR)
 					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
+					@mkdir -p $(OBJ_DIR)$(EXPDING_DIR)
 					@mkdir -p $(OBJ_DIR)$(BUILTIN_DIR)
 					@mkdir -p $(OBJ_DIR)$(SIGNAL_DIR)
 					@mkdir -p $(OBJ_DIR)$(EXE_DIR)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/25 19:10:53 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/26 13:30:52 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@
 # define MAX_TOKENS 100
 # define CTRL_D '\004'
 # define ERROR_PATH_EGAL "Error: '=' not found in path string\n"
-
-extern bool				exit_requested;
 
 typedef enum s_token
 {
@@ -89,10 +87,8 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
-/// @param settings Structure secondaire pour la gestion du projet
 /// @param global Structure principale pour les datas
 /// @param envp Variables d'environement
-/// @param unused_signal
 
 /* ###@ LEXING */
 t_lexer					*init_lexer(char *str, t_token token);
@@ -171,7 +167,6 @@ void	_signal_exit(int signal __attribute__((unused)), t_global *global);
 int						count_path(char *path);
 int						are_quotes_closed(char *line);
 void					free_array(char **array);
-void					free_global(t_global *global);
 
 void					init_global(t_global *global);
 void					reset_global(t_global *global);

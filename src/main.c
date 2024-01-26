@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/25 19:17:03 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/26 13:30:15 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	init_sh(t_global *global);
-static int  pre_execute(t_global *global);
-
-bool		exit_requested = true;
+static int	pre_execute(t_global *global);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -29,6 +27,8 @@ int	main(int argc, char **argv, char **envp)
 		return (ft_printf("Error.\nGlobal malloc error.\n"), 1);
 	init_global(global);
 	init_execute(global, envp);
+	signal(SIGINT, _signal_newline);
+	signal(SIGQUIT, SIG_IGN);
 	init_sh(global);
 	free_global(global);
 	return (0);
@@ -38,10 +38,8 @@ static int	init_sh(t_global *global)
 {
 	char	*temp;
 
-	while (exit_requested)
+	while (1)
 	{
-		signal(SIGINT, _signal_newline);
-		signal(SIGQUIT, SIG_IGN);
 		global->input = readline("AMS $ ");
 		temp = ft_strtrim(global->input, " ");
 		free(global->input);
@@ -59,23 +57,23 @@ static int	init_sh(t_global *global)
 		global->lexer_list = tokenize(global->input, global);
 		free(global->input);
 		parser(global);
-        pre_execute(global);
-        reset_global(global);
+		pre_execute(global);
+		reset_global(global);
 	}
 	return (1);
 }
 
-static int pre_execute(t_global *global)
+static int	pre_execute(t_global *global)
 {
-    if (global->nb_pipes == 0)
+	if (global->nb_pipes == 0)
 		single_command(global);
-    else
-    {
+	else
+	{
 		// TODO :
-        // global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
-        // if (!global->pid)
+		// global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
+		// if (!global->pid)
 		// 	return (handle_error(1, global));
-        // execute(global);
-    }
-    return (0);
+		// execute(global);
+	}
+	return (0);
 }
