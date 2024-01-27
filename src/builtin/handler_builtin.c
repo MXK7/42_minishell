@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 02:39:39 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/27 23:38:55 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@ static bool	builtin_exist(t_global *global);
 
 void	single_command(t_global *global)
 {
+	char	**strs;
+	char	*expanded_str;
+	int		i;
+
+	strs = global->command_list->str;
+	i = 0;
+	while (strs[i])
+	{
+		expanded_str = expand_env_var(strs[i]);
+		if (!expanded_str)
+			return ;
+		free(strs[i]);
+		strs[i] = expanded_str;
+		i++;
+	}
 	if (builtin_exist(global))
 		_builtin_exe(global);
 	else

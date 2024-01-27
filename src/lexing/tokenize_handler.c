@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/25 17:17:57 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/27 23:46:50 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_strndup(const char *src, size_t size)
+char	*ft_strndup(const char *src, size_t size)
 {
 	size_t	len;
 	char	*copy;
 
-	len = 0;
-	while (src[len] && len < size)
-		len++;
+	len = ft_strlen(src);
+	if (size < len)
+        len = size;
 	copy = malloc(sizeof(char) * (len + 1));
 	if (!copy)
 		return (NULL);
-	ft_memcpy(copy, src, size);
+	ft_memcpy(copy, src, len);
 	copy[len] = '\0';
 	return (copy);
 }
@@ -55,7 +55,8 @@ void	handle_operator(char *input, int *i, t_lexer **current, char operator)
 	free(temp);
 }
 
-void	handle_quote(char *input, int *i, t_lexer **current, char quote, t_global *global)
+void	handle_quote(char *input, int *i, t_lexer **current, char quote,
+		t_global *global)
 {
 	char	*word;
 	int		j;

@@ -6,7 +6,7 @@
 #    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/26 12:51:55 by arazzok          ###   ########.fr        #
+#    Updated: 2024/01/27 02:31:58 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ PARSING_DIR = parsing/
 PARSING     = parser parser_utils redirection_handler t_command_utils
 
 EXPDING_DIR = expanding/
-EXPDING     = expander
+EXPDING     = expander expander_utils
 
 EXE_DIR     = executing/
 EXE         = handler_exe execute

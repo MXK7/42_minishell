@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/26 13:30:52 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/27 18:53:27 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int						is_quote(char c);
 void					skip_whitespaces(char *input, int *i);
 int						get_word_len(char *input, int i);
 
+char					*ft_strndup(const char *src, size_t size);
 void					handle_operator(char *input, int *i, t_lexer **current,
 							char operator);
 void					handle_quote(char *input, int *i, t_lexer **current,
@@ -127,6 +128,12 @@ void					del_redirections(t_parser *parser);
 t_lexer					*tokenize(char *input, t_global *global);
 t_command				*pre_init_command(t_parser *parser);
 int						parser(t_global *global);
+
+/* ###@ EXPANDING */
+char					*expand_env_var(char *command);
+
+char					*ft_strpbrk(char *s, char *accept);
+char					*ft_strncpy(char *dest, char *src, size_t len);
 
 /* ###@ EXECUTOR */
 void					get_path_exe(t_global *global);
@@ -160,8 +167,9 @@ int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
 
 /* ###@ SIGNAL */
-void	_signal_newline(int signal __attribute__((unused)));
-void	_signal_exit(int signal __attribute__((unused)), t_global *global);
+void					_signal_newline(int signal __attribute__((unused)));
+void					_signal_exit(int signal __attribute__((unused)),
+							t_global *global);
 
 /* ###@ UTILS */
 int						count_path(char *path);
