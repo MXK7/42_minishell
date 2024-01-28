@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:51:31 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/28 00:17:30 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/28 01:39:31 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,41 @@ static char	*replace_env_var(char *result, char *start, char *end, char *value)
 	return (new);
 }
 
-char	*expand_env_var(char *command)
+static void process_expand(char **start, char **result, bool is_quote, char **end)
 {
-	char	*result;
-	char	*start;
-	char	*end;
-	char	*name;
-	char	*value;
+    char    *name;
+    char    *value;
 
-	result = ft_strdup(command);
-	start = result;
-	name = find_env_var(start, &end);
-	while (name)
-	{
-		value = get_env_var_value(name);
-		result = replace_env_var(result, start, end, value);
-		start = result + (start - result) + ft_strlen(value);
-		free(name);
-		name = find_env_var(start, &end);
-	}
-	return (result);
+    if (**start == '$' && !is_quote)
+    {
+        name = find_env_var(*start, end);
+        if (name)
+        {
+            value = get_env_var_value(name);
+            *result = replace_env_var(*result, *start, *end, value);
+            *start = *result + (*start - *result) + ft_strlen(value);
+            free(name);
+        }
+    }
+}
+
+char	*expand_env_var(char *command)
+{    
+    char	*result;
+    char	*start;
+    char	*end;
+    bool	is_quote;
+
+    is_quote = false;
+    result = ft_strdup(command);
+    start = result;
+    while (*start)
+    {
+        if (*start == '\"')
+            is_quote = !is_quote;
+        else
+            process_expand(&start, &result, is_quote, &end);
+        start++;
+    }
+    return (result);
 }
