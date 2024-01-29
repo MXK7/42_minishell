@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:51:31 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/29 20:11:40 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/29 23:30:55 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*expand_env_var(char *command)
 	start = result;
 	while (*start)
 	{
-		if (*start == '\"')
+		if (*start == '\'')
 			is_quote = !is_quote;
 		else
 		{
