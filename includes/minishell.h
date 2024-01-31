@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/29 16:27:18 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:38:06 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char					*ft_strndup(const char *src, size_t size);
 void					handle_operator(char *input, int *i, t_lexer **current,
 							char operator);
 void					handle_quote(char *input, int *i, t_lexer **current,
-							char quote, t_global *global);
+							char quote);
 
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
@@ -125,7 +125,7 @@ void					free_command(t_command **list);
 int						add_redirection(t_lexer *temp, t_parser *parser);
 void					del_redirections(t_parser *parser);
 
-t_lexer					*tokenize(char *input, t_global *global);
+t_lexer					*tokenize(char *input);
 t_command				*pre_init_command(t_parser *parser);
 int						parser(t_global *global);
 

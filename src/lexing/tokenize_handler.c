@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/27 23:46:50 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/29 22:54:59 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strndup(const char *src, size_t size)
 
 	len = ft_strlen(src);
 	if (size < len)
-        len = size;
+		len = size;
 	copy = malloc(sizeof(char) * (len + 1));
 	if (!copy)
 		return (NULL);
@@ -55,8 +55,7 @@ void	handle_operator(char *input, int *i, t_lexer **current, char operator)
 	free(temp);
 }
 
-void	handle_quote(char *input, int *i, t_lexer **current, char quote,
-		t_global *global)
+void	handle_quote(char *input, int *i, t_lexer **current, char quote)
 {
 	char	*word;
 	int		j;
@@ -70,11 +69,6 @@ void	handle_quote(char *input, int *i, t_lexer **current, char quote,
 		*current = init_lexer(word, WORD);
 		*i = j;
 		free(word);
-	}
-	else
-	{
-		ft_printf("Error.\n");
-		free_global(global);
 	}
 }
 

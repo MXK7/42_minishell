@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/01/29 16:28:19 by mpoussie         ###   ########.fr       */
+=======
+/*   Updated: 2024/01/29 23:01:59 by arazzok          ###   ########.fr       */
+>>>>>>> a2d3a37a34436663989a34d21664e75aabfe3e96
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +58,7 @@ static int	init_sh(t_global *global)
 		add_history(global->input);
 		if (!are_quotes_closed(global->input))
 			return (handle_error(2, global));
-		global->lexer_list = tokenize(global->input, global);
+		global->lexer_list = tokenize(global->input);
 		free(global->input);
 		parser(global);
 		pre_execute(global);

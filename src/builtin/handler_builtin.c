@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/28 01:03:54 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/29 22:13:35 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void	single_command(t_global *global)
 	int		i;
 
 	strs = global->command_list->str;
-	i = 0;
+	i = 1;
 	while (strs[i])
 	{
+        ft_printf("strs[%d] = %s\n", i, strs[i]);
 		expanded_str = expand_env_var(strs[i]);
 		if (!expanded_str)
 			return ;
