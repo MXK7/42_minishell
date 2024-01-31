@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:23:21 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/31 14:46:30 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/31 17:00:41 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ void	_builtin_others(t_global *global)
 		pid = fork();
 		if (pid == 0)
 		{
-			handle_redirection(global);
+			if (global->command_list->redirections)
+			{
+				if (handle_redirection(global))
+					exit(1);
+			}
 			execve(global->path, global->command_list->str, global->env);
 			exit(-1);
 		}
 		waitpid(pid, &status, 0);
-		if (status != 0)
-			ft_printf("STATUS : %d\n", status / 256);
 	}
 	else
 		ft_printf("ams: command not found: %s\n", global->command_list->str[0]);

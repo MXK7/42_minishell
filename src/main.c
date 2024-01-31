@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/31 14:39:07 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:19:13 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	init_sh(t_global *global);
+int	init_sh(t_global *global);
 static int	pre_execute(t_global *global);
 
 int	main(int argc, char **argv, char **envp)
@@ -34,32 +34,28 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
-static int	init_sh(t_global *global)
+int	init_sh(t_global *global)
 {
 	char	*temp;
 
-	while (1)
+	global->input = readline("AMS $ ");
+	temp = ft_strtrim(global->input, " ");
+	free(global->input);
+	global->input = temp;
+	if (!global->input)
 	{
-		global->input = readline("AMS $ ");
-		temp = ft_strtrim(global->input, " ");
-		free(global->input);
-		global->input = temp;
-		if (!global->input)
-		{
-			ft_putendl_fd("exit", STDOUT_FILENO);
-			exit(0);
-		}
-		if (global->input[0] == '\0')
-			continue ;
-		add_history(global->input);
-		if (!are_quotes_closed(global->input))
-			return (handle_error(2, global));
-		global->lexer_list = tokenize(global->input);
-		free(global->input);
-		parser(global);
-		pre_execute(global);
-		reset_global(global);
+		ft_putendl_fd("exit", STDOUT_FILENO);
+		exit(0);
 	}
+	if (global->input[0] == '\0')
+		return (reset_global(global));
+	add_history(global->input);
+	if (!are_quotes_closed(global->input))
+		return (handle_error(2, global));
+	global->lexer_list = tokenize(global->input);
+	parser(global);
+	pre_execute(global);
+	reset_global(global);
 	return (1);
 }
 
