@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/26 14:49:02 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:28:19 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,10 @@ static int	pre_execute(t_global *global)
 		single_command(global);
 	else
 	{
-		// TODO :
-		// global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
-		// if (!global->pid)
-		// 	return (handle_error(1, global));
-		// execute(global);
+		global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
+		if (!global->pid)
+			return (handle_error(1, global));
+		execute(global);
 	}
 	return (0);
 }

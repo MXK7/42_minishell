@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/27 18:53:27 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/29 16:27:18 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void					get_path_exe(t_global *global);
 bool					exe_commands(t_global *global);
 
 void					init_execute(t_global *global, char **envp);
-int						execute(t_global *global);
+void					execute(t_global *global);
 
 void					single_command(t_global *global);
 
