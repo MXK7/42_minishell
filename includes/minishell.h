@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/29 23:03:08 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/30 16:51:18 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int						parser(t_global *global);
 /* ###@ EXPANDING */
 char					*expand_env_var(char *command);
 
-char					*ft_strpbrk(char *s, char *accept);
 char					*ft_strncpy(char *dest, char *src, size_t len);
 
 /* ###@ EXECUTOR */
@@ -143,6 +142,8 @@ void					init_execute(t_global *global, char **envp);
 int						execute(t_global *global);
 
 void					single_command(t_global *global);
+
+void					redirections_handler(t_lexer *redirections);
 
 /* ###@ BUILTIN */
 char					*get_path(t_global *global);
