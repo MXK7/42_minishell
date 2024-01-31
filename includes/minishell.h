@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/31 17:18:07 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/31 23:04:39 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ bool					exe_commands(t_global *global);
 void					init_execute(t_global *global, char **envp);
 void					execute(t_global *global);
 
-int						handle_redirection(t_global *global);
+int						handle_redirection(t_command *command);
 
 void					single_command(t_global *global);
 

@@ -6,19 +6,19 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:45:38 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/31 16:45:50 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/31 23:07:11 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handle_outfile(t_lexer *redirections, bool is_append)
+int	handle_outfile(t_lexer *redirections)
 {
 	char	*pathname;
 	int		fd;
 
 	pathname = redirections->str;
-	if (is_append)
+	if (redirections->token == DOUBLE_RIGHT)
 		fd = open(pathname, O_CREAT | O_RDWR | O_APPEND, 0644);
 	else
 		fd = open(pathname, O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -36,12 +36,10 @@ int	handle_outfile(t_lexer *redirections, bool is_append)
 	return (0);
 }
 
-int	handle_infile(t_lexer *redirections)
+int	handle_infile(char *pathname)
 {
-	char	*pathname;
 	int		fd;
 
-	pathname = redirections->str;
 	fd = open(pathname, O_RDONLY);
 	if (fd < 0)
 	{
@@ -57,36 +55,31 @@ int	handle_infile(t_lexer *redirections)
 	return (0);
 }
 
-int	handle_heredoc(t_lexer *redirections)
+int	handle_redirection(t_command *command)
 {
-	(void)redirections;
-	ft_printf("handle heredoc\n");
-	return (0);
-}
-int	handle_redirection(t_global *global)
-{
-	t_lexer	*redirections;
+	t_lexer	*start;
 
-	redirections = global->command_list->redirections;
-	if (redirections->token == LEFT)
+	start = command->redirections;
+	while (command->redirections)
 	{
-		if (handle_infile(redirections))
-			return (1);
+		if (command->redirections->token == LEFT)
+		{
+			if (handle_infile(command->redirections->str))
+				return (1);
+		}
+		else if (command->redirections->token == DOUBLE_LEFT)
+		{
+			if (handle_infile(command->heredoc_file_name))
+				return (1);
+		}
+		else if (command->redirections->token == RIGHT
+			|| command->redirections->token == DOUBLE_RIGHT)
+		{
+			if (handle_outfile(command->redirections))
+				return (1);
+		}
+		command->redirections = command->redirections->next;
 	}
-	else if (redirections->token == DOUBLE_LEFT)
-	{
-		if (handle_heredoc(redirections))
-			return (1);
-	}
-	else if (redirections->token == RIGHT)
-	{
-		if (handle_outfile(redirections, false))
-			return (1);
-	}
-	else if (redirections->token == DOUBLE_RIGHT)
-	{
-		if (handle_outfile(redirections, true))
-			return (1);
-	}
+	command->redirections = start;
 	return (0);
 }

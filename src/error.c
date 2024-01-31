@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:23:53 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/25 14:29:00 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/31 23:46:51 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	parser_error(int err_code, t_global *global, t_lexer *lexer_list)
 
 int	double_token_error(t_global *global, t_lexer *lexer_list, t_token token)
 {
-	(void)lexer_list;
 	ft_putstr_fd("ams: parse error near ", STDERR_FILENO);
 	if (token == RIGHT)
 		ft_putendl_fd("'>'", STDERR_FILENO);

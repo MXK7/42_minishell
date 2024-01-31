@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/29 23:13:25 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/31 23:46:17 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	parser(t_global *global)
 
 	count_pipes(global);
 	if (global->lexer_list->token == PIPE)
-		return (double_token_error(global, global->lexer_list, parser.lexer_list->token));
+		return (double_token_error(global, global->lexer_list,
+				global->lexer_list->token));
 	while (global->lexer_list)
 	{
 		if (global->lexer_list && global->lexer_list->token == PIPE)
