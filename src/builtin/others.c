@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:23:21 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/25 14:14:58 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/31 14:46:30 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	_builtin_others(t_global *global)
 		pid = fork();
 		if (pid == 0)
 		{
+			handle_redirection(global);
 			execve(global->path, global->command_list->str, global->env);
 			exit(-1);
 		}

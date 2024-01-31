@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
+#    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/01/29 18:23:47 by mpoussie         ###   ########.fr        #
+#    Updated: 2024/01/31 14:51:40 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ EXPDING_DIR = expanding/
 EXPDING     = expander expander_utils
 
 EXE_DIR     = executing/
-EXE         = handler_exe execute
+EXE         = handler_exe execute redirection
 
 BUILTIN_DIR = builtin/
 BUILTIN     = handler_builtin utils_builtin env echo others pwd exit cd export unset
