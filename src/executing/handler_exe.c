@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_exe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/31 17:26:24 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/31 18:46:35 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ bool	exe_commands(t_global *global)
 	tmp = global->nbr_path;
 	while (tmp > 0)
 	{
-		// ! Cette ligne fait leak ls
 		global->path = ft_strjoin(global->args_path[tmp - 1],
 			global->command_list->str[0]);
-		// !
 		if (access(global->path, X_OK) == 0)
 			return (true);
 		free(global->path);

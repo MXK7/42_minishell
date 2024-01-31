@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_global_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/31 17:17:53 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/01/31 18:47:45 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	free_global(t_global *global)
 	free(global->token);
 	free_lexer(&global->lexer_list);
 	free_command(&global->command_list);
-	free(global->pid);
+	if (global->pid)
+		free(global->pid);
+	free(global->path);
 	free(global);
 }
