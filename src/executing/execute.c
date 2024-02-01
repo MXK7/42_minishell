@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:51:03 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/01 17:41:00 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/01 18:38:53 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,30 @@ void	init_execute(t_global *global, char **envp)
 	get_path_exe(global);
 }
 
-void	execute(t_global *global)
+int	execute(t_global *global)
 {
-	(void)global;
-	// TODO: gerer l execution
+	int			pipefd[2];
+	int			fd_in;
+	t_command	*current;
+
+	fd_in = STDIN_FILENO;
+	current = global->command_list;
+	while (current)
+	{
+		// TODO: expand env variables
+		if (current->next)
+			pipe(pipefd);
+		handle_heredoc(global);
+		// TODO: fork
+		close(pipefd[0]);
+		if (current->prev)
+			close(fd_in);
+		// TODO: check fd heredoc
+		if (current->next)
+			current = current->next;
+		else
+			break ;
+	}
+	// TODO: waitpid
+	return (0);
 }
