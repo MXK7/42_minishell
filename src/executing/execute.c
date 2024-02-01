@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:51:03 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/29 17:49:15 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:41:00 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ void	init_execute(t_global *global, char **envp)
 
 void	execute(t_global *global)
 {
-	int	i;
-
-	i = 0;
-	while (global->command_list->str[i] != NULL)
-	{
-		printf("%d, %s", i, global->command_list->str[i]);
-		i++;
-	}
+	(void)global;
+	// TODO: gerer l execution
 }
