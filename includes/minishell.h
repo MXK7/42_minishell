@@ -6,7 +6,11 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/02 17:56:32 by mpoussie         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/02 18:22:25 by arazzok          ###   ########.fr       */
+>>>>>>> e6d00f35ef831dbab76703793b2fed188780cc38
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +78,12 @@ typedef struct s_global
 	struct s_command	*command_list;
 	int					nb_pipes;
 	int					*pid;
+<<<<<<< HEAD
 	char				*old_pwd;
+=======
+	bool				is_heredoc;
+	bool				is_reset;
+>>>>>>> e6d00f35ef831dbab76703793b2fed188780cc38
 }						t_global;
 
 typedef struct s_command
@@ -135,25 +144,21 @@ int						parser(t_global *global);
 /* ###@ EXPANDING */
 char					*expand_env_var(char *command);
 
-char					*ft_strpbrk(char *s, char *accept);
 char					*ft_strncpy(char *dest, char *src, size_t len);
+void					call_expander(t_global *global);
 
 /* ###@ EXECUTOR */
 void					get_path_exe(t_global *global);
 bool					exe_commands(t_global *global);
 
-void					init_execute(t_global *global, char **envp);
 int						execute(t_global *global);
-
 int						handle_redirection(t_command *command);
-
 int						handle_heredoc(t_global *global);
-
-void					single_command(t_global *global);
+void					handle_command(t_global *global);
 
 /* ###@ BUILTIN */
-char					*get_path(t_global *global);
 void					single_command(t_global *global);
+char					*get_path(t_global *global);
 void					init_env(t_global *global, char **envp);
 char					*get_env(char *env_name, t_global *global);
 void					update_env(t_global *global, const char *env_name,
@@ -168,7 +173,7 @@ int						_builtin_exit(t_global *global);
 int						_builtin_pwd(t_global *global);
 int						_builtin_env(t_global *global);
 int						_builtin_echo(t_global *global);
-void					_builtin_others(t_global *global);
+// void					_builtin_others(t_global *global);
 int						_builtin_cd(t_global *global);
 int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
@@ -184,6 +189,7 @@ int						are_quotes_closed(char *line);
 void					free_array(char **array);
 
 void					init_global(t_global *global);
+void					init_execute(t_global *global, char **envp);
 int						reset_global(t_global *global);
 void					free_global(t_global *global);
 

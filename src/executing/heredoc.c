@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:48:44 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/01 16:43:14 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/02 14:51:11 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	create_heredoc(t_global *global, char *filename)
 	}
 	free(line);
 	close(fd);
+	global->is_heredoc = true;
 	return (0);
 }
 

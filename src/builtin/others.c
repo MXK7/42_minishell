@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 01:23:21 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 18:30:19 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:50:06 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	_builtin_others(t_global *global)
 	status = 0;
 	if (exe_commands(global))
 	{
-		handle_heredoc(global);
 		pid = fork();
 		if (pid < 0)
 			handle_error(5, global);
