@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 08:36:51 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/24 18:51:35 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:14:49 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,12 @@ static char	**_delete_var(char **env, char *env_name);
 
 int	_builtin_unset(t_global *global)
 {
-	int	i;
-
-	if (global->argv[1] == NULL)
+	if (global->command_list->str[1] == NULL)
 	{
 		ft_printf("unset: not enough arguments\n");
 		return (1);
 	}
-	i = 0;
-	while (global->env[i])
-	{
-		global->env = _delete_var(global->env, global->argv[1]);
-		i++;
-	}
+	global->env = _delete_var(global->env, global->command_list->str[1]);
 	return (0);
 }
 
@@ -38,20 +31,18 @@ static char	**_delete_var(char **env, char *env_name)
 	int		i;
 	int		x;
 
-	new_env = (char **)malloc(sizeof(char *) * _env_len(env) + 1);
+	new_env = (char **)malloc(sizeof(char *) * (tab_len(env) + 1));
 	i = 0;
 	x = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], ft_strtoupper(env_name),
-				ft_strlen(env_name)) != 0)
+		if (ft_strncmp(env[i], ft_strtoupper(env_name), ft_strlen(env_name)) != 0)
 		{
 			new_env[x] = env[i];
 			x++;
 		}
 		i++;
 	}
-	new_env[x] = 0;
-	free(new_env);
+	new_env[x] = NULL;
 	return (new_env);
 }

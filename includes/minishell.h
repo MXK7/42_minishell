@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/01 16:00:25 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/02 17:56:32 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_global
 	struct s_command	*command_list;
 	int					nb_pipes;
 	int					*pid;
+	char				*old_pwd;
 }						t_global;
 
 typedef struct s_command
@@ -142,7 +143,7 @@ void					get_path_exe(t_global *global);
 bool					exe_commands(t_global *global);
 
 void					init_execute(t_global *global, char **envp);
-void					execute(t_global *global);
+int						execute(t_global *global);
 
 int						handle_redirection(t_command *command);
 
@@ -155,13 +156,13 @@ char					*get_path(t_global *global);
 void					single_command(t_global *global);
 void					init_env(t_global *global, char **envp);
 char					*get_env(char *env_name, t_global *global);
-void					_env_update(t_global *global, const char *env_name,
+void					update_env(t_global *global, const char *env_name,
 							const char *new_env);
-int						_env_len(char **env);
+size_t					tab_len(char **tab);
 
 void					_others(t_global *global);
 
-int (*get_builtin(char *str))(t_global *global);
+// int (*get_builtin(char *str))(t_global *global);
 
 int						_builtin_exit(t_global *global);
 int						_builtin_pwd(t_global *global);

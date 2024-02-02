@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:51:03 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/01 18:38:53 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:30:31 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_execute(t_global *global, char **envp)
 {
 	global->env = NULL;
 	global->args_path = NULL;
+	global->old_pwd = NULL;
 	init_env(global, envp);
 	global->path = get_env("PATH=", global);
 	global->pwd = getcwd(NULL, 0);

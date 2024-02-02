@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
+#    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/02/01 16:01:28 by arazzok          ###   ########.fr        #
+#    Updated: 2024/02/02 19:38:10 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_DIR   = $(INCLUDES)src/libft/
 LIBFT       = $(LIBFT_DIR)libft.a
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror -g3
+CFLAGS      = -Wall -Wextra -Werror -g -g3
 PRFLAGS     = -lreadline
 RM          = rm -rf
 
