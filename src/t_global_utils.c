@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_global_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/31 18:47:45 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:00:36 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ void	init_global(t_global *global)
 	global->command_list = NULL;
 	global->nb_pipes = 0;
 	global->pid = NULL;
+	global->is_heredoc = false;
+	global->is_reset = false;
+}
+
+void	init_execute(t_global *global, char **envp)
+{
+	global->env = NULL;
+	global->args_path = NULL;
+	init_env(global, envp);
+	global->path = get_env("PATH=", global);
+	global->pwd = getcwd(NULL, 0);
+	global->nbr_path = count_path(global->path);
+	get_path_exe(global);
 }
 
 int	reset_global(t_global *global)
@@ -29,6 +42,7 @@ int	reset_global(t_global *global)
 	if (global->pid)
 		free(global->pid);
 	init_global(global);
+	global->is_reset = true;
 	init_sh(global);
 	return (1);
 }
