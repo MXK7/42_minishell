@@ -6,11 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/02 17:56:32 by mpoussie         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/02 18:22:25 by arazzok          ###   ########.fr       */
->>>>>>> e6d00f35ef831dbab76703793b2fed188780cc38
+/*   Updated: 2024/02/02 19:51:28 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +74,9 @@ typedef struct s_global
 	struct s_command	*command_list;
 	int					nb_pipes;
 	int					*pid;
-<<<<<<< HEAD
 	char				*old_pwd;
-=======
 	bool				is_heredoc;
 	bool				is_reset;
->>>>>>> e6d00f35ef831dbab76703793b2fed188780cc38
 }						t_global;
 
 typedef struct s_command
