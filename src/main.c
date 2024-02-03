@@ -3,34 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 19:49:00 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:40:42 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	init_sh(t_global *global);
-static int	pre_execute(t_global *global);
-
-int	main(int argc, char **argv, char **envp)
+static int	pre_execute(t_global *global)
 {
-	t_global	*global;
-
-	(void)argv;
-	if (argc != 1)
-		return (ft_printf("Error.\nNo argument accepted.\n"), 1);
-	global = calloc(1, sizeof(t_global));
-	if (!global)
-		return (ft_printf("Error.\nGlobal malloc error.\n"), 1);
-	init_global(global);
-	init_execute(global, envp);
-	signal(SIGINT, _signal_newline);
-	signal(SIGQUIT, SIG_IGN);
-	init_sh(global);
-	free_global(global);
+	if (global->nb_pipes == 0)
+		single_command(global);
+	else
+	{
+		global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
+		if (!global->pid)
+			return (handle_error(1, global));
+		execute(global);
+	}
 	return (0);
 }
 
@@ -59,16 +51,21 @@ int	init_sh(t_global *global)
 	return (1);
 }
 
-static int	pre_execute(t_global *global)
+int	main(int argc, char **argv, char **envp)
 {
-	if (global->nb_pipes == 0)
-		single_command(global);
-	else
-	{
-		global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
-		if (!global->pid)
-			return (handle_error(1, global));
-		execute(global);
-	}
+	t_global	*global;
+
+	(void)argv;
+	if (argc != 1)
+		return (ft_printf("Error.\nNo argument accepted.\n"), 1);
+	global = malloc(sizeof(t_global));
+	if (!global)
+		return (ft_printf("Error.\nGlobal malloc error.\n"), 1);
+	init_global(global);
+	init_execute(global, envp);
+	signal(SIGINT, _signal_newline);
+	signal(SIGQUIT, SIG_IGN);
+	init_sh(global);
+	free_global(global);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 19:50:21 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:48:19 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,20 @@ void	handle_command(t_global *global)
 		if (handle_redirection(global->command_list))
 			exit(1);
 	}
-	if (is_builtin(global))
+	if (is_builtin(global)) {
 		_builtin_exe(global);
+        exit(0);
+    }
 	if (exe_commands(global))
+    {
 		execve(global->path, global->command_list->str, global->env);
+        exit(0);
+    }
 	else
+    {
 		ft_printf("ams: command not found: %s\n", global->command_list->str[0]);
-	exit(-1);
+	    exit(127);
+    }
 }
 
 void	single_command(t_global *global)

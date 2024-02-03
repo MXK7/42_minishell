@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/02 19:51:28 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:39:19 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,7 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
-/// @param global Structure principale pour les datas
-/// @param envp Variables d'environement
-
+/* ###@ MAIN */
 int						init_sh(t_global *global);
 
 /* ###@ LEXING */
