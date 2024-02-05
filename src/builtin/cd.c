@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/05 12:43:51 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:50:31 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	_builtin_cd(t_global *global)
 	int	i;
 
 	global->old_pwd = global->pwd;
+	free(global->pwd);
 	global->pwd = getcwd(NULL, 0);
 	fd = 0;
 	i = 0;

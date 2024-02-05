@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/02 19:48:52 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:51:55 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	reset_global(t_global *global)
 
 void	free_global(t_global *global)
 {
-	free_array(global->argv);
 	free_array(global->args_path);
 	free_array(global->env);
 	free(global->pwd);
