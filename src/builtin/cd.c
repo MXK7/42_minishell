@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 19:48:15 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:38:04 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int	_builtin_cd(t_global *global)
 	i = 0;
 	while (global->command_list->str[i])
 		i++;
+	if (i > 2)
+	{
+		ft_printf("CD: There are too many arguments.\n");
+		return (1);
+	}
 	if (i == 1)
 		open_cd(fd, get_env("HOME=", global), global);
 	else if (ft_strcmp(global->command_list->str[1], "-") == 0)
