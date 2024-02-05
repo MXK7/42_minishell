@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:51:03 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/02 19:52:05 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:35:18 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	process_waitpid(int *pid, int nb_pipes)
 	return (0);
 }
 
-// TODO: cest casse la
+// TODO: Faire fonctionner les pipes
 int	execute(t_global *global)
 {
 	int			pipefd[2];
