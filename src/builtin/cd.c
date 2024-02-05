@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/05 12:38:04 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:43:51 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ static int	open_cd(int fd, char *dir, t_global *global)
 	{
 		fd = open(dir, O_RDONLY);
 		if (fd == -1)
-		{
 			return (1);
-		}
 		close(fd);
 	}
 	if (chdir(dir) == 0)

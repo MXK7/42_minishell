@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 07:38:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 13:47:35 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:45:53 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,22 @@ int	_builtin_export(t_global *global)
 
 	i = 0;
 	tri_export_var(global);
-	while (global->env[i])
-	{
-		if (global->env[i][0] != '\0')
-			ft_printf("declare -x %s\n", global->env[i]);
+	while (global->command_list->str[i])
 		i++;
+	if (i > 2)
+	{
+		update_env(global, ft_strtoupper(global->command_list->str[1]),
+			global->command_list->str[2]);
+		return (0);
+	}
+	else if (i == 1)
+	{
+		while (global->env[i])
+		{
+			if (global->env[i][0] != '\0')
+				ft_printf("%s\n", global->env[i]);
+			i++;
+		}
 	}
 	return (0);
 }
