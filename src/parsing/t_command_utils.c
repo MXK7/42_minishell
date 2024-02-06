@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:42:16 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 09:59:13 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 14:35:54 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,13 @@ void	free_command(t_command **list)
 		*list = temp;
 	}
 	*list = NULL;
+}
+
+t_command	*command_first(t_command *list)
+{
+	if (!list)
+		return (NULL);
+	while (list->prev)
+		list = list->prev;
+	return (list);
 }

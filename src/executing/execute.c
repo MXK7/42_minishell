@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:51:03 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/03 17:35:18 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 14:51:01 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	process_dup(t_global *global, int pipefd[2], int fd_in, t_command *current)
 	if (current->prev && dup2(fd_in, STDIN_FILENO) < 0)
 		handle_error(4, global);
 	close(pipefd[0]);
-	if (current->next && dup2(pipefd[1], STDOUT_FILENO))
+	if (current->next && dup2(pipefd[1], STDOUT_FILENO) < 0)
 		handle_error(4, global);
 	close(pipefd[1]);
 	if (current->prev)
@@ -30,7 +30,7 @@ int	process_fork(t_global *global, int pipefd[2], int fd_in, t_command *current)
 {
 	static int	i = 0;
 
-	if (global->is_reset)
+	if (global->is_reset == true)
 	{
 		i = 0;
 		global->is_reset = false;
@@ -73,31 +73,29 @@ int	process_waitpid(int *pid, int nb_pipes)
 	return (0);
 }
 
-// TODO: Faire fonctionner les pipes
 int	execute(t_global *global)
 {
 	int			pipefd[2];
 	int			fd_in;
-	t_command	*current;
 
 	fd_in = STDIN_FILENO;
-	current = global->command_list;
-	while (current)
+	while (global->command_list)
 	{
 		call_expander(global);
-		if (current->next)
+		if (global->command_list->next)
 			pipe(pipefd);
 		handle_heredoc(global);
-		process_fork(global, pipefd, fd_in, current);
+		process_fork(global, pipefd, fd_in, global->command_list);
 		close(pipefd[1]);
-		if (current->prev)
+		if (global->command_list->prev)
 			close(fd_in);
-		fd_in = check_fd_heredoc(global, pipefd, current);
-		if (current->next)
-			current = current->next;
+		fd_in = check_fd_heredoc(global, pipefd, global->command_list);
+		if (global->command_list->next)
+			global->command_list = global->command_list->next;
 		else
 			break ;
 	}
 	process_waitpid(global->pid, global->nb_pipes);
+	global->command_list = command_first(global->command_list);
 	return (0);
 }

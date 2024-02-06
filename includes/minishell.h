@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 10:05:24 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 14:40:18 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_command				*init_command(char **str, int nb_redirections,
 							t_lexer *redirections);
 void					push_command(t_command **list, t_command *new);
 void					free_command(t_command **list);
+t_command				*command_first(t_command *list);
 int						add_redirection(t_lexer *temp, t_parser *parser);
 void					del_redirections(t_parser *parser);
 

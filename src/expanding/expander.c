@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:51:31 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 12:16:35 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 12:57:02 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,12 @@ static char	*replace_env_var(char *result, char *start, char *end, char *value)
 	return (new);
 }
 
-static void	process_expand(char **start, char **result, bool is_quote,
-		char **end)
+static void	process_expand(char **start, char **result, char **end)
 {
 	char	*name;
 	char	*value;
 
-	if (**start == '$' && !is_quote)
+	if (**start == '$')
 	{
 		name = find_env_var(*start, end);
 		if (name)
@@ -97,22 +96,15 @@ char	*expand_env_var(char *command)
 	char	*result;
 	char	*start;
 	char	*end;
-	bool	is_quote;
 	size_t	offset;
 
-	is_quote = false;
 	result = ft_strdup(command);
 	start = result;
 	while (*start)
 	{
-		if (*start == '\'')
-			is_quote = !is_quote;
-		else
-		{
-			offset = start - result;
-			process_expand(&start, &result, is_quote, &end);
-			start = result + offset;
-		}
+		offset = start - result;
+		process_expand(&start, &result, &end);
+		start = result + offset;
 		if (*start)
 			start++;
 	}
