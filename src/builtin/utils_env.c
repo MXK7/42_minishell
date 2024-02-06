@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 21:19:59 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 21:24:46 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 21:32:09 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,5 @@ static void	add_env_res(t_global *global, int i, char **result)
 		free_array(result);
 		return ;
 	}
-	free_array(global->env);
 	global->env = result;
 }
