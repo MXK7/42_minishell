@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/03 17:39:19 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 10:05:24 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
+extern int				g_exit_status;
+
 /* ###@ MAIN */
 int						init_sh(t_global *global);
 
@@ -99,19 +101,16 @@ void					clear_one(t_lexer **list);
 void					del_first(t_lexer **list);
 void					del_one(t_lexer **list, int index);
 void					free_lexer(t_lexer **list);
-
 int						is_whitespace(char c);
 int						is_operator(char c);
 int						is_quote(char c);
 void					skip_whitespaces(char *input, int *i);
 int						get_word_len(char *input, int i);
-
 char					*ft_strndup(const char *src, size_t size);
 void					handle_operator(char *input, int *i, t_lexer **current,
 							char operator);
 void					handle_quote(char *input, int *i, t_lexer **current,
 							char quote);
-
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
 
@@ -119,12 +118,10 @@ void					handle_head(t_lexer **head, t_lexer *current);
 t_parser				init_parser(t_global *global);
 void					count_pipes(t_global *global);
 int						count_args(t_lexer *lexer_list);
-
 t_command				*init_command(char **str, int nb_redirections,
 							t_lexer *redirections);
 void					push_command(t_command **list, t_command *new);
 void					free_command(t_command **list);
-
 int						add_redirection(t_lexer *temp, t_parser *parser);
 void					del_redirections(t_parser *parser);
 
@@ -134,14 +131,12 @@ int						parser(t_global *global);
 
 /* ###@ EXPANDING */
 char					*expand_env_var(char *command);
-
 char					*ft_strncpy(char *dest, char *src, size_t len);
 void					call_expander(t_global *global);
 
 /* ###@ EXECUTOR */
 void					get_path_exe(t_global *global);
 bool					exe_commands(t_global *global);
-
 int						execute(t_global *global);
 int						handle_redirection(t_command *command);
 int						handle_heredoc(t_global *global);
@@ -155,16 +150,12 @@ char					*get_env(char *env_name, t_global *global);
 void					update_env(t_global *global, const char *env_name,
 							const char *new_env);
 size_t					tab_len(char **tab);
-
 void					_others(t_global *global);
-
-// int (*get_builtin(char *str))(t_global *global);
 
 int						_builtin_exit(t_global *global);
 int						_builtin_pwd(t_global *global);
 int						_builtin_env(t_global *global);
 int						_builtin_echo(t_global *global);
-// void					_builtin_others(t_global *global);
 int						_builtin_cd(t_global *global);
 int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
@@ -178,7 +169,6 @@ void					_signal_exit(int signal __attribute__((unused)),
 int						count_path(char *path);
 int						are_quotes_closed(char *line);
 void					free_array(char **array);
-
 void					init_global(t_global *global);
 void					init_execute(t_global *global, char **envp);
 int						reset_global(t_global *global);

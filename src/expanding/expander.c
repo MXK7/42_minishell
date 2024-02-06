@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:51:31 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/05 17:45:44 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:22:38 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static char	*find_env_var(char *start, char **end)
 	if (start)
 	{
 		*end = start + 1;
+		if (**end == '?')
+		{
+			(*end)++;
+			return (ft_strdup("?"));
+		}
 		while (ft_isalnum(**end) || **end == '_')
 			(*end)++;
 		return (ft_strndup(start + 1, *end - start - 1));
@@ -29,6 +34,12 @@ static char	*get_env_var_value(char *name)
 {
 	char	*value;
 
+	if (ft_strcmp(name, "?") == 0)
+	{
+		value = ft_itoa(g_exit_status);
+		if (value)
+			return (value);
+	}
 	value = getenv(name);
 	if (!value)
 		value = "";
@@ -76,6 +87,7 @@ static void	process_expand(char **start, char **result, bool is_quote,
 			*result = replace_env_var(*result, *start, *end, value);
 			*start = *result + (*start - *result) + ft_strlen(value);
 			free(name);
+			free(value);
 		}
 	}
 }

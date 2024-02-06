@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_command_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:42:16 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/02 17:56:37 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 09:59:13 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_command	*init_command(char **str, int nb_redirections,
 	if (!node)
 		return (NULL);
 	node->str = str;
-	// node->builtin = get_builtin(str[0]);
 	node->heredoc_file_name = NULL;
 	node->nb_redirections = nb_redirections;
 	node->redirections = redirections;

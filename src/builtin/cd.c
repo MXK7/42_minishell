@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/05 17:50:31 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 09:29:40 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	_builtin_cd(t_global *global)
 		i++;
 	if (i > 2)
 	{
-		ft_printf("CD: There are too many arguments.\n");
+		ft_printf("ams: cd: too many arguments.\n");
 		return (1);
 	}
 	if (i == 1)
