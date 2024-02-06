@@ -6,13 +6,13 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 20:58:27 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:13:52 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			g_exit_status;
+int	g_exit_status;
 
 static int	pre_execute(t_global *global)
 {
@@ -65,8 +65,6 @@ int	main(int argc, char **argv, char **envp)
 		return (ft_printf(ERROR_MALLOC), 1);
 	init_global(global);
 	init_execute(global, envp);
-	signal(SIGINT, _signal_newline);
-	signal(SIGQUIT, SIG_IGN);
 	init_sh(global);
 	free_global(global);
 	rl_clear_history();

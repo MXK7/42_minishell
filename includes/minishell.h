@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 19:26:15 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:14:09 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define ERROR_MAIN_ARGS "No argument accepted.\n"
 # define ERROR_MALLOC "Global malloc error.\n"
 
-typedef enum s_token
+typedef enum e_token
 {
 	WORD = 1,
 	PIPE,
@@ -106,14 +106,16 @@ void					del_one(t_lexer **list, int index);
 void					free_lexer(t_lexer **list);
 int						is_whitespace(char c);
 int						is_operator(char c);
-int						is_quote(char c);
 void					skip_whitespaces(char *input, int *i);
 int						get_word_len(char *input, int i);
 char					*ft_strndup(const char *src, size_t size);
+
+void					handle_single_quote(char *input, int *i,
+							t_lexer **current, char quote);
+void					handle_double_quotes(char *input, int *i,
+							t_lexer **current, char quote);
 void					handle_operator(char *input, int *i, t_lexer **current,
 							char operator);
-void					handle_quote(char *input, int *i, t_lexer **current,
-							char quote);
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
 
@@ -167,9 +169,11 @@ int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
 
 /* ###@ SIGNAL */
-void					_signal_newline(int signal __attribute__((unused)));
-void					_signal_exit(int signal __attribute__((unused)),
-							t_global *global);
+void					handle_sigint(int signal);
+void					handle_sigint_cmd(int signal);
+void					handle_sigint_heredoc(int signal);
+void					handle_sigquit(int signal);
+void					init_signals(void);
 
 /* ###@ UTILS */
 int						count_path(char *path);

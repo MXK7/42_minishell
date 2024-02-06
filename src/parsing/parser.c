@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/01/31 23:46:17 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 21:03:08 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ t_lexer	*tokenize(char *input)
 		skip_whitespaces(input, &i);
 		if (is_operator(input[i]))
 			handle_operator(input, &i, &current, input[i]);
-		else if (is_quote(input[i]))
-			handle_quote(input, &i, &current, input[i]);
+		else if (input[i] == '\'')
+			handle_single_quote(input, &i, &current, input[i]);
+		else if (input[i] == '"')
+			handle_double_quotes(input, &i, &current, input[i]);
 		else
 			handle_word(input, &i, &current);
 		handle_head(&head, current);

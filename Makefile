@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
+#    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/02/06 15:32:59 by mpoussie         ###   ########.fr        #
+#    Updated: 2024/02/06 21:05:54 by arazzok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ PRFLAGS     = -lreadline
 RM          = rm -rf
 
 LEXING_DIR  = lexing/
-LEXING      = tokenize_handler tokenize_utils t_lexer_utils
+LEXING      = tokenize_handler tokenize_utils t_lexer_utils quotes_handler
 
 PARSING_DIR = parsing/
 PARSING     = parser parser_utils redirection_handler t_command_utils
