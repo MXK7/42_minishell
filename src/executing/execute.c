@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:51:03 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 14:51:01 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 21:12:38 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,17 @@ int	process_waitpid(int *pid, int nb_pipes)
 
 int	execute(t_global *global)
 {
-	int			pipefd[2];
-	int			fd_in;
+	int	pipefd[2];
+	int	fd_in;
 
 	fd_in = STDIN_FILENO;
 	while (global->command_list)
 	{
-		call_expander(global);
 		if (global->command_list->next)
 			pipe(pipefd);
 		handle_heredoc(global);
+		signal(SIGINT, handle_sigint_cmd);
+		signal(SIGQUIT, handle_sigquit);
 		process_fork(global, pipefd, fd_in, global->command_list);
 		close(pipefd[1]);
 		if (global->command_list->prev)

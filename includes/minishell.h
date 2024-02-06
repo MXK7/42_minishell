@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 19:18:49 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 21:03:00 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,16 @@ void					del_one(t_lexer **list, int index);
 void					free_lexer(t_lexer **list);
 int						is_whitespace(char c);
 int						is_operator(char c);
-int						is_quote(char c);
 void					skip_whitespaces(char *input, int *i);
 int						get_word_len(char *input, int i);
 char					*ft_strndup(const char *src, size_t size);
+
+void					handle_single_quote(char *input, int *i,
+							t_lexer **current, char quote);
+void					handle_double_quotes(char *input, int *i,
+							t_lexer **current, char quote);
 void					handle_operator(char *input, int *i, t_lexer **current,
 							char operator);
-void					handle_quote(char *input, int *i, t_lexer **current,
-							char quote);
 void					handle_word(char *input, int *i, t_lexer **current);
 void					handle_head(t_lexer **head, t_lexer *current);
 
