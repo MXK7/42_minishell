@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 17:19:59 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 19:18:49 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define CTRL_D '\004'
 # define ERROR_PATH_EGAL "Error: '=' not found in path string\n"
 
-typedef enum s_token
+typedef enum e_token
 {
 	WORD = 1,
 	PIPE,
@@ -90,15 +90,7 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
-typedef struct s_data
-{
-	int					exit_status;
-	int					in_cmd;
-	int					in_heredoc;
-	int					stop_heredoc;
-}						t_data;
-
-extern t_data			g_data;
+extern int				g_exit_status;
 
 /* ###@ MAIN */
 int						init_sh(t_global *global);
@@ -170,9 +162,10 @@ int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
 
 /* ###@ SIGNAL */
-int						event(void);
-void					handle_sigint();
-void					handle_sigquit();
+void					handle_sigint(int signal);
+void					handle_sigint_cmd(int signal);
+void					handle_sigint_heredoc(int signal);
+void					handle_sigquit(int signal);
 void					init_signals(void);
 
 /* ###@ UTILS */

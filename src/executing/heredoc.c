@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:48:44 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 16:43:06 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 18:57:59 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ int	create_heredoc(t_global *global, char *filename)
 	if (fd < 0)
 		return (1);
 	line = readline("> ");
-	while (line)
+	while (line && ft_strcmp(line, global->command_list->redirections->str))
 	{
-		if (strcmp(line, global->command_list->redirections->str) == 0)
-			break ;
 		expanded_line = expand_env_var(line);
 		write(fd, expanded_line, ft_strlen(expanded_line));
 		write(fd, "\n", 1);
@@ -34,10 +32,7 @@ int	create_heredoc(t_global *global, char *filename)
 		line = readline("> ");
 	}
 	free(line);
-	if (g_data.stop_heredoc || !line)
-		return (1);
 	close(fd);
-	global->is_heredoc = true;
 	return (0);
 }
 
@@ -58,10 +53,7 @@ int	pre_heredoc(t_global *global, char *filename)
 	int	exit_code;
 
 	exit_code = 0;
-	g_data.stop_heredoc = 0;
-	g_data.in_heredoc = 1;
 	exit_code = create_heredoc(global, filename);
-	g_data.in_heredoc = 0;
 	global->is_heredoc = true;
 	return (exit_code);
 }
@@ -85,7 +77,7 @@ int	handle_heredoc(t_global *global)
 			exit_code = pre_heredoc(global, command->heredoc_file_name);
 			if (exit_code)
 			{
-				g_data.exit_status = 1;
+				g_exit_status = 1;
 				return (reset_global(global));
 			}
 		}

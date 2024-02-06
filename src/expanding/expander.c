@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:51:31 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 16:03:07 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 18:22:58 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*get_env_var_value(char *name)
 
 	if (ft_strcmp(name, "?") == 0)
 	{
-		value = ft_itoa(g_data.exit_status);
+		value = ft_itoa(g_exit_status);
 		if (value)
 			return (value);
 	}

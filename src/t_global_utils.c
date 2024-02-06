@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 17:20:13 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 18:20:38 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ void	init_global(t_global *global)
 	global->pid = NULL;
 	global->is_heredoc = false;
 	global->is_reset = false;
-	g_data.in_cmd = 0;
-	g_data.in_heredoc = 0;
-	g_data.stop_heredoc = 0;
 	init_signals();
 }
 

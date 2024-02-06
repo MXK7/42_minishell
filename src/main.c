@@ -6,17 +6,16 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 17:23:52 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 19:59:19 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_data	g_data;
+int	g_exit_status;
 
 static int	pre_execute(t_global *global)
 {
-	g_data.in_cmd = 1;
 	if (global->nb_pipes == 0)
 		single_command(global);
 	else
@@ -26,7 +25,6 @@ static int	pre_execute(t_global *global)
 			return (handle_error(1, global));
 		execute(global);
 	}
-	g_data.in_cmd = 0;
 	return (0);
 }
 
