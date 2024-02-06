@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:52:50 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 21:20:47 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:27:17 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void	handle_double_quotes(char *input, int *i, t_lexer **current, char quote)
 		*current = init_lexer(expanded_word, WORD);
 		*i = j;
 		free(word);
+		free(expanded_word);
 	}
 }

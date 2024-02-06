@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 21:19:59 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 21:20:23 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:24:46 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_env_res(t_global *global, int x, int i, char **result);
+static void	add_env_res(t_global *global, int i, char **result);
 
 bool	is_exist_env(char *env_name, t_global *global)
 {
@@ -100,10 +100,10 @@ void	add_env(t_global *global, char *new_var)
 		x++;
 	}
 	result[i] = ft_strdup(new_var);
-	add_env_res(global, x, i, result);
+	add_env_res(global, i, result);
 }
 
-static void	add_env_res(t_global *global, int x, int i, char **result);
+static void	add_env_res(t_global *global, int i, char **result)
 {
 	if (!result[i])
 	{

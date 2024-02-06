@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:06:24 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 21:04:38 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 21:27:32 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	handle_word(char *input, int *i, t_lexer **current)
 	*current = init_lexer(expanded_word, WORD);
 	*i += len - 1;
 	free(word);
+	free(expanded_word);
 }
 
 void	handle_head(t_lexer **head, t_lexer *current)
