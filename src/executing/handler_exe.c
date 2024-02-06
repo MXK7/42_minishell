@@ -6,13 +6,14 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 18:30:51 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:37:01 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	*make_absolute_path(const char *path, const char *exec_name);
+static bool	exe_path(t_global *global);
 
 void	get_path_exe(t_global *global)
 {
@@ -21,7 +22,7 @@ void	get_path_exe(t_global *global)
 
 	i = 0;
 	global->args_path = (char **)malloc(sizeof(char **) * ft_strlen(global->path
-			+ 1));
+				+ 1));
 	token = strtok(global->path + 1, ":");
 	while (token != NULL)
 	{
@@ -36,23 +37,33 @@ void	get_path_exe(t_global *global)
 
 bool	exe_commands(t_global *global)
 {
-	int	tmp;
-
+	if (ft_strlen(global->command_list->str[0]) == 1)
+		return (false);
+	free(global->path);
 	global->path = ft_strdup(global->command_list->str[0]);
 	if (access(global->path, X_OK) == 0)
 		return (true);
 	free(global->path);
 	global->path = make_absolute_path(global->pwd,
-		global->command_list->str[0]);
+			global->command_list->str[0]);
 	if (access(global->path, X_OK) == 0)
 		return (true);
 	free(global->path);
 	global->path = NULL;
+	if (exe_path(global))
+		return (true);
+	return (false);
+}
+
+static bool	exe_path(t_global *global)
+{
+	int	tmp;
+
 	tmp = global->nbr_path;
 	while (tmp > 0)
 	{
 		global->path = ft_strjoin(global->args_path[tmp - 1],
-			global->command_list->str[0]);
+				global->command_list->str[0]);
 		if (access(global->path, X_OK) == 0)
 			return (true);
 		free(global->path);

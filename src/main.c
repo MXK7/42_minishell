@@ -6,13 +6,13 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 15:40:00 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 15:50:44 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int g_exit_status;
+int			g_exit_status;
 
 static int	pre_execute(t_global *global)
 {

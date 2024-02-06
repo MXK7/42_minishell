@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:23:53 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/31 23:46:51 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 15:37:36 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ int	handle_error(int err_code, t_global *global)
 		ft_putendl_fd("memory allocation error", STDERR_FILENO);
 	else if (err_code == 2)
 		ft_putendl_fd("quotes are note closed", STDERR_FILENO);
-    else if (err_code == 3)
+	else if (err_code == 3)
 		ft_putendl_fd("parser error", STDERR_FILENO);
-    else if (err_code == 4)
+	else if (err_code == 4)
 		ft_putendl_fd("failed to create pipe", STDERR_FILENO);
-    else if (err_code == 5)
+	else if (err_code == 5)
 		ft_putendl_fd("failed to fork", STDERR_FILENO);
-    else if (err_code == 6)
+	else if (err_code == 6)
 		ft_putendl_fd("outfile error", STDERR_FILENO);
-    else if (err_code == 7)
+	else if (err_code == 7)
 		ft_putendl_fd("infile: no such file or directory", STDERR_FILENO);
-    else if (err_code == 8)
+	else if (err_code == 8)
 		ft_putendl_fd("path does not exist", STDERR_FILENO);
 	reset_global(global);
 	return (1);

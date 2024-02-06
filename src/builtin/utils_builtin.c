@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 08:50:55 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 19:37:05 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:31:50 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,30 +71,3 @@ size_t	tab_len(char **tab)
 		i++;
 	return (i);
 }
-
-// int (*get_builtin(char *str))(t_global *global)
-// {
-// 	static void	*builtins[7][2];
-// 	int			i;
-
-// 	builtins[7][2] = {
-// 		{"cd", _builtin_cd},
-// 		{"echo", _builtin_echo},
-// 		{"env", _builtin_env},
-// 		{"exit", _builtin_exit},
-// 		{"export", _builtin_export},
-// 		{"pwd", _builtin_pwd},
-// 		{"unset", _builtin_unset}
-// 	};
-// 	i = 0;
-// 	while (i < 7)
-// 	{
-// 		if (str)
-// 		{
-// 			if (!ft_strncmp(builtins[i][0], str, ft_strlen(builtins[i][0])))
-// 				return (builtins[i][1]);
-// 		}
-// 		i++;
-// 	}
-// 	return (NULL);
-// }

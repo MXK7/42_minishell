@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:31:55 by arazzok           #+#    #+#             */
-/*   Updated: 2024/01/11 18:24:39 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 15:39:58 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	count_args(t_lexer *lexer_list)
 	int		nb_args;
 	t_lexer	*temp;
 
-	;
 	nb_args = 0;
 	temp = lexer_list;
 	while (temp && temp->token != PIPE)
