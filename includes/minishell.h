@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 15:50:18 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 19:26:15 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@
 # include <time.h>
 # include <unistd.h>
 
-# define MAX_TOKENS 100
-# define CTRL_D '\004'
 # define ERROR_PATH_EGAL "Error: '=' not found in path string\n"
+# define ERROR_CD_ARGS "ams: cd: too many arguments.\n"
+# define ERROR_UNSET_ARGS "unset: not enough arguments\n"
+# define ERROR_ENV_VAR "Error code: 1, var en_len"
+# define ERROR_MAIN_ARGS "No argument accepted.\n"
+# define ERROR_MALLOC "Global malloc error.\n"
 
 typedef enum s_token
 {
@@ -150,6 +153,8 @@ void					init_env(t_global *global, char **envp);
 char					*get_env(char *env_name, t_global *global);
 void					update_env(t_global *global, const char *env_name,
 							const char *new_env);
+void					add_env(t_global *global, char *new_var);
+bool					is_exist_env(char *env_name, t_global *global);
 size_t					tab_len(char **tab);
 void					_others(t_global *global);
 

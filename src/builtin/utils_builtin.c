@@ -6,11 +6,25 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 08:50:55 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 15:31:50 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:43:14 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	is_exist_env(char *env_name, t_global *global)
+{
+	int	i;
+
+	i = 0;
+	while (global->env[i] != NULL)
+	{
+		if (ft_strcmp(env_name, global->env[i]) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
+}
 
 char	*get_env(char *env_name, t_global *global)
 {
@@ -22,7 +36,7 @@ char	*get_env(char *env_name, t_global *global)
 	en_len = ft_strlen(env_name);
 	if (en_len == 0)
 	{
-		ft_printf("Error code: 1, var en_len");
+		ft_printf(ERROR_ENV_VAR);
 		return (NULL);
 	}
 	index_env = 0;
@@ -58,6 +72,39 @@ void	update_env(t_global *global, const char *env_name, const char *new_env)
 		}
 		i++;
 	}
+}
+
+void	add_env(t_global *global, char *new_var)
+{
+	char	**result;
+	size_t	i;
+	size_t	x;
+
+	x = 0;
+	i = 0;
+	while (global->env[i] != NULL)
+		i++;
+	result = (char **)ft_calloc(sizeof(char *), i + 2);
+	if (!result)
+		return ;
+	while (x < i)
+	{
+		result[x] = ft_strdup(global->env[x]);
+		if (!result[x])
+		{
+			free_array(result);
+			return ;
+		}
+		x++;
+	}
+	result[i] = ft_strdup(new_var);
+	if (!result[i])
+	{
+		free_array(result);
+		return ;
+	}
+	free_array(global->env);
+	global->env = result;
 }
 
 size_t	tab_len(char **tab)

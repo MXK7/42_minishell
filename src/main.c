@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 15:50:44 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 20:58:27 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	if (argc != 1)
-		return (ft_printf("Error.\nNo argument accepted.\n"), 1);
+		return (ft_printf(ERROR_MAIN_ARGS), 1);
 	global = malloc(sizeof(t_global));
 	if (!global)
-		return (ft_printf("Error.\nGlobal malloc error.\n"), 1);
+		return (ft_printf(ERROR_MALLOC), 1);
 	init_global(global);
 	init_execute(global, envp);
 	signal(SIGINT, _signal_newline);

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 08:36:51 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 15:35:02 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:57:19 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	_builtin_unset(t_global *global)
 {
 	if (global->command_list->str[1] == NULL)
 	{
-		ft_printf("unset: not enough arguments\n");
+		ft_printf(ERROR_UNSET_ARGS);
 		return (1);
 	}
 	global->env = _delete_var(global->env, global->command_list->str[1]);
