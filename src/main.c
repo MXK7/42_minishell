@@ -6,13 +6,13 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 21:13:52 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:15:31 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_exit_status;
+int			g_exit_status;
 
 static int	pre_execute(t_global *global)
 {

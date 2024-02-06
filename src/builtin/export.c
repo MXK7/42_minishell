@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 07:38:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 20:55:27 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:20:54 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	tri_export_var(t_global *global);
 
 int	_builtin_export(t_global *global)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	tri_export_var(global);
@@ -25,21 +25,14 @@ int	_builtin_export(t_global *global)
 	if (i == 2)
 	{
 		if (is_exist_env(ft_strtoupper(global->command_list->str[1]), global))
-			update_env(global, ft_strtoupper(global->command_list->str[1]), global->command_list->str[2]);
+			update_env(global, ft_strtoupper(global->command_list->str[1]),
+				global->command_list->str[2]);
 		else
 			add_env(global, global->command_list->str[1]);
 		return (0);
 	}
 	else if (i == 1)
-	{
-		// while (global->env[i])
-		// {
-		// 	if (global->env[i][0] != '\0')
-		// 		ft_printf("%s\n", global->env[i]);
-		// 	i++;
-		// }
 		_builtin_env(global);
-	}
 	return (0);
 }
 

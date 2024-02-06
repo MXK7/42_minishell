@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+         #
+#    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/02/06 21:05:54 by arazzok          ###   ########.fr        #
+#    Updated: 2024/02/06 21:20:35 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ EXE_DIR     = executing/
 EXE         = handler_exe execute redirection heredoc
 
 BUILTIN_DIR = builtin/
-BUILTIN     = handler_builtin utils_builtin env echo pwd exit cd export unset
+BUILTIN     = handler_builtin utils_builtin utils_env env echo pwd exit cd export unset
 
 SIGNAL_DIR  = signal/
 SIGNAL      = signal

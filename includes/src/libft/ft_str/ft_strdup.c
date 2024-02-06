@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 22:38:03 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/05 17:18:38 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:16:44 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *src)
 	size_t	i;
 	size_t	strlen;
 
+	if (!src == NULL)
+		return (NULL);
 	strlen = ft_strlen(src);
 	dest = (char *)malloc(sizeof(*dest) * (strlen + 1));
 	if (!dest)
