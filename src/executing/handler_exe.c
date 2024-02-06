@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 14:39:38 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:37:01 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	exe_commands(t_global *global)
 		return (true);
 	free(global->path);
 	global->path = make_absolute_path(global->pwd,
-		global->command_list->str[0]);
+			global->command_list->str[0]);
 	if (access(global->path, X_OK) == 0)
 		return (true);
 	free(global->path);
@@ -63,7 +63,7 @@ static bool	exe_path(t_global *global)
 	while (tmp > 0)
 	{
 		global->path = ft_strjoin(global->args_path[tmp - 1],
-			global->command_list->str[0]);
+				global->command_list->str[0]);
 		if (access(global->path, X_OK) == 0)
 			return (true);
 		free(global->path);

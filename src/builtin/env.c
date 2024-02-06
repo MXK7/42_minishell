@@ -6,13 +6,13 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 16:06:17 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:34:58 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void init_env(t_global *global, char **envp)
+void	init_env(t_global *global, char **envp)
 {
 	int	i;
 	int	j;

@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 02:28:12 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/02 18:07:28 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 15:39:10 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *ft_strncpy(char *dest, char *src, size_t len)
+char	*ft_strncpy(char *dest, char *src, size_t len)
 {
-    size_t  i;
+	size_t	i;
 
-    i = 0;
-    while (src[i] && i < len)
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    while (i < len)
-        dest[i++] = '\0';
-    return (dest);
+	i = 0;
+	while (src[i] && i < len)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < len)
+		dest[i++] = '\0';
+	return (dest);
 }
 
 void	call_expander(t_global *global)
