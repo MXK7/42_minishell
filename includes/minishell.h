@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 15:50:18 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 17:19:59 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,15 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
-extern int				g_exit_status;
+typedef struct s_data
+{
+	int					exit_status;
+	int					in_cmd;
+	int					in_heredoc;
+	int					stop_heredoc;
+}						t_data;
+
+extern t_data			g_data;
 
 /* ###@ MAIN */
 int						init_sh(t_global *global);
@@ -162,9 +170,10 @@ int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
 
 /* ###@ SIGNAL */
-void					_signal_newline(int signal __attribute__((unused)));
-void					_signal_exit(int signal __attribute__((unused)),
-							t_global *global);
+int						event(void);
+void					handle_sigint();
+void					handle_sigquit();
+void					init_signals(void);
 
 /* ###@ UTILS */
 int						count_path(char *path);

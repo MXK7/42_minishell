@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:48:44 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/02 14:51:11 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 16:43:06 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	create_heredoc(t_global *global, char *filename)
 		line = readline("> ");
 	}
 	free(line);
+	if (g_data.stop_heredoc || !line)
+		return (1);
 	close(fd);
 	global->is_heredoc = true;
 	return (0);
@@ -49,6 +51,19 @@ char	*generate_hd_filename(void)
 	filename = ft_strjoin("/tmp/.heredoc_file_", number);
 	free(number);
 	return (filename);
+}
+
+int	pre_heredoc(t_global *global, char *filename)
+{
+	int	exit_code;
+
+	exit_code = 0;
+	g_data.stop_heredoc = 0;
+	g_data.in_heredoc = 1;
+	exit_code = create_heredoc(global, filename);
+	g_data.in_heredoc = 0;
+	global->is_heredoc = true;
+	return (exit_code);
 }
 
 int	handle_heredoc(t_global *global)
@@ -67,9 +82,12 @@ int	handle_heredoc(t_global *global)
 			if (command->heredoc_file_name)
 				free(command->heredoc_file_name);
 			command->heredoc_file_name = generate_hd_filename();
-			exit_code = create_heredoc(global, command->heredoc_file_name);
+			exit_code = pre_heredoc(global, command->heredoc_file_name);
 			if (exit_code)
+			{
+				g_data.exit_status = 1;
 				return (reset_global(global));
+			}
 		}
 		current = current->next;
 	}

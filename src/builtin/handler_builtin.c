@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 09:55:09 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 17:24:01 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,11 @@ void	single_command(t_global *global)
 	call_expander(global);
 	if (is_env_builtin(global))
 	{
-		g_exit_status = _builtin_exe(global);
+		g_data.exit_status = _builtin_exe(global);
 		return ;
 	}
 	handle_heredoc(global);
+	signal(SIGQUIT, handle_sigquit);
 	pid = fork();
 	if (pid < 0)
 		handle_error(5, global);
@@ -103,5 +104,5 @@ void	single_command(t_global *global)
 		handle_command(global);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+		g_data.exit_status = WEXITSTATUS(status);
 }

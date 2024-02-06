@@ -6,16 +6,17 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 15:50:44 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 17:23:52 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			g_exit_status;
+t_data	g_data;
 
 static int	pre_execute(t_global *global)
 {
+	g_data.in_cmd = 1;
 	if (global->nb_pipes == 0)
 		single_command(global);
 	else
@@ -25,6 +26,7 @@ static int	pre_execute(t_global *global)
 			return (handle_error(1, global));
 		execute(global);
 	}
+	g_data.in_cmd = 0;
 	return (0);
 }
 
@@ -65,8 +67,6 @@ int	main(int argc, char **argv, char **envp)
 		return (ft_printf("Error.\nGlobal malloc error.\n"), 1);
 	init_global(global);
 	init_execute(global, envp);
-	signal(SIGINT, _signal_newline);
-	signal(SIGQUIT, SIG_IGN);
 	init_sh(global);
 	free_global(global);
 	rl_clear_history();
