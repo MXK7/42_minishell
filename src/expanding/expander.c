@@ -6,7 +6,7 @@
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:51:31 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 10:22:38 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/06 12:16:35 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*get_env_var_value(char *name)
 	value = getenv(name);
 	if (!value)
 		value = "";
-	return (value);
+	return (ft_strdup(value));
 }
 
 static char	*replace_env_var(char *result, char *start, char *end, char *value)
@@ -113,7 +113,8 @@ char	*expand_env_var(char *command)
 			process_expand(&start, &result, is_quote, &end);
 			start = result + offset;
 		}
-		start++;
+		if (*start)
+			start++;
 	}
 	return (result);
 }
