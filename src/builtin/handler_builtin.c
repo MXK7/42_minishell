@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 05:39:32 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 06:05:44 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static bool	is_env_builtin(t_global *global)
 {
-	if (!global->command_list->str)
+	// for (size_t i = 0; global->command_list->str[i] != NULL; i++)
+		// printf("%s\n", global->command_list->str[i]);
+	if (!global->command_list->str[0])
 		return (false);
 	else if (ft_strcmp(global->command_list->str[0], "cd") == 0)
 		return (true);
@@ -30,7 +32,7 @@ static bool	is_env_builtin(t_global *global)
 
 static bool	is_builtin(t_global *global)
 {
-	if (!global->command_list->str)
+	if (!global->command_list->str[0])
 		return (false);
 	else if (ft_strcmp(global->command_list->str[0], "echo") == 0)
 		return (true);
