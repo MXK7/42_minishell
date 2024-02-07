@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 21:21:08 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 01:27:31 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void					init_env(t_global *global, char **envp);
 char					*get_env(char *env_name, t_global *global);
 void					update_env(t_global *global, const char *env_name,
 							const char *new_env);
+void					edit_env(t_global *global, char *var_env, char *var_v);
 void					add_env(t_global *global, char *new_var);
 bool					is_exist_env(char *env_name, t_global *global);
 size_t					tab_len(char **tab);
@@ -167,6 +168,12 @@ int						_builtin_echo(t_global *global);
 int						_builtin_cd(t_global *global);
 int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
+
+/* ###@EXPORT */
+int						is_key_good_format(char *str);
+int						print_env_sorted(char **env);
+void					print_invalid_identifier(char *id);
+int						parse_env_var_data(char *arguments, t_global *global);
 
 /* ###@ SIGNAL */
 void					handle_sigint(int signal);

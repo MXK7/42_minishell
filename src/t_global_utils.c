@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_global_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:27:54 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:38 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/07 03:08:23 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	init_execute(t_global *global, char **envp)
 	global->env = NULL;
 	global->args_path = NULL;
 	init_env(global, envp);
-	global->path = get_env("PATH=", global);
-	global->pwd = getcwd(NULL, 0);
-	global->nbr_path = count_path(global->path);
-	get_path_exe(global);
+	global->path = NULL;
+	global->pwd = getcwd(NULL, 1024);
+	global->old_pwd = global->pwd;
+	global->nbr_path = 0;
 }
 
 int	reset_global(t_global *global)
@@ -50,7 +50,9 @@ int	reset_global(t_global *global)
 
 void	free_global(t_global *global)
 {
-	free_array(global->args_path);
+	free(global->input);
+	if (global->args_path)
+		free_array(global->args_path);
 	free_array(global->env);
 	free(global->pwd);
 	free(global->token);
@@ -58,6 +60,7 @@ void	free_global(t_global *global)
 	free_command(&global->command_list);
 	if (global->pid)
 		free(global->pid);
-	free(global->path);
+	if (global->path)
+		free(global->path);
 	free(global);
 }

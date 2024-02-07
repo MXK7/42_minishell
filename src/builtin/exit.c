@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:15:48 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/02 13:47:37 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 00:30:29 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int	_builtin_exit(t_global *global)
 	int	exit_code;
 
 	if (global->command_list->str[1] && global->command_list->str[2])
-		return (ft_putstr_fd("exit\nams: exit: too many arguments\n",
-				STDERR_FILENO), 1);
+		return (ft_putstr_fd("exit\nams: exit: too many arguments\n", STDERR_FILENO), 1);
 	if (!global->command_list->str[1])
 		exit_code = 0;
 	else if (global->command_list->str[1]

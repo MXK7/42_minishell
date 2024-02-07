@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 15:37:01 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 03:56:06 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,32 @@ static bool	exe_path(t_global *global);
 void	get_path_exe(t_global *global)
 {
 	int		i;
-	char	*token;
+	char	**token;
 
 	i = 0;
-	global->args_path = (char **)malloc(sizeof(char **) * ft_strlen(global->path
-				+ 1));
-	token = strtok(global->path + 1, ":");
-	while (token != NULL)
+	token = NULL;
+	global->path = get_env("PATH=", global);
+	
+	if (global->path != NULL)
 	{
-		global->args_path[i] = (char *)malloc(ft_strlen(token) + 2);
-		ft_strcpy(global->args_path[i], token);
-		ft_strcat(global->args_path[i], "/");
-		token = strtok(NULL, ":");
-		i++;
+		global->nbr_path = count_path(global->path);
+		global->args_path = (char **)malloc(sizeof(char **) * (ft_strlen(global->path) + 1));
+		token = ft_split(global->path, ':');
+		while (token[i] != NULL)
+		{
+			global->args_path[i] = (char *)malloc(ft_strlen(token[i]) + 2);
+			ft_strcpy(global->args_path[i], token[i]);
+			ft_strcat(global->args_path[i], "/");
+			i++;
+		}
+		free_array(token);
+		global->args_path[i] = NULL;
 	}
-	global->args_path[i] = NULL;
+	else
+	{
+		global->nbr_path = 0;
+		global->args_path = NULL;
+	}
 }
 
 bool	exe_commands(t_global *global)
@@ -50,7 +61,8 @@ bool	exe_commands(t_global *global)
 		return (true);
 	free(global->path);
 	global->path = NULL;
-	if (exe_path(global))
+	if (ft_strchr(global->command_list->str[0], '/') == NULL 
+		&& exe_path(global))
 		return (true);
 	return (false);
 }
@@ -59,6 +71,8 @@ static bool	exe_path(t_global *global)
 {
 	int	tmp;
 
+	get_path_exe(global);
+	
 	tmp = global->nbr_path;
 	while (tmp > 0)
 	{

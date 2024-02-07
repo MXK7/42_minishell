@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 21:19:59 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 21:32:09 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 03:18:14 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	is_exist_env(char *env_name, t_global *global)
 	i = 0;
 	while (global->env[i] != NULL)
 	{
-		if (ft_strcmp(env_name, global->env[i]) == 0)
+		if (ft_strncmp(env_name, global->env[i], ft_strlen(env_name)) == 0)
 			return (true);
 		i++;
 	}
@@ -35,6 +35,7 @@ char	*get_env(char *env_name, t_global *global)
 	size_t	en_len;
 	size_t	index_env;
 
+	res = NULL;
 	en_len = ft_strlen(env_name);
 	if (en_len == 0)
 	{
@@ -86,7 +87,7 @@ void	add_env(t_global *global, char *new_var)
 	i = 0;
 	while (global->env[i] != NULL)
 		i++;
-	result = (char **)ft_calloc(sizeof(char *), i + 2);
+	result = (char **)malloc(sizeof(char *) * (i + 2));
 	if (!result)
 		return ;
 	while (x < i)
@@ -100,6 +101,7 @@ void	add_env(t_global *global, char *new_var)
 		x++;
 	}
 	result[i] = ft_strdup(new_var);
+	result[i + 1] = NULL;
 	add_env_res(global, i, result);
 }
 
@@ -110,5 +112,37 @@ static void	add_env_res(t_global *global, int i, char **result)
 		free_array(result);
 		return ;
 	}
+	free_array(global->env);
 	global->env = result;
+}
+
+void	edit_env(t_global *global, char *var_env, char *var_v)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (var_v)
+		var_env = ft_strjoin(var_env, "=");
+	if (!var_env)
+		return ;
+	if (is_exist_env(var_env, global))
+	{
+		update_env(global, var_env, var_v);
+		if (var_v)
+			free(var_env);
+	}
+	else
+	{
+		if (var_v)
+		{
+			tmp = ft_strjoin(var_env, var_v);
+			free(var_env);
+			if (!tmp)
+				return ;
+			add_env(global, tmp);
+			free(tmp);
+		}
+		else
+			add_env(global, var_env);
+	}
 }

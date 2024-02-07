@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strsdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 01:40:46 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 00:22:02 by mpoussie         ###   ########.fr       */
+/*   Created: 2024/02/07 00:53:44 by mpoussie          #+#    #+#             */
+/*   Updated: 2024/02/07 01:03:23 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	_builtin_pwd(t_global *global)
+char	**ft_strs_dup(char **src)
 {
-	free(global->pwd);
-	global->pwd = getcwd(NULL, 1024);
-	ft_printf("%s\n", global->pwd);
-	return (0);
+	char	**dest;
+	size_t	dest_len;
+	size_t	i;
+
+	dest_len = ft_strs_len(src);
+	dest = malloc((dest_len + 1) * sizeof(char *));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (i < dest_len)
+	{
+		dest[i] = ft_strdup(src[i]);
+		if (!dest[i])
+		{
+			ft_free_strs(dest);
+			return (NULL);
+		}
+		i++;
+	}
+	dest[i] = NULL;
+	return (dest);
 }

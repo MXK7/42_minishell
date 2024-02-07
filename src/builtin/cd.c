@@ -6,23 +6,20 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:18:31 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 16:52:01 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 03:11:06 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	open_cd(int fd, char *dir, t_global *global);
+static int	open_cd(char *dir, t_global *global, bool _free);
 
 int	_builtin_cd(t_global *global)
 {
-	int	fd;
 	int	i;
 
 	global->old_pwd = global->pwd;
-	free(global->pwd);
-	global->pwd = getcwd(NULL, 0);
-	fd = 0;
+	global->pwd = getcwd(NULL, 1024);
 	i = 0;
 	while (global->command_list->str[i])
 		i++;
@@ -32,27 +29,26 @@ int	_builtin_cd(t_global *global)
 		return (1);
 	}
 	if (i == 1)
-		open_cd(fd, get_env("HOME=", global), global);
+		open_cd(get_env("HOME=", global), global, true);
 	else if (ft_strcmp(global->command_list->str[1], "-") == 0)
-		open_cd(fd, get_env("OLDPWD=", global), global);
+		open_cd(get_env("OLDPWD=", global), global, true);
 	else if (global->command_list->str[1] != NULL)
-		open_cd(fd, global->command_list->str[1], global);
+		open_cd(global->command_list->str[1], global, false);
 	return (0);
 }
 
-static int	open_cd(int fd, char *dir, t_global *global)
+static int	open_cd(char *dir, t_global *global, bool _free)
 {
-	if (opendir(dir) != NULL)
-	{
-		fd = open(dir, O_RDONLY);
-		if (fd == -1)
-			return (1);
-		close(fd);
-	}
+	char	*str;
+
 	if (chdir(dir) == 0)
 	{
-		update_env(global, "PWD=", getcwd(NULL, 0));
+		str = getcwd(NULL, 1024);
+		update_env(global, "PWD=", str);
 		update_env(global, "OLDPWD=", global->old_pwd);
+		free(str);
+		if (_free)
+			free(dir);
 	}
 	return (0);
 }

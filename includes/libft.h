@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 05:49:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/29 17:03:43 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 01:03:56 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@
 //////////////////////////////////////////////////////////////////////////////
 
 size_t				ft_strlen(const char *str);
+size_t				ft_strs_len(char **tab);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
+
+void				ft_free_strs(char **strs);
+char				**ft_strs_dup(char **src);
 
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);

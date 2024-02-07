@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 21:03:08 by arazzok          ###   ########.fr       */
+/*   Updated: 2024/02/07 00:13:20 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_command	*pre_init_command(t_parser *parser)
 
 	del_redirections(parser);
 	arg_size = count_args(parser->lexer_list);
-	str = ft_calloc(arg_size + 1, sizeof(char *));
+	str = malloc((arg_size + 1) * sizeof(char *));
 	if (!str)
 		return (NULL);
 	temp = parser->lexer_list;
@@ -62,6 +62,7 @@ t_command	*pre_init_command(t_parser *parser)
 			del_one(&parser->lexer_list, temp->index);
 			temp = parser->lexer_list;
 		}
+		str[i] = NULL;
 		arg_size--;
 	}
 	return (init_command(str, parser->nb_redirections, parser->redirections));

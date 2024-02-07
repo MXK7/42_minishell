@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/06 15:34:58 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 02:08:31 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_env(t_global *global, char **envp)
 	i = 0;
 	while (envp[i])
 		i++;
-	global->env = calloc(1, sizeof(char **) * (i + 1));
+	global->env = malloc(sizeof(char *) * (i + 1));
 	if (global->env == NULL)
 		return ;
 	j = 0;
@@ -39,8 +39,11 @@ int	_builtin_env(t_global *global)
 	i = 0;
 	while (global->env[i] != NULL)
 	{
-		ft_putstr_fd(global->env[i], STDOUT_FILENO);
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		if (ft_strchr(global->env[i], '=') != NULL)
+		{
+			ft_putstr_fd(global->env[i], STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+		}
 		i++;
 	}
 	return (0);
