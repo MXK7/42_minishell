@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 00:47:45 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 00:54:23 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 05:58:39 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ size_t	ft_strs_len(char **tab)
 	size_t	i;
 
 	i = 0;
-    if (tab)
-    {
-    	while (tab[i])
-	    	i++;
-    }
+	if (tab)
+	{
+		while (tab[i])
+			i++;
+	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:49:21 by arazzok           #+#    #+#             */
-/*   Updated: 2024/02/07 01:27:31 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 05:54:49 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,15 +152,9 @@ void					handle_command(t_global *global);
 void					single_command(t_global *global);
 char					*get_path(t_global *global);
 void					init_env(t_global *global, char **envp);
-char					*get_env(char *env_name, t_global *global);
-void					update_env(t_global *global, const char *env_name,
-							const char *new_env);
-void					edit_env(t_global *global, char *var_env, char *var_v);
-void					add_env(t_global *global, char *new_var);
-bool					is_exist_env(char *env_name, t_global *global);
 size_t					tab_len(char **tab);
-void					_others(t_global *global);
 
+void					_others(t_global *global);
 int						_builtin_exit(t_global *global);
 int						_builtin_pwd(t_global *global);
 int						_builtin_env(t_global *global);
@@ -168,6 +162,15 @@ int						_builtin_echo(t_global *global);
 int						_builtin_cd(t_global *global);
 int						_builtin_export(t_global *global);
 int						_builtin_unset(t_global *global);
+
+/* ###@ENV*/
+char					*get_env(char *env_name, t_global *global);
+void					update_env(t_global *global, const char *env_name,
+							const char *new_env);
+char					**remove_env(char **env, char *env_name);
+void					edit_env(t_global *global, char *var_env, char *var_v);
+void					add_env(t_global *global, char *new_var);
+bool					is_exist_env(char *env_name, t_global *global);
 
 /* ###@EXPORT */
 int						is_key_good_format(char *str);

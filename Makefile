@@ -6,7 +6,7 @@
 #    By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 10:23:14 by mpoussie          #+#    #+#              #
-#    Updated: 2024/02/07 04:06:15 by mpoussie         ###   ########.fr        #
+#    Updated: 2024/02/07 05:56:21 by mpoussie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,13 @@ EXE_DIR     = executing/
 EXE         = handler_exe execute redirection heredoc
 
 BUILTIN_DIR = builtin/
-BUILTIN     = handler_builtin utils_builtin utils_env env echo pwd exit cd unset
+BUILTIN     = handler_builtin utils_builtin env echo pwd exit cd unset
 
 _EXPORT_DIR = $(BUILTIN_DIR)export/
 _EXPORT     = export print_env_sorted export_multiple_env
+
+_ENV_DIR 	= $(BUILTIN_DIR)env/
+_ENV     	= add_env edit_env get_env is_exist_env update_env remove_env
 
 SIGNAL_DIR  = signal/
 SIGNAL      = signal
@@ -50,6 +53,7 @@ SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
 SRC_FILES  += $(addprefix $(EXPDING_DIR), $(EXPDING))
 SRC_FILES  += $(addprefix $(BUILTIN_DIR), $(BUILTIN))
 SRC_FILES  += $(addprefix $(_EXPORT_DIR), $(_EXPORT))
+SRC_FILES  += $(addprefix $(_ENV_DIR), $(_ENV))
 SRC_FILES  += $(addprefix $(SIGNAL_DIR), $(SIGNAL))
 SRC_FILES  += $(addprefix $(EXE_DIR), $(EXE))
 
@@ -80,6 +84,7 @@ $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)$(EXPDING_DIR)
 					@mkdir -p $(OBJ_DIR)$(BUILTIN_DIR)
 					@mkdir -p $(OBJ_DIR)$(_EXPORT_DIR)
+					@mkdir -p $(OBJ_DIR)$(_ENV_DIR)
 					@mkdir -p $(OBJ_DIR)$(SIGNAL_DIR)
 					@mkdir -p $(OBJ_DIR)$(EXE_DIR)
 

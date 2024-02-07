@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 00:44:22 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 02:13:53 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 05:45:09 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	print_env_sorted(char **env)
 	tmp_env = ft_strs_dup(env);
 	if (tmp_env == NULL)
 	{
-        ft_putstr_fd("ams: export: ", 2);
-        ft_putstr_fd(strerror(ENOMEM), 2);
-        ft_putstr_fd("\n", 2);
+		ft_putstr_fd("ams: export: ", 2);
+		ft_putstr_fd(strerror(ENOMEM), 2);
+		ft_putstr_fd("\n", 2);
 		return (ENOMEM);
 	}
 	ft_strs_sort(tmp_env);

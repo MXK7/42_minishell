@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 21:44:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 05:33:13 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 05:39:32 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static bool	is_env_builtin(t_global *global)
 {
-	if (ft_strcmp(global->command_list->str[0], "cd") == 0)
+	if (!global->command_list->str)
+		return (false);
+	else if (ft_strcmp(global->command_list->str[0], "cd") == 0)
 		return (true);
 	else if (ft_strcmp(global->command_list->str[0], "exit") == 0)
 		return (true);
@@ -28,7 +30,9 @@ static bool	is_env_builtin(t_global *global)
 
 static bool	is_builtin(t_global *global)
 {
-	if (ft_strcmp(global->command_list->str[0], "echo") == 0)
+	if (!global->command_list->str)
+		return (false);
+	else if (ft_strcmp(global->command_list->str[0], "echo") == 0)
 		return (true);
 	else if (ft_strcmp(global->command_list->str[0], "pwd") == 0)
 		return (true);
@@ -76,8 +80,7 @@ void	handle_command(t_global *global)
 		execve(global->path, global->command_list->str, global->env);
 	else
 	{
-		ft_printf("ams: command not found: %s\n",
-			global->command_list->str[0]);
+		ft_printf("ams: command not found: %s\n", global->command_list->str[0]);
 		i = 127;
 	}
 	free_global(global);

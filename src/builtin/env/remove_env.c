@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   remove_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/27 08:36:51 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 05:52:39 by mpoussie         ###   ########.fr       */
+/*   Created: 2024/02/07 05:52:48 by mpoussie          #+#    #+#             */
+/*   Updated: 2024/02/07 05:53:41 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	_builtin_unset(t_global *global)
+char	**remove_env(char **env, char *env_name)
 {
-	int	i;
+	char	**new_env;
+	int		i;
+	int		x;
 
-	if (global->command_list->str[1] == NULL)
+	new_env = (char **)malloc(sizeof(char *) * (tab_len(env) + 1));
+	i = 0;
+	x = 0;
+	while (env[i])
 	{
-		ft_printf(ERROR_UNSET_ARGS);
-		return (1);
-	}
-	i = 1;
-	while (global->command_list->str[i] != NULL)
-	{
-		global->env = remove_env(global->env, global->command_list->str[i]);
+		if (ft_strncmp(env[i], env_name, ft_strlen(env_name)) != 0)
+		{
+			new_env[x] = env[i];
+			x++;
+		}
+		else
+			free(env[i]);
 		i++;
 	}
-	return (0);
+	new_env[x] = NULL;
+	free(env);
+	return (new_env);
 }

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:33:54 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 03:56:06 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 05:41:46 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	*make_absolute_path(const char *path, const char *exec_name);
 static bool	exe_path(t_global *global);
+static void	free_path_exe(t_global *global);
 
 void	get_path_exe(t_global *global)
 {
@@ -23,11 +24,11 @@ void	get_path_exe(t_global *global)
 	i = 0;
 	token = NULL;
 	global->path = get_env("PATH=", global);
-	
 	if (global->path != NULL)
 	{
 		global->nbr_path = count_path(global->path);
-		global->args_path = (char **)malloc(sizeof(char **) * (ft_strlen(global->path) + 1));
+		global->args_path = (char **)malloc(sizeof(char **)
+				* (ft_strlen(global->path) + 1));
 		token = ft_split(global->path, ':');
 		while (token[i] != NULL)
 		{
@@ -40,10 +41,7 @@ void	get_path_exe(t_global *global)
 		global->args_path[i] = NULL;
 	}
 	else
-	{
-		global->nbr_path = 0;
-		global->args_path = NULL;
-	}
+		free_path_exe(global);
 }
 
 bool	exe_commands(t_global *global)
@@ -61,7 +59,7 @@ bool	exe_commands(t_global *global)
 		return (true);
 	free(global->path);
 	global->path = NULL;
-	if (ft_strchr(global->command_list->str[0], '/') == NULL 
+	if (ft_strchr(global->command_list->str[0], '/') == NULL
 		&& exe_path(global))
 		return (true);
 	return (false);
@@ -72,7 +70,6 @@ static bool	exe_path(t_global *global)
 	int	tmp;
 
 	get_path_exe(global);
-	
 	tmp = global->nbr_path;
 	while (tmp > 0)
 	{
@@ -108,4 +105,10 @@ static char	*make_absolute_path(const char *path, const char *exec_name)
 	ft_memcpy(absolute_path + path_length + 1, path, exec_name_length);
 	absolute_path[exec_name_length + 1 + path_length] = '\0';
 	return (absolute_path);
+}
+
+static void	free_path_exe(t_global *global)
+{
+	global->nbr_path = 0;
+	global->args_path = NULL;
 }
