@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strslen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 01:40:46 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 15:19:38 by mpoussie         ###   ########.fr       */
+/*   Created: 2024/02/07 00:47:45 by mpoussie          #+#    #+#             */
+/*   Updated: 2024/02/07 05:58:39 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	_builtin_pwd(t_global *global)
+size_t	ft_strs_len(char **tab)
 {
-	free(global->pwd);
-	global->pwd = getcwd(NULL, 1024);
-	ft_printf("%s\n", global->pwd);
-	return (0);
+	size_t	i;
+
+	i = 0;
+	if (tab)
+	{
+		while (tab[i])
+			i++;
+	}
+	return (i);
 }

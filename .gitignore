@@ -21,3 +21,8 @@ minishell
 
 # VS Code files
 .vscode
+
+# Others files
+test.c
+vgcore.*
+todo.txt

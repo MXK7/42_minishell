@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_signal.c                                   :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 18:07:11 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/07 18:42:06 by mpoussie         ###   ########.fr       */
+/*   Created: 2023/12/27 12:52:15 by mpoussie          #+#    #+#             */
+/*   Updated: 2023/12/28 08:49:23 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handler_signal(int signal __attribute__((unused)))
+char	*ft_strtoupper(char *str)
 {
-	rl_replace_line("", 0);
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	int	i;
 
-// void	_signal_exit(int signal __attribute__((unused)))
-// {
-	
-// }
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			str[i] = str[i] - 32;
+		i++;
+	}
+	return (str);
+}

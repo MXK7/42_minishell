@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strtolower.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 01:40:46 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 15:19:38 by mpoussie         ###   ########.fr       */
+/*   Created: 2023/12/27 12:50:21 by mpoussie          #+#    #+#             */
+/*   Updated: 2023/12/28 08:49:21 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	_builtin_pwd(t_global *global)
+char	*ft_strtolower(char *str)
 {
-	free(global->pwd);
-	global->pwd = getcwd(NULL, 1024);
-	ft_printf("%s\n", global->pwd);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] = str[i] + 32;
+		i++;
+	}
+	return (str);
 }

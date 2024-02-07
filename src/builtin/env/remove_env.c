@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   remove_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 01:40:46 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 15:19:38 by mpoussie         ###   ########.fr       */
+/*   Created: 2024/02/07 05:52:48 by mpoussie          #+#    #+#             */
+/*   Updated: 2024/02/07 17:35:01 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	_builtin_pwd(t_global *global)
+char	**remove_env(char **env, char *env_name)
 {
-	free(global->pwd);
-	global->pwd = getcwd(NULL, 1024);
-	ft_printf("%s\n", global->pwd);
-	return (0);
+	char	**new_env;
+	int		i;
+	int		x;
+
+	new_env = (char **)malloc(sizeof(char *) * (tab_len(env) + 1));
+	i = 0;
+	x = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], env_name, ft_strlen(env_name)) != 0)
+		{
+			new_env[x] = env[i];
+			x++;
+		}
+		else
+			free(env[i]);
+		i++;
+	}
+	new_env[x] = NULL;
+	free(env);
+	return (new_env);
 }

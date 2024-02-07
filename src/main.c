@@ -6,41 +6,68 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:21:38 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/08 21:38:17 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:56:37 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	prompt(t_settings *settings, t_global *global, char **envp)
+int			g_exit_status;
+
+static int	pre_execute(t_global *global)
 {
-	signal(SIGINT, handler_signal);
-	// signal(SIGQUIT, _signal_exit);
-	builtin_start(global, envp);
-	// printf("COUNT PATH : %d\n", count_path(global->path));
-	
-	while (settings->exitRequested)
+	if (global->nb_pipes == 0)
+		single_command(global);
+	else
 	{
-		global->input = readline("\033[1;37m-\033[0m \033[1;31m\033[1;1mAMS\033[0m \033[1;33m\033[1;93m✗\033[0m ");
-		handler_builtin(settings, global);
+		global->pid = ft_calloc(sizeof(int), global->nb_pipes + 2);
+		if (!global->pid)
+			return (handle_error(1, global));
+		execute(global);
 	}
+	return (0);
+}
+
+int	init_sh(t_global *global)
+{
+	char	*temp;
+
+	global->input = readline("AMS $ ");
+	temp = ft_strtrim(global->input, " ");
+	free(global->input);
+	global->input = temp;
+	if (!global->input)
+	{
+		ft_putendl_fd("exit", STDOUT_FILENO);
+		free_global(global);
+		exit(0);
+	}
+	if (global->input[0] == '\0')
+		return (reset_global(global));
+	add_history(global->input);
+	if (!are_quotes_closed(global->input))
+		return (handle_error(2, global));
+	global->lexer_list = tokenize(global->input, global);
+	parser(global);
+	pre_execute(global);
+	reset_global(global);
+	return (1);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_global	*global;
-	t_settings	*settings;
 
 	(void)argv;
-	global = (t_global *)malloc(sizeof(global));
-	settings = (t_settings *)malloc(sizeof(settings));
-	if (argc == 1 && (settings != NULL && global != NULL))
-	{
-		settings->exitRequested = true;
-		prompt(settings, global, envp);
-		free(global->input);
-	}
-	free(global);
-	free(settings);
+	if (argc != 1)
+		return (ft_printf(ERROR_MAIN_ARGS), 1);
+	global = malloc(sizeof(t_global));
+	if (!global)
+		return (ft_printf(ERROR_MALLOC), 1);
+	init_global(global);
+	init_execute(global, envp);
+	init_sh(global);
+	free_global(global);
+	rl_clear_history();
 	return (0);
 }

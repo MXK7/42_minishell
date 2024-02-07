@@ -1,50 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 16:11:57 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 17:44:46 by mpoussie         ###   ########.fr       */
+/*   Created: 2023/12/26 07:38:31 by mpoussie          #+#    #+#             */
+/*   Updated: 2024/02/07 00:45:12 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_env(t_global *global, char **envp)
+int	_builtin_export(t_global *global)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (envp[i])
+	while (global->command_list->str[i])
 		i++;
-	global->env = malloc(sizeof(char *) * (i + 1));
-	if (global->env == NULL)
-		return ;
-	j = 0;
-	while (j < i)
+	if (i == 2)
 	{
-		global->env[j] = ft_strdup(envp[j]);
-		j++;
+		if (is_exist_env(ft_strtoupper(global->command_list->str[1]), global))
+			update_env(global, ft_strtoupper(global->command_list->str[1]),
+				global->command_list->str[2]);
+		else
+			add_env(global, global->command_list->str[1]);
+		return (0);
 	}
-	global->env[j] = NULL;
-}
-
-int	_builtin_env(t_global *global)
-{
-	int	i;
-
-	i = 0;
-	while (global->env[i] != NULL)
+	else if (i == 1)
 	{
-		if (ft_strchr(global->env[i], '=') != NULL)
+		i = 0;
+		while (global->env[i])
 		{
-			ft_putstr_fd(global->env[i], STDOUT_FILENO);
-			ft_putstr_fd("\n", STDOUT_FILENO);
+			if (global->env[i][0] != '\0')
+				ft_printf("declare -x %s\n", global->env[i]);
+			i++;
 		}
-		i++;
 	}
 	return (0);
 }

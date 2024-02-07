@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_parsing.c                                  :+:      :+:    :+:   */
+/*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 21:50:36 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/11 15:00:41 by arazzok          ###   ########.fr       */
+/*   Created: 2024/01/27 02:28:12 by arazzok           #+#    #+#             */
+/*   Updated: 2024/02/07 14:51:40 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handler_parse_cmd(t_settings *settings, t_global *global)
+char	*ft_strncpy(char *dest, char *src, size_t len)
 {
-	(void) settings;
-	printf("input: %s\n", global->input);
+	size_t	i;
+
+	i = 0;
+	while (src[i] && i < len)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < len)
+		dest[i++] = '\0';
+	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 05:49:13 by mpoussie          #+#    #+#             */
-/*   Updated: 2023/12/04 14:11:55 by mpoussie         ###   ########.fr       */
+/*   Updated: 2024/02/07 01:03:56 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stdint.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -39,8 +40,12 @@
 //////////////////////////////////////////////////////////////////////////////
 
 size_t				ft_strlen(const char *str);
+size_t				ft_strs_len(char **tab);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
+
+void				ft_free_strs(char **strs);
+char				**ft_strs_dup(char **src);
 
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
@@ -54,6 +59,9 @@ int					ft_strcmp(const char *s1, const char *s2);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_atoi(const char *str);
 
+char				*ft_strcat(char *dest, char *src);
+char				*ft_strncat(char *dest, char *src, unsigned int nb);
+char				*ft_strcpy(char *dest, char *src);
 char				*ft_strchr(const char *str, int c);
 char				*ft_strdup(const char *src);
 char				*ft_strrchr(const char *str, int c);
@@ -72,6 +80,8 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *str, char c);
 char				*ft_itoa(int n);
+char				*ft_strtoupper(char *str);
+char				*ft_strtolower(char *str);
 
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 void				ft_putchar_fd(char c, int fd);

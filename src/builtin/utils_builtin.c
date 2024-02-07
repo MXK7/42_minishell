@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   utils_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 01:40:46 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 15:19:38 by mpoussie         ###   ########.fr       */
+/*   Created: 2023/12/28 08:50:55 by mpoussie          #+#    #+#             */
+/*   Updated: 2024/02/06 21:19:46 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	_builtin_pwd(t_global *global)
+size_t	tab_len(char **tab)
 {
-	free(global->pwd);
-	global->pwd = getcwd(NULL, 1024);
-	ft_printf("%s\n", global->pwd);
-	return (0);
+	size_t	i;
+
+	if (!tab)
+		return (0);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

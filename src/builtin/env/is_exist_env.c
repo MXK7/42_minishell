@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   is_exist_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 01:40:46 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 15:19:38 by mpoussie         ###   ########.fr       */
+/*   Created: 2024/02/07 05:48:55 by mpoussie          #+#    #+#             */
+/*   Updated: 2024/02/07 17:10:18 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	_builtin_pwd(t_global *global)
+bool	is_exist_env(char *env_name, t_global *global)
 {
-	free(global->pwd);
-	global->pwd = getcwd(NULL, 1024);
-	ft_printf("%s\n", global->pwd);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (global->env[i] != NULL)
+	{
+		if (ft_strncmp(env_name, global->env[i], ft_strlen(env_name)) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
 }

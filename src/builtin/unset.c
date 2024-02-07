@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoussie <mpoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 01:40:46 by mpoussie          #+#    #+#             */
-/*   Updated: 2024/02/07 15:19:38 by mpoussie         ###   ########.fr       */
+/*   Created: 2023/12/27 08:36:51 by mpoussie          #+#    #+#             */
+/*   Updated: 2024/02/07 05:52:39 by mpoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	_builtin_pwd(t_global *global)
+int	_builtin_unset(t_global *global)
 {
-	free(global->pwd);
-	global->pwd = getcwd(NULL, 1024);
-	ft_printf("%s\n", global->pwd);
+	int	i;
+
+	if (global->command_list->str[1] == NULL)
+	{
+		ft_printf(ERROR_UNSET_ARGS);
+		return (1);
+	}
+	i = 1;
+	while (global->command_list->str[i] != NULL)
+	{
+		global->env = remove_env(global->env, global->command_list->str[i]);
+		i++;
+	}
 	return (0);
 }
