@@ -1,1 +1,1 @@
-42 Developper project in collaboration with @Delin0
+42 Developper project in collaboration with @AdelRazzok
